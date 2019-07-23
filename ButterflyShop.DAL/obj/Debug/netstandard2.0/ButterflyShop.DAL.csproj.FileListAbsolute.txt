@@ -1,9 +1,0 @@
-C:\Users\Asus\source\repos\ButterflyShop\ButterflyShop.DAL\bin\Debug\netstandard2.0\ButterflyShop.DAL.deps.json
-C:\Users\Asus\source\repos\ButterflyShop\ButterflyShop.DAL\bin\Debug\netstandard2.0\ButterflyShop.DAL.dll
-C:\Users\Asus\source\repos\ButterflyShop\ButterflyShop.DAL\obj\Debug\netstandard2.0\ButterflyShop.DAL.csprojAssemblyReference.cache
-C:\Users\Asus\source\repos\ButterflyShop\ButterflyShop.DAL\obj\Debug\netstandard2.0\ButterflyShop.DAL.csproj.CoreCompileInputs.cache
-C:\Users\Asus\source\repos\ButterflyShop\ButterflyShop.DAL\obj\Debug\netstandard2.0\ButterflyShop.DAL.AssemblyInfoInputs.cache
-C:\Users\Asus\source\repos\ButterflyShop\ButterflyShop.DAL\obj\Debug\netstandard2.0\ButterflyShop.DAL.AssemblyInfo.cs
-C:\Users\Asus\source\repos\ButterflyShop\ButterflyShop.DAL\bin\Debug\netstandard2.0\ButterflyShop.DAL.pdb
-C:\Users\Asus\source\repos\ButterflyShop\ButterflyShop.DAL\obj\Debug\netstandard2.0\ButterflyShop.DAL.dll
-C:\Users\Asus\source\repos\ButterflyShop\ButterflyShop.DAL\obj\Debug\netstandard2.0\ButterflyShop.DAL.pdb
