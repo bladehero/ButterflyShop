@@ -183,24 +183,28 @@ $('.brand-slider').slick({
             breakpoint: 1199,
             settings: {
                 slidesToShow: 4,
+                slidesToScroll: 4,
             }
         },
         {
             breakpoint: 992,
             settings: {
                 slidesToShow: 3,
+                slidesToScroll: 3,
             }
         },
         {
             breakpoint: 768,
             settings: {
-                slidesToShow: 3,
+                slidesToShow: 2,
+                slidesToScroll: 2,
             }
         },
         {
             breakpoint: 479,
             settings: {
                 slidesToShow: 2,
+                slidesToScroll: 2,
             }
         },
     ]
