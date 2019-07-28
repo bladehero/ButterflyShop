@@ -60,7 +60,7 @@ if not exists (select 1
                from sys.tables t 
                where t.name='ProductImages' 
                and t.schema_id = schema_id('dbo'))
-  create table ProductImages
+  create table ProductImages--
   (
     Id int not null primary key identity,
     ProductId int not null foreign key references Products(Id),

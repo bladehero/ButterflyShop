@@ -16,6 +16,18 @@ insert Products(Name, BrandId, Description) values
 , (N'Oriflame Eternal Man - Туалетная вода (пробник)', 2, N'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using ''Content here, content here'', making it look like readable English.')
 , (N'Oriflame Born to Fly For Him - Туалетная вода (пробник)', 2, N'Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for ''lorem ipsum'' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).')
 
+insert into Items(ProductId, Price) values
+  (1,80)
+, (2,100)
+, (3,200)
+, (4,250)
+, (5,150)
+, (6,220)
+, (7,300)
+, (7,500)
+, (8,500)
+, (9,600)
+
 insert Categories(Name, ParentId) values
   (N'Женская косметика', null) -- 1
 , (N'Мужская косметика', null) -- 2
@@ -78,3 +90,7 @@ insert OptionalParameters(Name) values
   (N'Объем')
 , (N'Цвет')
 , (N'Тип кожи')
+
+insert OptionalParameterProducts(ItemId, OptionalParameterId, Value) values
+  (1,1,N'50мл.')
+, (2,1,N'100мл.')
