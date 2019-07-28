@@ -35,38 +35,11 @@ namespace ButterflyShop.DAL.Dao
 
         public virtual IEnumerable<T> Random(int count, bool withDeleted = false)
         {
-            var items = FindAll(withDeleted);
-            if (count > Count())
-            {
-                return items;
-            }
-            else
-            {
-                Random random = new Random();
-                var itemList = items.ToList();
-                var randomList = new List<T>(count);
-
-                for (int i = 0; i < count;)
-                {
-                    int next = random.Next(items.Count());
-                    if (!randomList.Contains(itemList[next]))
-                    {
-                        randomList.Add(itemList[next]);
-                        i++;
-                    }
-                }
-                return randomList;
-            }
+            return Connection.Query<T>($"select top {count} * from {TableName}{(withDeleted ? string.Empty : " where IsDeleted = 0")} order by newid()");
         }
         public virtual T FirstOrDefaultRandom(bool withDeleted = false)
         {
-            var count = Count();
-            if (count == 0)
-            {
-                return null;
-            }
-            Random random = new Random();
-            return FindAll(withDeleted).ToList()[random.Next(count)];
+            return Connection.QueryFirstOrDefault<T>($"select top 1 * from {TableName}{(withDeleted ? string.Empty : " where IsDeleted = 0")} order by Id newid()");
         }
 
         public virtual int Insert(T item)
