@@ -2,8 +2,9 @@
 go
 
 insert Brands(Name, Country, Logo, BackgroundImage) values
-  (N'Avon', N'США', N'avon-logo.png', N'avon-bg.png')
-, (N'Oriflame', N'Швеция', N'oriflame-logo.png', N'oriflame-bg.png')
+  (N'TianDe', N'Неизвестно', N'tiande-logo.png', N'tiande-bg.png')
+, (N'Amrita', N'Неизвестно', N'amrita-logo.png', N'amrita-bg.png')
+, (N'Unice', N'Неизвестно', N'unice-logo.png', N'unice-bg.png')
 
 insert Products(Name, BrandId, Description) values
   (N'Тушь для ресниц "Супердлина. Акцент"', 1, N'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry''s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.')

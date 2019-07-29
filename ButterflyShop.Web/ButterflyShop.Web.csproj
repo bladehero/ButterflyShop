@@ -9,8 +9,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Models\" />
     <Folder Include="wwwroot\assets\images\about\" />
+    <Folder Include="wwwroot\assets\images\products\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ButterflyShop.DAL\ButterflyShop.DAL.csproj" />
   </ItemGroup>
 
 </Project>

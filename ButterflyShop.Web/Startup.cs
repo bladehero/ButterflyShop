@@ -30,6 +30,7 @@ namespace ButterflyShop.Web
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            GlobalVariables.ConnectionString = "Data Source=localhost;Initial Catalog=ButterflyShopDatabase;Integrated Security=True;";
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }

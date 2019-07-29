@@ -3016,6 +3016,7 @@ ul.cart-items > li {
 }
 
 .single-banner-item .banner-image a img {
+  height: 350px;
   width: 100%;
   -webkit-transition: all 0.5s cubic-bezier(0.215, 0.61, 0.355, 1);
   -o-transition: all 0.5s cubic-bezier(0.215, 0.61, 0.355, 1);
@@ -3085,10 +3086,14 @@ ul.cart-items > li {
 }
 
 .single-banner-item .banner-content a {
-  font-size: 16px;
-  line-height: 32px;
-  text-decoration: underline;
+  font-size: 14px;
+  line-height: 18px;
   font-weight: 500;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.single-banner-item .banner-content a:hover {
+    background-color: rgba(0, 0, 0, 0.7);
 }
 
 .single-banner-item .discount-banner-content {
