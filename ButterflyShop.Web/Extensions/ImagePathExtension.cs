@@ -11,6 +11,10 @@ namespace ButterflyShop.Web.Extensions
 
         public static string ImageForFolder(string source, string folder)
         {
+            if (string.IsNullOrWhiteSpace(source))
+            {
+                return ImageFolderNames.NoImagePath;
+            }
             var path = Path.Combine(folder, source);
             return File.Exists(Path.Combine(GlobalVariables.ResourceDirectory, path)) ? path : ImageFolderNames.NoImagePath;
         }

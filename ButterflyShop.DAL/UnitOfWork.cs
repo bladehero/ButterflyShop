@@ -8,6 +8,7 @@ namespace ButterflyShop.DAL
     {
         private IDbConnection _connection;
 
+        public StoredProcedures StoredProcedures { get; set; }
         public BrandDao Brands { get; set; }
         public CartDao Carts { get; set; }
         public CategoryDao Categories { get; set; }
@@ -30,6 +31,7 @@ namespace ButterflyShop.DAL
         {
             _connection = connection;
 
+            StoredProcedures = new StoredProcedures(connection);
             Brands = new BrandDao(connection);
             Carts = new CartDao(connection);
             Categories = new CategoryDao(connection);

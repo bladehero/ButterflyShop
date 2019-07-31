@@ -1,0 +1,37 @@
+﻿@model ButterflyShop.DAL.Models.StoredProcedureModels.ProductItemInfo_Result
+@using static ButterflyShop.Web.Extensions.ImagePathExtension
+
+<!--  Single Grid product Start -->
+<div class="col-lg-3 col-md-4 col-sm-6">
+    <div class="single-grid-product mb-40">
+        <div class="product-image">
+            @if (Model.Discount.HasValue)
+            {
+                <div class="product-label">
+                    <span>@Model.Discount.Value%</span>
+                </div>
+            }
+            <a href="@Url.Action("Product", "Shop")">
+                <img src="~/@ProductImage(Model.Image)" class="img-fluid" alt="">
+            </a>
+            <div class="product-action">
+                <ul>
+                    <li><a href="@Url.Action("Cart", "Account")"><i class="fa fa-cart-plus"></i></a></li>
+                    <li><a href="@Url.Action("Wishlist", "Account")"><i class="fa fa-heart-o"></i></a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="product-content">
+            <h3 class="title"> <a href="@Url.Action("Product", "Shop")">@Model.Name</a></h3>
+            @if (Model.OldPrice.HasValue)
+            {
+                <p class="product-price"><span class="discounted-price">@Model.Price</span> <span class="main-price discounted">@Model.OldPrice</span></p>
+            }
+            else
+            {
+                <p class="product-price"><span class="regular-price">@Model.Price</span></p>
+            }
+        </div>
+    </div>
+</div>
+<!--  Single Grid product End -->

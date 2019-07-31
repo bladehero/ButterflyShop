@@ -1,6 +1,7 @@
 ﻿using ButterflyShop.DAL.Dao;
 using ButterflyShop.DAL.Models.StoredProcedureModels;
 using Dapper;
+using System.Collections.Generic;
 using System.Data;
 
 namespace ButterflyShop.DAL
@@ -9,9 +10,16 @@ namespace ButterflyShop.DAL
     {
         public StoredProcedures(IDbConnection connection) : base(connection) { }
 
-        public ProductItemInfo_Result GetItemsInfo(int count, bool newItems, bool saleItems)
+        public IEnumerable<ProductItemInfo_Result> GetItemsInfo(int count, bool? newItems = null, bool? saleItems = null)
         {
-            return Connection.Execute("");
+            var obj = new
+            {
+                @count = count,
+                @newItems = newItems,
+                @saleItems = saleItems
+            };
+            var result = Connection.Query<ProductItemInfo_Result>("dbo.GetItemsInfo", obj, commandType: CommandType.StoredProcedure);
+            return result;
         }
     }
 }

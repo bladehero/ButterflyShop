@@ -1,6 +1,5 @@
 ﻿using ButterflyShop.Web.Models.HomeModels;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
 
 namespace ButterflyShop.Web.Controllers
 {
@@ -10,8 +9,9 @@ namespace ButterflyShop.Web.Controllers
         {
             var model = new IndexVM
             {
-                Brands = UnitOfWork.Brands.Random(2),
-                NewItems = 
+                Brands = UnitOfWork.Brands.FindAll(),
+                NewItems = UnitOfWork.StoredProcedures.GetItemsInfo(8, newItems: true),
+                SaleItems = UnitOfWork.StoredProcedures.GetItemsInfo(8, saleItems: true)
             };
 
             return View(model);

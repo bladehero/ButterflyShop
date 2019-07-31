@@ -2,6 +2,7 @@
 @using static ButterflyShop.Web.Extensions.ImagePathExtension
 @{
     var brands = Model.Brands;
+    var randomBrands = Model.RandomBrands;
     var newItems = Model.NewItems;
     var saleItems = Model.SaleItems;
 }
@@ -18,7 +19,7 @@
                             <!--Hero Content start-->
                             <div class="hero-content-2 center">
                                 <h2>Экологически чистая <br> косметика</h2>
-                                <a href="@Url.Action("Index", "Shop")" class="btn">КУПИТЬ</a>
+                                <a href="@Url.Action("Index", "Shop")" class="btn">НАЙТИ</a>
                             </div>
                             <!--Hero Content end-->
                         </div>
@@ -50,7 +51,7 @@
 <div class="banner-section section pt-30">
     <div class="container">
         <div class="row justify-content-center">
-            @foreach (var brand in brands)
+            @foreach (var brand in randomBrands)
             {
                 <!-- Single Banner Start -->
                 <div class="col-lg-6 col-md-6 col-sm-12">
@@ -61,7 +62,7 @@
                             </a>
                         </div>
                         <div class="banner-content">
-                            <a class="btn" href="@Url.Action("Index", "Shop", new { brandId = brand.Id })">КУПИТЬ</a>
+                            <a class="btn" href="@Url.Action("Index", "Shop", new { brandId = brand.Id })">ПРОСМОТР</a>
                         </div>
                     </div>
                 </div>
@@ -93,30 +94,7 @@
                 <div class="row">
                     @foreach (var item in newItems)
                     {
-                        <!--  Single Grid product Start -->
-                        <div class="col-lg-3 col-md-4 col-sm-6">
-                            <div class="single-grid-product mb-40">
-                                <div class="product-image">
-                                    <div class="product-label">
-                                        <span>-20%</span>
-                                    </div>
-                                    <a href="single-product.html">
-                                        <img src="~/@ProductImage(item.)" class="img-fluid" alt="">
-                                    </a>
-                                    <div class="product-action">
-                                        <ul>
-                                            <li><a href="cart.html"><i class="fa fa-cart-plus"></i></a></li>
-                                            <li><a href="wishlist.html"><i class="fa fa-heart-o"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="product-content">
-                                    <h3 class="title"> <a href="single-product.html">Stylish Design Chair</a></h3>
-                                    <p class="product-price"><span class="discounted-price">$190.00</span> <span class="main-price discounted">$230.00</span></p>
-                                </div>
-                            </div>
-                        </div>
-                        <!--  Single Grid product End -->
+                        @await Html.PartialAsync("~/Views/Shared/_ProductCard.cshtml", item)
                     }
                 </div>
             </div>
@@ -125,34 +103,15 @@
             <div id="with-sale-items" class="tab-pane">
                 <!--  Single Grid product Start -->
                 <div class="row">
-                    <div class="col-lg-3 col-md-4 col-sm-6">
-                        <div class="single-grid-product mb-40">
-                            <div class="product-image">
-                                <a href="single-product.html">
-                                    <img src="~/assets/images/product/product-9.jpg" class="img-fluid" alt="">
-                                    <img src="~/assets/images/product/product-10.jpg" class="img-fluid" alt="">
-                                </a>
-
-                                <div class="product-action">
-                                    <ul>
-                                        <li><a href="cart.html"><i class="fa fa-cart-plus"></i></a></li>
-                                        <li><a href="wishlit.html"><i class="fa fa-heart-o"></i></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="product-content">
-                                <h3 class="title"> <a href="single-product.html">Normal Dining chair</a></h3>
-                                <p class="product-price"><span class="discounted-price">$130.00</span> </p>
-                            </div>
-                        </div>
-                    </div>
+                    @foreach (var item in saleItems)
+                    {
+                        @await Html.PartialAsync("~/Views/Shared/_ProductCard.cshtml", item)
+                    }
                 </div>
                 <!--  Single Grid product End -->
             </div>
             <!-- With Sale Items Tab End -->
         </div>
-
-
     </div>
 </div>
 <!--Product section end-->
@@ -212,96 +171,18 @@
         </div>
         <div class="row">
             <div class="brand-slider section">
-                <div class="col">
+                @foreach (var brand in brands)
+                {
                     <!-- Single Brand Start -->
-                    <div class="single-brand">
-                        <div class="brand-image">
-                            <img src="~/assets/images/brands/brand-1.png" alt="">
+                    <div class="col">
+                        <div class="single-brand">
+                            <div class="brand-image">
+                                <img src="~/@BrandLogoImage(brand.Logo)" alt="@brand.Name">
+                            </div>
                         </div>
                     </div>
                     <!-- Single Brand End -->
-                </div>
-                <div class="col">
-                    <!-- Single Brand Start -->
-                    <div class="single-brand">
-                        <div class="brand-image">
-                            <img src="~/assets/images/brands/brand-2.png" alt="">
-                        </div>
-                    </div>
-                    <!-- Single Brand End -->
-                </div>
-                <div class="col">
-                    <!-- Single Brand Start -->
-                    <div class="single-brand">
-                        <div class="brand-image">
-                            <img src="~/assets/images/brands/brand-3.png" alt="">
-                        </div>
-                    </div>
-                    <!-- Single Brand End -->
-                </div>
-                <div class="col">
-                    <!-- Single Brand Start -->
-                    <div class="single-brand">
-                        <div class="brand-image">
-                            <img src="~/assets/images/brands/brand-4.png" alt="">
-                        </div>
-                    </div>
-                    <!-- Single Brand End -->
-                </div>
-                <div class="col">
-                    <!-- Single Brand Start -->
-                    <div class="single-brand">
-                        <div class="brand-image">
-                            <img src="~/assets/images/brands/brand-5.png" alt="">
-                        </div>
-                    </div>
-                    <!-- Single Brand End -->
-                </div>
-                <div class="col">
-                    <!-- Single Brand Start -->
-                    <div class="single-brand">
-                        <div class="brand-image">
-                            <img src="~/assets/images/brands/brand-1.png" alt="">
-                        </div>
-                    </div>
-                    <!-- Single Brand End -->
-                </div>
-                <div class="col">
-                    <!-- Single Brand Start -->
-                    <div class="single-brand">
-                        <div class="brand-image">
-                            <img src="~/assets/images/brands/brand-2.png" alt="">
-                        </div>
-                    </div>
-                    <!-- Single Brand End -->
-                </div>
-                <div class="col">
-                    <!-- Single Brand Start -->
-                    <div class="single-brand">
-                        <div class="brand-image">
-                            <img src="~/assets/images/brands/brand-3.png" alt="">
-                        </div>
-                    </div>
-                    <!-- Single Brand End -->
-                </div>
-                <div class="col">
-                    <!-- Single Brand Start -->
-                    <div class="single-brand">
-                        <div class="brand-image">
-                            <img src="~/assets/images/brands/brand-4.png" alt="">
-                        </div>
-                    </div>
-                    <!-- Single Brand End -->
-                </div>
-                <div class="col">
-                    <!-- Single Brand Start -->
-                    <div class="single-brand">
-                        <div class="brand-image">
-                            <img src="~/assets/images/brands/brand-5.png" alt="">
-                        </div>
-                    </div>
-                    <!-- Single Brand End -->
-                </div>
+                }
             </div>
         </div>
     </div>

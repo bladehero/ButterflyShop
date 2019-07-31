@@ -1,4 +1,6 @@
-﻿namespace ButterflyShop.DAL.Models.StoredProcedureModels
+﻿using System;
+
+namespace ButterflyShop.DAL.Models.StoredProcedureModels
 {
     public class ProductItemInfo_Result
     {
@@ -9,5 +11,7 @@
         public double Price { get; set; }
         public double? OldPrice { get; set; }
         public string Image { get; set; }
+
+        public int? Discount => OldPrice.HasValue ? (int?)Math.Floor(Price / OldPrice.Value * 100 - 100) : null;
     }
 }

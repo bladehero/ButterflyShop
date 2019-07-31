@@ -34,22 +34,22 @@ go
 -- Description: —
 -- ============================================================================
 
-alter procedure dbo.GetItemsInfo -- exec dbo.GetItemsInfo 4, 0, 1
+alter procedure dbo.GetItemsInfo -- exec dbo.GetItemsInfo 4, 1
 (
   @count int = 8,
-  @newItems bit = 1,
+  @newItems bit = 0,
   @saleItems bit = 0
 )
 as  
 begin  
   
-  select top (@count)
+  select top (@count) 
     p.Id as ProductId
   , i.Id as ItemId
-  , p.Name as Name
-  , p.Description as Description
-  , i.Price as Price
-  , i.OldPrice as OldPrice
+  , p.Name
+  , p.Description
+  , i.Price
+  , i.OldPrice
   , pimg.Image
     from dbo.Products p
     join dbo.Items i on i.ProductId = p.Id
@@ -60,11 +60,11 @@ begin
     ) pimg
     where p.IsDeleted = 0 
       and i.IsDeleted = 0
-      and (@saleItems = 0 
+      and (isnull(@saleItems, 0) = 0
         or (@saleItems = 1 
         and i.OldPrice is not null))
     order by
-      case when @newItems = 1 then p.DateCreated end desc
+      case when isnull(@newItems, 0) = 1 then p.DateCreated end desc
     , newid() 
 end;
 go
