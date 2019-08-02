@@ -1,4 +1,5 @@
 ﻿using ButterflyShop.DAL.Dao;
+using ButterflyShop.DAL.Models;
 using ButterflyShop.DAL.Models.StoredProcedureModels;
 using Dapper;
 using System.Collections.Generic;
@@ -19,6 +20,24 @@ namespace ButterflyShop.DAL
                 @saleItems = saleItems
             };
             var result = Connection.Query<ProductItemInfo_Result>("dbo.GetItemsInfo", obj, commandType: CommandType.StoredProcedure);
+            return result;
+        }
+        public IEnumerable<Category> CategoriesForProduct(int productId)
+        {
+            var obj = new
+            {
+                @productId = productId
+            };
+            var result = Connection.Query<Category>("dbo.CategoriesForProduct", obj, commandType: CommandType.StoredProcedure);
+            return result;
+        }
+        public IEnumerable<ProductImage> GetProductImages(int productId)
+        {
+            var obj = new
+            {
+                @productId = productId
+            };
+            var result = Connection.Query<ProductImage>("dbo.GetProductImages", obj, commandType: CommandType.StoredProcedure);
             return result;
         }
     }

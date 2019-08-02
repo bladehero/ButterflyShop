@@ -11,7 +11,7 @@
                     <span>@Model.Discount.Value%</span>
                 </div>
             }
-            <a href="@Url.Action("Product", "Shop")">
+            <a href="@Url.Action("Product", "Shop", new { id = Model.ProductId })">
                 <img src="~/@ProductImage(Model.Image)" class="img-fluid" alt="">
             </a>
             <div class="product-action">
@@ -22,7 +22,7 @@
             </div>
         </div>
         <div class="product-content">
-            <h3 class="title"> <a href="@Url.Action("Product", "Shop")">@Model.Name</a></h3>
+            <h3 class="title"> <a href="@Url.Action("Product", "Shop", new { id = Model.ProductId })">@Model.Name</a></h3>
             @if (Model.OldPrice.HasValue)
             {
                 <p class="product-price"><span class="discounted-price">@Model.Price</span> <span class="main-price discounted">@Model.OldPrice</span></p>
