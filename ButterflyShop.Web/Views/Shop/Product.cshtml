@@ -7,6 +7,8 @@
     var products = Model.Products;
     var images = Model.ProductImages;
     var categories = Model.Categories;
+    var parameters = Model.ItemsWithParameters;
+    var currentParameter = Model.ItemsWithParameters.FirstOrDefault();
 }
 
 <!-- Page Banner Section Start -->
@@ -28,11 +30,13 @@
                 <div class="common-sidebar-widget">
                     <h3 class="sidebar-title">Параметры товара</h3>
                     <ul class="sidebar-tag">
-                        <li><a href="#">blouse</a></li>
-                        <li><a href="#">clothes</a></li>
-                        <li><a href="#">fashion</a></li>
-                        <li><a href="#">handbag</a></li>
-                        <li><a href="#">laptop</a></li>
+                        @if (parameters?.Count() > 1)
+                        {
+                            @foreach (var parameter in parameters)
+                            {
+                                <li><a href="#" data-item="@parameter.ItemId">@parameter.Parameters</a></li>
+                            }
+                        }
                     </ul>
                 </div>
             </div>
@@ -90,8 +94,11 @@
                             <div class="product-details-content">
                                 <h2>@Model.Product.Name</h2>
                                 <div class="single-product-price">
-                                    <span class="price new-price">$66.00</span>
-                                    <span class="regular-price">$77.00</span>
+                                    <span class="price new-price">@currentParameter.Price₴</span>
+                                    @if (currentParameter.OldPrice.HasValue)
+                                    {
+                                    <span class="regular-price">@currentParameter.OldPrice.Value₴</span>
+                                    }
                                 </div>
                                 <div class="product-description">
                                     <p>@Model.Product.Description.Cut(100)...</p>

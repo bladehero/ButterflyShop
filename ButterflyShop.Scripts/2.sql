@@ -23,6 +23,9 @@
 -- end;
 -- go
 
+use ButterflyShopDatabase
+go
+
 if object_id(N'dbo.GetItemsInfo') is null
   exec('create procedure dbo.GetItemsInfo as set nocount on;');
 go
@@ -64,6 +67,7 @@ begin
     (
       select top 1 * 
         from dbo.ProductImages pim where pim.ProductId = p.Id
+                                     and pim.IsDeleted = 0
     ) pimg
     where p.IsDeleted = 0 
       and i.IsDeleted = 0
@@ -106,7 +110,8 @@ with CategoryParents as
                     from Categories c
                     join CategoryProducts cp on cp.CategoryId = c.Id
                     join Products p on p.Id = cp.ProductId
-                    where p.Id = @ProductId and c.IsDeleted = 0
+                    where p.Id = @ProductId 
+                      and c.IsDeleted = 0
                 )
   union all
   select c.*
@@ -142,6 +147,8 @@ begin
     from Products p
     join ProductImages pim on pim.ProductId = p.Id
     where p.Id = @productId
+      and p.IsDeleted = 0
+      and pim.IsDeleted = 0
 
 end;
 go
@@ -151,7 +158,7 @@ if object_id(N'dbo.GetItemWithParameters') is null
 go
 
 -- ============================================================================
--- Example    : exec dbo.GetItemWithParameters 1
+-- Example    : exec dbo.GetItemWithParameters 7
 -- Author     : Nikita Dermenzhi
 -- Date       : 25/07/2019
 -- Description: —
@@ -164,7 +171,10 @@ alter procedure dbo.GetItemWithParameters
 as  
 begin  
   
-  select * 
+  select i.Id as ItemId
+       , i.Price
+       , i.OldPrice
+       , params.Parameters
     from Products p
     join Items i on i.ProductId = p.Id
   cross apply
@@ -173,8 +183,13 @@ begin
       from OptionalParameterProducts opp
       join OptionalParameters op on op.Id = opp.OptionalParameterId
       where opp.ItemId = i.Id
+        and opp.IsDeleted = 0
+        and op.IsDeleted = 0
   ) params
     where p.Id = @productId
+      and p.IsDeleted = 0
+      and i.IsDeleted = 0
+    order by i.Price
 
 end;
 go

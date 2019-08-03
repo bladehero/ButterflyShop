@@ -40,5 +40,14 @@ namespace ButterflyShop.DAL
             var result = Connection.Query<ProductImage>("dbo.GetProductImages", obj, commandType: CommandType.StoredProcedure);
             return result;
         }
+        public IEnumerable<ItemWithParameters_Result> GetItemWithParameters(int productId)
+        {
+            var obj = new
+            {
+                @productId = productId
+            };
+            var result = Connection.Query<ItemWithParameters_Result>("dbo.GetItemWithParameters", obj, commandType: CommandType.StoredProcedure);
+            return result;
+        }
     }
 }

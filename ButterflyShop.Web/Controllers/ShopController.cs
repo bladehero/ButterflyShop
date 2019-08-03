@@ -16,13 +16,14 @@ namespace ButterflyShop.Web.Controllers
 
         public IActionResult Product(int id)
         {
-            var model = new IndexVM
+            var model = new ProductVM
             {
                 Product = UnitOfWork.Products.FindById(id),
                 Products = UnitOfWork.StoredProcedures.GetItemsInfo(8),
                 Categories = UnitOfWork.StoredProcedures.CategoriesForProduct(id),
                 ProductImages = UnitOfWork.StoredProcedures.GetProductImages(id),
-                Items = UnitOfWork.Items.Find(x => x.ProductId == id)
+                Items = UnitOfWork.Items.Find(x => x.ProductId == id),
+                ItemsWithParameters = UnitOfWork.StoredProcedures.GetItemWithParameters(id)
             };
             return View(model);
         }
