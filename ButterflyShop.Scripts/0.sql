@@ -188,6 +188,7 @@ if not exists (select 1
     Id int not null primary key identity,
     Email nvarchar(100) not null,
     Password char(32) not null,
+    Token uniqueidentifier not null default(newid()),
     FirstName nvarchar(200) not null,
     LastName nvarchar(200) null,
     Phone char(9) null,
