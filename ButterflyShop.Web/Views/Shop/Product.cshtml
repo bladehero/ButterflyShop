@@ -32,16 +32,30 @@
                         <!-- Product Details Left -->
                         <div class="col-md-6 pr-35 pr-lg-15 pr-md-15 pr-sm-15 pr-xs-15">
                             <div class="row">
-                                <div class="col">
+                                <div class="col-2">
+                                    <div class="product-details-nav">
+                                        @if (images?.Count() > 0)
+                                        {
+                                            foreach (var image in images)
+                                            {
+                                                <div class="sm-image"><img src="~/@ProductImage(image.Image)" alt="@($"{currentProduct.Name} {image.Image}")"></div>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <div class="sm-image"><img src="~/@NoImage" alt="Без изображения"></div>
+                                        }
+                                    </div>
+                                </div>
+                                <div class="col-10">
                                     <div class="product-details-left">
-                                        <div class="product-details-images-2 tf-element-carousel">
+                                        <div class="product-details-images tf-element-carousel">
                                             @if (images?.Count() > 0)
                                             {
                                                 foreach (var image in images)
                                                 {
                                                     <div class="lg-image">
                                                         <img src="~/@ProductImage(image.Image)" alt="@($"{currentProduct.Name} {image.Image}")">
-                                                        <a href="~/@ProductImage(image.Image)" class="popup-img venobox" data-gall="myGallery"><i class="fa fa-expand"></i></a>
                                                     </div>
                                                 }
                                             }
@@ -49,21 +63,7 @@
                                             {
                                                 <div class="lg-image">
                                                     <img src="~/@NoImage" alt="Без изображения">
-                                                    <a href="~/@NoImage" class="popup-img venobox" data-gall="myGallery"><i class="fa fa-expand"></i></a>
                                                 </div>
-                                            }
-                                        </div>
-                                        <div class="product-details-thumbs-2 mt-0">
-                                            @if (images?.Count() > 0)
-                                            {
-                                                foreach (var image in images)
-                                                {
-                                                    <div class="sm-image"><img src="~/@ProductImage(image.Image)" alt="@($"{currentProduct.Name} {image.Image}")"></div>
-                                                }
-                                            }
-                                            else
-                                            {
-                                                <div class="sm-image"><img src="~/@NoImage" alt="Без изображения"></div>
                                             }
                                         </div>
                                     </div>
@@ -220,6 +220,33 @@
                 selectedItemInput.val(id);
                 itemPriceLabel.text(price + '₴');
                 itemOldPriceLabel.text(oldPrice + '₴');
+            });
+
+
+            $('.product-details-images').slick({
+                arrows: false,
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                autoplay: false,
+                autoplaySpeed: 5000,
+                dots: false,
+                centerMode: false,
+                centerPadding: 0,
+                asNavFor: '.product-details-nav'
+            });
+            $('.product-details-nav').slick({
+                arrows: false,
+                slidesToShow: 3,
+                slidesToScroll: 1,
+                autoplay: false,
+                autoplaySpeed: 5000,
+                vertical: true,
+                verticalSwiping: true,
+                dots: false,
+                focusOnSelect: true,
+                centerMode: false,
+                centerPadding: 0,
+                asNavFor: '.product-details-images',
             });
         });
     </script>

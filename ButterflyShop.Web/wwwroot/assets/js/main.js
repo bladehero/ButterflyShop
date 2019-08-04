@@ -183,28 +183,28 @@
                 breakpoint: 1199,
                 settings: {
                     slidesToShow: 4,
-                    slidesToScroll: 4,
+                    slidesToScroll: 4
                 }
             },
             {
                 breakpoint: 992,
                 settings: {
                     slidesToShow: 3,
-                    slidesToScroll: 3,
+                    slidesToScroll: 3
                 }
             },
             {
                 breakpoint: 768,
                 settings: {
                     slidesToShow: 2,
-                    slidesToScroll: 2,
+                    slidesToScroll: 2
                 }
             },
             {
                 breakpoint: 479,
                 settings: {
                     slidesToShow: 2,
-                    slidesToScroll: 2,
+                    slidesToScroll: 2
                 }
             }
         ]
@@ -246,77 +246,6 @@
                 }
             },
         ]
-    });
-    /*----------------------------------- 
-        Single Product Slide Menu Active 
-    --------------------------------------*/
-    /* Product Details 2 Images Slider */
-    $('.product-details-images-2').each(function () {
-        var $this = $(this);
-        var $thumb = $this.siblings('.product-details-thumbs-2');
-        $this.slick({
-            arrows: false,
-            slidesToShow: 1,
-            slidesToScroll: 1,
-            autoplay: false,
-            autoplaySpeed: 5000,
-            dots: false,
-            infinite: true,
-            centerMode: false,
-            centerPadding: 0,
-            asNavFor: $thumb
-        });
-    });
-    $('.product-details-thumbs-2').each(function () {
-        var $this = $(this);
-        var $details = $this.siblings('.product-details-images-2');
-        $this.slick({
-            arrows: false,
-            slidesToShow: 2,
-            slidesToScroll: 1,
-            autoplay: false,
-            autoplaySpeed: 5000,
-            vertical: true,
-            verticalSwiping: true,
-            dots: false,
-            infinite: true,
-            focusOnSelect: true,
-            centerMode: false,
-            centerPadding: 0,
-            prevArrow: '<span class="slick-prev"><i class="fa fa-angle-up"></i></span>',
-            nextArrow: '<span class="slick-next"><i class="fa fa-angle-down"></i></span>',
-            asNavFor: $details,
-            responsive: [
-                {
-                    breakpoint: 1199,
-                    settings: {
-                        slidesToShow: 4,
-                        slidesToScroll: 4
-                    }
-                },
-                {
-                    breakpoint: 992,
-                    settings: {
-                        slidesToShow: 3,
-                        slidesToScroll: 3
-                    }
-                },
-                {
-                    breakpoint: 768,
-                    settings: {
-                        slidesToShow: 2,
-                        slidesToScroll: 2
-                    }
-                },
-                {
-                    breakpoint: 479,
-                    settings: {
-                        slidesToShow: 2,
-                        slidesToScroll: 2
-                    }
-                }
-            ]
-        });
     });
     $('.slider-lg-image-1').slick({
         infinite: true,
