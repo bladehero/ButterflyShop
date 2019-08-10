@@ -49,5 +49,10 @@ namespace ButterflyShop.DAL
             var result = Connection.Query<ItemWithParameters_Result>("dbo.GetItemWithParameters", obj, commandType: CommandType.StoredProcedure);
             return result;
         }
+        public string MD5HashPassword(string password)
+        {
+            var result = Connection.ExecuteScalar<string>($"select dbo.MD5HashPassword('{password}')");
+            return result;
+        }
     }
 }

@@ -1,0 +1,77 @@
+﻿@model ButterflyShop.Web.Models.AccountModels.LoginViewVM
+<!--Login Register section start-->
+<div class="login-register-section section pt-90 pt-lg-70 pt-md-60 pt-sm-55 pt-xs-45  pb-70 pb-lg-50 pb-md-40 pb-sm-30 pb-xs-20">
+    <div class="container">
+        <div class="row">
+            <!--Login Form Start-->
+            <div class="col-md-6 col-sm-6">
+                <div class="customer-login-register">
+                    <div class="form-login-title">
+                        <h2>Вход</h2>
+                    </div>
+                    <div class="login-form">
+                        <form asp-action="SignIn" method="post">
+                            <div class="form-fild">
+                                <p><label>Эл. почта <span class="required">*</span></label></p>
+                                <input name="username" value="@Model.LoginVM.Username" type="text">
+                            </div>
+                            <div class="form-fild">
+                                <p><label>Пароль <span class="required">*</span></label></p>
+                                <input name="password" value="@Model.LoginVM.Password" type="password">
+                            </div>
+                            <div class="login-submit">
+                                <button type="submit" class="btn">Войти</button>
+                            </div>
+                            <div class="lost-password">
+                                <a href="#">Lost your password?</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!--Login Form End-->
+            <!--Register Form Start-->
+            <div class="col-md-6 col-sm-6">
+                <div class="customer-login-register register-pt-0">
+                    <div class="form-register-title">
+                        <h2>Регистрация</h2>
+                    </div>
+                    <div class="register-form">
+                        <form asp-action="Register" method="post">
+                            <div class="form-fild">
+                                <p><label>Эл. почта <span class="required">*</span></label></p>
+                                <input name="username" value="@Model.RegisterVM.Username" type="text">
+                            </div>
+                            <div class="form-fild">
+                                <p><label>Пароль <span class="required">*</span></label></p>
+                                <input name="password" value="@Model.RegisterVM.Password" type="password">
+                            </div>
+                            <div class="form-fild">
+                                <p><label>Подтвердить пароль <span class="required">*</span></label></p>
+                                <input name="repeatPassword" value="@Model.RegisterVM.RepeatPassword" type="password">
+                            </div>
+                            <div class="register-submit">
+                                <button type="submit" class="btn">Зарегистрироваться</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!--Register Form End-->
+        </div>
+    </div>
+</div>
+<!--Login Register section end-->
+
+@if (Model.HasError)
+{
+    @section Scripts{
+        <script>
+            Swal.fire({
+                title: 'Ошибка',
+                type: 'error',
+                html: '@Html.Raw(Model.Error)'
+            });
+        </script>
+    }
+}
