@@ -4,7 +4,7 @@
 <!--  Single Grid product Start -->
 <div class="col-lg-3 col-md-4 col-sm-6">
     <div class="single-grid-product mb-40">
-        <div class="product-image">
+        <div class="product-image text-center">
             @if (Model.Discount.HasValue)
             {
                 <div class="product-label">
@@ -25,11 +25,11 @@
             <h3 class="title"> <a href="@Url.Action("Product", "Shop", new { id = Model.ProductId })">@Model.Name</a></h3>
             @if (Model.OldPrice.HasValue)
             {
-                <p class="product-price"><span class="discounted-price">@Model.Price</span> <span class="main-price discounted">@Model.OldPrice</span></p>
+                <p class="product-price"><span class="discounted-price">@Model.Price₴</span> <span class="main-price discounted">@Model.OldPrice₴</span></p>
             }
             else
             {
-                <p class="product-price"><span class="regular-price">@Model.Price</span></p>
+                <p class="product-price"><span class="regular-price">@Model.Price₴</span></p>
             }
         </div>
     </div>
