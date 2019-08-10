@@ -25,22 +25,6 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col">
-                <div class="common-sidebar-widget">
-                    <h3 class="sidebar-title">Параметры товара</h3>
-                    <ul class="sidebar-tag">
-                        @if (parameters?.Count() > 1)
-                        {
-                            @foreach (var parameter in parameters)
-                            {
-                                <li><a href="#" data-item="@parameter.ItemId">@parameter.Parameters</a></li>
-                            }
-                        }
-                    </ul>
-                </div>
-            </div>
-        </div>
     </div>
 </div>
 <!-- Page Banner Section End -->
@@ -53,38 +37,58 @@
                     <div class="row">
                         <!-- Product Details Left -->
                         <div class="col-md-6 pr-35 pr-lg-15 pr-md-15 pr-sm-15 pr-xs-15">
-                            <div class="product-details-left">
-                                <div class="product-details-images-2 tf-element-carousel">
-                                    @if (images?.Count() > 0)
-                                    {
-                                        foreach (var image in images)
-                                        {
-                                            <div class="lg-image">
-                                                <img src="~/@ProductImage(image.Image)" alt="@($"{currentProduct.Name} {image.Image}")">
-                                                <a href="~/@ProductImage(image.Image)" class="popup-img venobox" data-gall="myGallery"><i class="fa fa-expand"></i></a>
-                                            </div>
-                                        }
-                                    }
-                                    else
-                                    {
-                                        <div class="lg-image">
-                                            <img src="~/@NoImage" alt="Без изображения">
-                                            <a href="~/@NoImage" class="popup-img venobox" data-gall="myGallery"><i class="fa fa-expand"></i></a>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="product-details-left">
+                                        <div class="product-details-images-2 tf-element-carousel">
+                                            @if (images?.Count() > 0)
+                                            {
+                                                foreach (var image in images)
+                                                {
+                                                    <div class="lg-image">
+                                                        <img src="~/@ProductImage(image.Image)" alt="@($"{currentProduct.Name} {image.Image}")">
+                                                        <a href="~/@ProductImage(image.Image)" class="popup-img venobox" data-gall="myGallery"><i class="fa fa-expand"></i></a>
+                                                    </div>
+                                                }
+                                            }
+                                            else
+                                            {
+                                                <div class="lg-image">
+                                                    <img src="~/@NoImage" alt="Без изображения">
+                                                    <a href="~/@NoImage" class="popup-img venobox" data-gall="myGallery"><i class="fa fa-expand"></i></a>
+                                                </div>
+                                            }
                                         </div>
-                                    }
+                                        <div class="product-details-thumbs-2 mt-0">
+                                            @if (images?.Count() > 0)
+                                            {
+                                                foreach (var image in images)
+                                                {
+                                                    <div class="sm-image"><img src="~/@ProductImage(image.Image)" alt="@($"{currentProduct.Name} {image.Image}")"></div>
+                                                }
+                                            }
+                                            else
+                                            {
+                                                <div class="sm-image"><img src="~/@NoImage" alt="Без изображения"></div>
+                                            }
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="product-details-thumbs-2 mt-0">
-                                    @if (images?.Count() > 0)
-                                    {
-                                        foreach (var image in images)
-                                        {
-                                            <div class="sm-image"><img src="~/@ProductImage(image.Image)" alt="@($"{currentProduct.Name} {image.Image}")"></div>
-                                        }
-                                    }
-                                    else
-                                    {
-                                        <div class="sm-image"><img src="~/@NoImage" alt="Без изображения"></div>
-                                    }
+                            </div>
+                            <div class="row mt-2">
+                                <div class="col">
+                                    <div class="common-sidebar-widget">
+                                        <h3 class="sidebar-title">Параметры товара</h3>
+                                        <ul class="sidebar-tag">
+                                            @if (parameters?.Count() > 1)
+                                            {
+                                                @foreach (var parameter in parameters)
+                                                {
+                                                    <li><a href="#" data-item="@parameter.ItemId">@parameter.Parameters</a></li>
+                                                }
+                                            }
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -94,10 +98,10 @@
                             <div class="product-details-content">
                                 <h2>@Model.Product.Name</h2>
                                 <div class="single-product-price">
-                                    <span class="price new-price">@currentParameter.Price₴</span>
+                                    <span class="price new-price@(currentParameter.OldPrice.HasValue ? " text-danger" : "")">@currentParameter.Price₴</span>
                                     @if (currentParameter.OldPrice.HasValue)
                                     {
-                                    <span class="regular-price">@currentParameter.OldPrice.Value₴</span>
+                                        <span class="regular-price">@currentParameter.OldPrice.Value₴</span>
                                     }
                                 </div>
                                 <div class="product-description">
