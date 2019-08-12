@@ -193,3 +193,23 @@ begin
 
 end;
 go
+
+if (object_ID('dbo.MD5HashPassword') is not null)
+   drop function dbo.MD5HashPassword
+go
+
+-- ============================================================================
+-- Example    : select dbo.MD5HashPassword('qwe')
+-- Author     : Nikita Dermenzhi
+-- Date       : 25/07/2019
+-- Description: —
+-- ============================================================================
+
+create function dbo.MD5HashPassword(@password nvarchar(100))
+returns char(32)
+as 
+begin 
+  return convert(varchar(32), hashbytes('MD5', @password), 2) 
+end
+go
+
