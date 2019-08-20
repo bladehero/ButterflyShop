@@ -1,4 +1,4 @@
-﻿using ButterflyShop.Web.Models.AccountModels;
+using ButterflyShop.Web.Models.AccountModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System;

@@ -16,6 +16,7 @@ namespace ButterflyShop.Web
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            GlobalVariables.ConnectionString = Configuration.GetConnectionString("DefaultConnection");
         }
 
         public IConfiguration Configuration { get; }
@@ -30,8 +31,13 @@ namespace ButterflyShop.Web
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            GlobalVariables.ConnectionString = "Data Source=localhost;Initial Catalog=ButterflyShopDatabase;Integrated Security=True;";
-
+            services.Configure<Microsoft.AspNetCore.Http.Features.FormOptions>(x =>
+            {
+                x.ValueLengthLimit = int.MaxValue;
+                x.MultipartBodyLengthLimit = int.MaxValue;
+                x.MemoryBufferThreshold = int.MaxValue;
+            });
+            
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
