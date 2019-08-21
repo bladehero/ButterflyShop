@@ -31,7 +31,7 @@ if object_id(N'dbo.GetItemsInfo') is null
 go
 
 -- ============================================================================
--- Example    : exec dbo.GetItemsInfo 4, 1
+-- Example    : exec dbo.GetItemsInfo 4, 1, 0, 5
 -- Author     : Nikita Dermenzhi
 -- Date       : 25/07/2019
 -- Description: —
@@ -41,7 +41,8 @@ alter procedure dbo.GetItemsInfo
 (
   @count int = 8,
   @newItems bit = 0,
-  @saleItems bit = 0
+  @saleItems bit = 0,
+  @userId int = null
 )
 as  
 begin  
@@ -54,7 +55,9 @@ begin
   , i.Price
   , i.OldPrice
   , pimg.Image
+  , fp.IsDeleted as Favourite
     from dbo.Products p
+    left join dbo.FavouriteProducts fp on fp.ProductId = p.Id and fp.UserId = @userId
     join (select i1.* 
             from dbo.Items i1
             join (select min(Id) as Id
@@ -79,8 +82,6 @@ begin
     , newid() 
 end;
 go
-
-declare @id int = 1;
 
 
 if object_id(N'dbo.CategoriesForProduct') is null

@@ -12,8 +12,8 @@ namespace ButterflyShop.Web.Controllers
             var model = new IndexVM
             {
                 Brands = UnitOfWork.Brands.FindAll(),
-                NewItems = UnitOfWork.StoredProcedures.GetItemsInfo(8, newItems: true),
-                SaleItems = UnitOfWork.StoredProcedures.GetItemsInfo(8, saleItems: true)
+                NewItems = UnitOfWork.StoredProcedures.GetItemsInfo(8, newItems: true, userId: SystemUser?.Id),
+                SaleItems = UnitOfWork.StoredProcedures.GetItemsInfo(8, saleItems: true, userId: SystemUser?.Id)
             };
 
             return View(model);

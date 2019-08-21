@@ -12,7 +12,7 @@ namespace ButterflyShop.Web.Controllers
         {
             var model = new IndexVM
             {
-                Products = UnitOfWork.StoredProcedures.GetItemsInfo(8),
+                Products = UnitOfWork.StoredProcedures.GetItemsInfo(8, userId: SystemUser?.Id),
             };
             return View();
         }
@@ -23,7 +23,7 @@ namespace ButterflyShop.Web.Controllers
             var model = new ProductVM
             {
                 Product = UnitOfWork.Products.FindById(id),
-                Products = UnitOfWork.StoredProcedures.GetItemsInfo(8),
+                Products = UnitOfWork.StoredProcedures.GetItemsInfo(8, userId: SystemUser?.Id),
                 Categories = UnitOfWork.StoredProcedures.CategoriesForProduct(id),
                 ProductImages = UnitOfWork.StoredProcedures.GetProductImages(id),
                 Items = UnitOfWork.Items.Find(x => x.ProductId == id),

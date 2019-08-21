@@ -11,6 +11,7 @@ namespace ButterflyShop.DAL.Models.StoredProcedureModels
         public double Price { get; set; }
         public double? OldPrice { get; set; }
         public string Image { get; set; }
+        public bool Favourite { get; set; }
 
         public int? Discount => OldPrice.HasValue ? (int?)Math.Floor(Price / OldPrice.Value * 100 - 100) : null;
     }

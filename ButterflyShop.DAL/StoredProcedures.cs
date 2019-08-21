@@ -11,13 +11,14 @@ namespace ButterflyShop.DAL
     {
         public StoredProcedures(IDbConnection connection) : base(connection) { }
 
-        public IEnumerable<ProductItemInfo_Result> GetItemsInfo(int count, bool? newItems = null, bool? saleItems = null)
+        public IEnumerable<ProductItemInfo_Result> GetItemsInfo(int count, bool? newItems = null, bool? saleItems = null, int? userId = null)
         {
             var obj = new
             {
                 @count = count,
                 @newItems = newItems,
-                @saleItems = saleItems
+                @saleItems = saleItems,
+                @userId = userId
             };
             var result = Connection.Query<ProductItemInfo_Result>("dbo.GetItemsInfo", obj, commandType: CommandType.StoredProcedure);
             return result;
@@ -56,7 +57,7 @@ namespace ButterflyShop.DAL
         }
         public int GetUserRoleId(string role)
         {
-            var result = Connection.ExecuteScalar<int>($"select dbo.GetUserRoleId('{role}')");
+            var result = Connection.ExecuteScalar<int>($"select dbo.GetUserRoleId(N'{role}')");
             return result;
         }
     }
