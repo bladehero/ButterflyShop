@@ -54,5 +54,10 @@ namespace ButterflyShop.DAL
             var result = Connection.ExecuteScalar<string>($"select dbo.MD5HashPassword('{password}')");
             return result;
         }
+        public int GetUserRoleId(string role)
+        {
+            var result = Connection.ExecuteScalar<int>($"select dbo.GetUserRoleId('{role}')");
+            return result;
+        }
     }
 }

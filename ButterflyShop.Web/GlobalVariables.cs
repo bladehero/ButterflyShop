@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.ComponentModel;
+using System.IO;
 
 namespace ButterflyShop.Web
 {
@@ -25,5 +26,13 @@ namespace ButterflyShop.Web
         public static string BrandLogosPath => Path.Combine(ImagesPath, BrandsFolder, BrandLogosFolder);
         public static string BrandBackgroundsPath => Path.Combine(ImagesPath, BrandsFolder, BrandBackgroundsFolder);
         public static string ProductsPath => Path.Combine(ImagesPath, ProductsFolder);
+    }
+
+    public enum UserRole
+    {
+        [Description("Пользователь")]
+        User,
+        [Description("Администратор")]
+        Administrator
     }
 }

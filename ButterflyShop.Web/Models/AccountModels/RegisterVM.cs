@@ -4,6 +4,8 @@ namespace ButterflyShop.Web.Models.AccountModels
 {
     public class RegisterVM
     {
+        [Required(ErrorMessage = "Имя пользователя - обязательное поле!")]
+        public string FirstName { get; set; }
         [Required(ErrorMessage = "Эл. почта - обязательное поле!")]
         [EmailAddress(ErrorMessage = "Неверный формат эл. почты!")]
         public string Username { get; set; }

@@ -1,16 +1,14 @@
 @model ButterflyShop.Web.Models.AccountModels.LoginViewVM
 <!-- Page Banner Section Start -->
-<div class="page-banner-section section bg-image" data-bg="assets/images/bg/breadcrumb.png">
-    <div class="container">
-        <div class="row">
-            <div class="col">
-                <div class="page-banner text-left">
-                    <h2>Регистрация</h2>
-                    <ul class="page-breadcrumb">
-                        <li><a href="@Url.Action("Index","Home")">Главная</a></li>
-                        <li>Регистрация</li>
-                    </ul>
-                </div>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div class="page-banner text-left">
+                <h2>Регистрация</h2>
+                <ul class="page-breadcrumb">
+                    <li><a href="@Url.Action("Index","Home")">Главная</a></li>
+                    <li>Регистрация</li>
+                </ul>
             </div>
         </div>
     </div>
@@ -56,6 +54,10 @@
                     <div class="register-form">
                         <form asp-action="Register" method="post">
                             <div class="form-fild">
+                                <p><label>Ваше имя <span class="required">*</span></label></p>
+                                <input name="firstName" value="@Model.RegisterVM.FirstName" type="text">
+                            </div>
+                            <div class="form-fild">
                                 <p><label>Эл. почта <span class="required">*</span></label></p>
                                 <input name="username" value="@Model.RegisterVM.Username" type="text">
                             </div>
@@ -92,4 +94,3 @@
         </script>
     }
 }
-<!--Login Register section end-->

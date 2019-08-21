@@ -213,3 +213,21 @@ begin
 end
 go
 
+if (object_ID('dbo.GetUserRoleId') is not null)
+   drop function dbo.GetUserRoleId
+go
+
+-- ============================================================================
+-- Example    : select dbo.GetUserRoleId(N'Пользователь')
+-- Author     : Nikita Dermenzhi
+-- Date       : 25/07/2019
+-- Description: —
+-- ============================================================================
+
+create function dbo.GetUserRoleId(@role nvarchar(100) null)
+returns int
+as 
+begin 
+  return (select top 1 r.Id from dbo.Roles r where r.Name = @role)
+end
+go

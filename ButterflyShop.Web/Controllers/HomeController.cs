@@ -1,10 +1,12 @@
 ﻿using ButterflyShop.Web.Models.HomeModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ButterflyShop.Web.Controllers
 {
     public class HomeController : BaseController
     {
+        [AllowAnonymous]
         public IActionResult Index()
         {
             var model = new IndexVM
@@ -17,11 +19,13 @@ namespace ButterflyShop.Web.Controllers
             return View(model);
         }
 
+        [AllowAnonymous]
         public IActionResult AboutUs()
         {
             return View();
         }
 
+        [AllowAnonymous]
         public IActionResult Contact()
         {
             return View();

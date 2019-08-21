@@ -4212,6 +4212,12 @@ a.popup-img {
     color: #fff;
 }
 
+.wishlist-compare-btn a.active {
+    background: #151515;
+    border-color: #151515;
+    color: #fff;
+}
+
     .wishlist-compare-btn a:hover:before {
         -webkit-animation: crFlipX 2s ease-in-out infinite both;
         animation: crFlipX 2s ease-in-out infinite both;

@@ -191,7 +191,7 @@ if not exists (select 1
     Token uniqueidentifier not null default(newid()),
     FirstName nvarchar(200) not null,
     LastName nvarchar(200) null,
-    Phone char(9) null,
+    Phone char(13) null,
     Birthdate date null,
     RoleId int not null foreign key references Roles(Id),
     DateCreated datetime not null default(getdate()),

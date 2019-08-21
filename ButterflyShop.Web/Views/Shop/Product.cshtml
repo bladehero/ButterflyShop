@@ -114,7 +114,7 @@
                                     </form>
                                 </div>
                                 <div class="wishlist-compare-btn">
-                                    <a href="#" class="wishlist-btn">В Избранное</a>
+                                    <a href="#" class="wishlist-btn@(Model.InWishlist ? " active" : null)" data-product-id="@Model.Product.Id">В Избранное</a>
                                 </div>
                                 <div class="product-meta">
                                     <span class="posted-in">
@@ -211,31 +211,58 @@
                 itemOldPriceLabel.text(oldPrice + '₴');
             });
 
+            $('.wishlist-btn').click(function () {
+                _this = $(this);
+                $.ajax({
+                    url: '@Url.Action("Wishlist", "Account")',
+                    method: 'POST',
+                    data: { productId: _this.data('product-id') },
+                    success: function (data) {
+                        if (data.success) {
+                            var msg;
+                            if (data.isDeleted) {
+                                msg = 'Товар удален из Избранного!';
+                                _this.removeClass('active');
+                            } else {
+                                msg = 'Товар добавлен в Избранное!';
+                                _this.addClass('active');
+                            }
+                            Swal.fire({
+                                title: 'Успешно',
+                                type: 'success',
+                                html: msg
+                            });
+                        } else {
+                            Swal.fire({
+                                title: 'Ошибка',
+                                type: 'error',
+                                html: 'При сохранении в избранное произошла ошибка!'
+                            });
+                        }
+                    }
+                });
+            });
 
             $('.product-details-images').slick({
                 arrows: false,
                 slidesToShow: 1,
                 slidesToScroll: 1,
-                autoplay: false,
-                autoplaySpeed: 5000,
                 dots: false,
-                centerMode: false,
-                centerPadding: 0,
+                infinite: true,
+                swipe: false,
+                swipeToSlide: false,
                 asNavFor: '.product-details-nav'
             });
 
             $('.product-details-nav').slick({
                 arrows: false,
-                slidesToShow: 3,
+                slidesToShow: @(images.Count() > 4 ? 4 : images.Count()),
                 slidesToScroll: 1,
-                autoplay: false,
-                autoplaySpeed: 5000,
                 vertical: true,
                 verticalSwiping: true,
                 dots: false,
                 focusOnSelect: true,
-                centerMode: false,
-                centerPadding: 0,
+                infinite: true,
                 asNavFor: '.product-details-images',
             });
         });

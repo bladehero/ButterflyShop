@@ -99,3 +99,7 @@ insert OptionalParameters(Name) values
 insert OptionalParameterProducts(ItemId, OptionalParameterId, Value) values
   (7,1,N'50мл.')
 , (8,1,N'100мл.')
+
+insert Roles(Name) values
+  (N'Пользователь')
+, (N'Администратор')

@@ -1,10 +1,13 @@
 ﻿using ButterflyShop.DAL;
 using ButterflyShop.DAL.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.AspNetCore.Mvc.Filters;
 using System;
 using System.Data.SqlClient;
+using System.Linq;
 
 namespace ButterflyShop.Web.Controllers
 {
@@ -31,6 +34,16 @@ namespace ButterflyShop.Web.Controllers
 
             ViewBag.SystemUser = SystemUser;
             ViewBag.Anonymous = Anonymous;
+
+            var allowAnonymous = ((context.ActionDescriptor as ControllerActionDescriptor)?.MethodInfo.CustomAttributes.Any(x => x.AttributeType == typeof(AllowAnonymousAttribute))).GetValueOrDefault();
+            if (allowAnonymous || !ViewBag.Anonymous)
+            {
+                base.OnActionExecuting(context);
+            }
+            else
+            {
+                context.Result = RedirectToAction("Login", "Account");
+            }
         }
 
         public override void OnActionExecuted(ActionExecutedContext context)
