@@ -28,7 +28,7 @@ namespace ButterflyShop.Web.Controllers
                 ProductImages = UnitOfWork.StoredProcedures.GetProductImages(id),
                 Items = UnitOfWork.Items.Find(x => x.ProductId == id),
                 ItemsWithParameters = UnitOfWork.StoredProcedures.GetItemWithParameters(id),
-                InWishlist = UnitOfWork.FavouriteProducts.Find(x => x.UserId == SystemUser.Id && x.ProductId == id).Any()
+                Favourite = UnitOfWork.FavouriteProducts.Find(x => x.UserId == SystemUser?.Id && x.ProductId == id).Any()
             };
             return View(model);
         }

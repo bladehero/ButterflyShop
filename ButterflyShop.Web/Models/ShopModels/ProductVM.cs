@@ -12,7 +12,7 @@ namespace ButterflyShop.Web.Models.ShopModels
         public IEnumerable<ProductImage> ProductImages { get; set; }
         public IEnumerable<Item> Items { get; set; }
         public IEnumerable<ItemWithParameters_Result> ItemsWithParameters { get; set; }
-        public bool InWishlist { get; set; }
+        public bool Favourite { get; set; }
 
         public ProductVM()
         {

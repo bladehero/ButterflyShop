@@ -394,7 +394,7 @@
         } else {
             $('#shipping-form').slideUp();
         }
-    })
+    });
 
     /*----- 
         Payment Method Select
@@ -406,7 +406,42 @@
         $('.single-method p').slideUp();
         $('[data-method="' + $value + '"]').slideDown();
 
-    })
+    });
+
+    /*-----
+        Wishlist adding/deleting product
+    --------------------------------*/
+    $('.wishlist-btn').click(function () {
+        var _this = $(this);
+        $.ajax({
+            url: '/Account/Wishlist',
+            method: 'POST',
+            data: { productId: _this.data('product-id') },
+            success: function (data) {
+                if (data.success) {
+                    var msg;
+                    if (data.isDeleted) {
+                        msg = 'Товар удален из Избранного!';
+                        _this.removeClass('active');
+                    } else {
+                        msg = 'Товар добавлен в Избранное!';
+                        _this.addClass('active');
+                    }
+                    Swal.fire({
+                        title: 'Успешно',
+                        type: 'success',
+                        html: msg
+                    });
+                } else {
+                    Swal.fire({
+                        title: 'Ошибка',
+                        type: 'error',
+                        html: 'При сохранении в избранное произошла ошибка!'
+                    });
+                }
+            }
+        });
+    });
 
     /*--
         MailChimp

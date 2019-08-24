@@ -1,4 +1,8 @@
-﻿<!doctype html>
+﻿@{
+    bool isAuthorized = !(ViewBag.Anonymous ?? true);
+}
+
+<!doctype html>
 <html class="no-js" lang="zxx">
 <head>
     <meta charset="utf-8">
@@ -64,69 +68,75 @@
                                 <ul>
                                     <li><a class="header-search-toggle" href="#"><i class="flaticon-magnifying-glass"></i></a></li>
                                     <li class="currency-menu">
-                                        <a href="#"><i class="flaticon-user"></i></a>
-                                        <!--Crunccy dropdown-->
-                                        <ul class="currency-dropdown">
-                                            <!--Account Currency Start-->
-                                            <li>
-                                                <a href="@Url.Action("Index", "Account")">Личный кабинет</a>
-                                                <ul>
-                                                    <li><a href="@Url.Action("Login", "Account")">Войти</a></li>
-                                                    <li><a href="@Url.Action("Checkout", "Account")">Оформить заказ</a></li>
-                                                    <li><a href="@Url.Action("Index", "Account")">Мой аккаунт</a></li>
-                                                    <li><a href="@Url.Action("Cart", "Account")">Корзина</a></li>
-                                                    <li><a href="@Url.Action("Wishlist", "Account")">Избранное</a></li>
-                                                </ul>
-                                            </li>
-                                            <!--Account Currency End-->
-                                        </ul>
-                                        <!--Crunccy dropdown-->
-                                    </li>
-                                    <li class="mini-cart">
-                                        <a href="#"><i class="flaticon-shopping-cart"></i> <span class="mini-cart-total">$300.00(2)</span></a>
-                                        <!--Mini Cart Dropdown Start-->
-                                        <div class="header-cart">
-                                            <ul class="cart-items">
-                                                <li class="single-cart-item">
-                                                    <div class="cart-img">
-                                                        <a href="@Url.Action("Cart", "Account")"><img src="~/assets/images/cart/cart1.jpg" alt=""></a>
-                                                    </div>
-                                                    <div class="cart-content">
-                                                        <h5 class="product-name"><a href="@Url.Action("Product", "Shop")">Dell Inspiron 24</a></h5>
-                                                        <span class="product-quantity">1 ×</span>
-                                                        <span class="product-price">$278.00</span>
-                                                    </div>
-                                                    <div class="cart-item-remove">
-                                                        <a title="Remove" href="#"><i class="fa fa-trash"></i></a>
-                                                    </div>
+                                        <a href="@Url.Action("Login", "Account")"><i class="flaticon-user"></i></a>
+                                        @if (isAuthorized)
+                                        {
+                                            <!--Crunccy dropdown-->
+                                            <ul class="currency-dropdown">
+                                                <!--Account Currency Start-->
+                                                <li>
+                                                    <a href="@Url.Action("Index", "Account")">Личный кабинет</a>
+                                                    <ul>
+                                                        <li><a href="@Url.Action("Checkout", "Account")">Оформить заказ</a></li>
+                                                        <li><a href="@Url.Action("Index", "Account")">Мой аккаунт</a></li>
+                                                        <li><a href="@Url.Action("Cart", "Account")">Корзина</a></li>
+                                                        <li><a href="@Url.Action("Wishlist", "Account")">Избранное</a></li>
+                                                        <li><a href="@Url.Action("Logout", "Account")">Выйти</a></li>
+                                                    </ul>
                                                 </li>
-                                                <li class="single-cart-item">
-                                                    <div class="cart-img">
-                                                        <a href="@Url.Action("Cart", "Account")"><img src="~/assets/images/cart/cart2.jpg" alt=""></a>
-                                                    </div>
-                                                    <div class="cart-content">
-                                                        <h5 class="product-name"><a href="@Url.Action("Product", "Shop")">Lenovo Ideacentre 300</a></h5>
-                                                        <span class="product-quantity">1 ×</span>
-                                                        <span class="product-price">$23.39</span>
-                                                    </div>
-                                                    <div class="cart-item-remove">
-                                                        <a title="Remove" href="#"><i class="fa fa-trash"></i></a>
-                                                    </div>
-                                                </li>
+                                                <!--Account Currency End-->
                                             </ul>
-                                            <div class="cart-total">
-                                                <h5>Subtotal :<span class="float-right">$39.79</span></h5>
-                                                <h5>Eco Tax (-2.00) :<span class="float-right">$7.00</span></h5>
-                                                <h5>VAT (20%) : <span class="float-right">$0.00</span></h5>
-                                                <h5>Total : <span class="float-right">$46.79</span></h5>
-                                            </div>
-                                            <div class="cart-btn">
-                                                <a href="@Url.Action("Cart", "Account")">Корзина</a>
-                                                <a href="@Url.Action("Checkout", "Account")">Оформить заказ</a>
-                                            </div>
-                                        </div>
-                                        <!--Mini Cart Dropdown End-->
+                                            <!--Crunccy dropdown-->
+                                        }
                                     </li>
+                                    @if (isAuthorized)
+                                    {
+                                        <li class="mini-cart">
+                                            <a href="#"><i class="flaticon-shopping-cart"></i> <span class="mini-cart-total">$300.00(2)</span></a>
+                                            <!--Mini Cart Dropdown Start-->
+                                            <div class="header-cart">
+                                                <ul class="cart-items">
+                                                    <li class="single-cart-item">
+                                                        <div class="cart-img">
+                                                            <a href="@Url.Action("Cart", "Account")"><img src="~/assets/images/cart/cart1.jpg" alt=""></a>
+                                                        </div>
+                                                        <div class="cart-content">
+                                                            <h5 class="product-name"><a href="@Url.Action("Product", "Shop")">Dell Inspiron 24</a></h5>
+                                                            <span class="product-quantity">1 ×</span>
+                                                            <span class="product-price">$278.00</span>
+                                                        </div>
+                                                        <div class="cart-item-remove">
+                                                            <a title="Remove" href="#"><i class="fa fa-trash"></i></a>
+                                                        </div>
+                                                    </li>
+                                                    <li class="single-cart-item">
+                                                        <div class="cart-img">
+                                                            <a href="@Url.Action("Cart", "Account")"><img src="~/assets/images/cart/cart2.jpg" alt=""></a>
+                                                        </div>
+                                                        <div class="cart-content">
+                                                            <h5 class="product-name"><a href="@Url.Action("Product", "Shop")">Lenovo Ideacentre 300</a></h5>
+                                                            <span class="product-quantity">1 ×</span>
+                                                            <span class="product-price">$23.39</span>
+                                                        </div>
+                                                        <div class="cart-item-remove">
+                                                            <a title="Remove" href="#"><i class="fa fa-trash"></i></a>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                                <div class="cart-total">
+                                                    <h5>Subtotal :<span class="float-right">$39.79</span></h5>
+                                                    <h5>Eco Tax (-2.00) :<span class="float-right">$7.00</span></h5>
+                                                    <h5>VAT (20%) : <span class="float-right">$0.00</span></h5>
+                                                    <h5>Total : <span class="float-right">$46.79</span></h5>
+                                                </div>
+                                                <div class="cart-btn">
+                                                    <a href="@Url.Action("Cart", "Account")">Корзина</a>
+                                                    <a href="@Url.Action("Checkout", "Account")">Оформить заказ</a>
+                                                </div>
+                                            </div>
+                                            <!--Mini Cart Dropdown End-->
+                                        </li>
+                                    }
                                 </ul>
                             </div>
                             <!--Header Search And Mini Cart Area End-->
@@ -157,11 +167,14 @@
                                         <div class="mobile-navigation text-right">
                                             <div class="header-icon-wrapper">
                                                 <ul class="icon-list justify-content-end">
-                                                    <li>
-                                                        <div class="header-cart-icon">
-                                                            <a href="@Url.Action("Cart", "Account")"><i class="flaticon-shopping-cart"></i></a>
-                                                        </div>
-                                                    </li>
+                                                    @if (isAuthorized)
+                                                    {
+                                                        <li>
+                                                            <div class="header-cart-icon">
+                                                                <a href="@Url.Action("Cart", "Account")"><i class="flaticon-shopping-cart"></i></a>
+                                                            </div>
+                                                        </li>
+                                                    }
                                                     <li>
                                                         <a href="javascript:void(0)" class="mobile-menu-icon" id="mobile-menu-trigger"><i class="fa fa-bars"></i></a>
                                                     </li>
@@ -240,14 +253,21 @@
                         <nav class="offcanvas-navigation">
                             <ul>
                                 <li class="menu-item-has-children">
-                                    <a href="#">Личный кабинет</a>
-                                    <ul class="submenu2">
-                                        <li><a href="@Url.Action("Login", "Account")">Войти</a></li>
-                                        <li><a href="@Url.Action("Checkout", "Account")">Оформить заказ</a></li>
-                                        <li><a href="@Url.Action("Index", "Account")">Мой аккаунт</a></li>
-                                        <li><a href="@Url.Action("Cart", "Account")">Корзина</a></li>
-                                        <li><a href="@Url.Action("Wishlist", "Account")">Избранное</a></li>
-                                    </ul>
+                                    @if (isAuthorized)
+                                    {
+                                        <a href="#">Личный кабинет</a>
+                                        <ul class="submenu2">
+                                            <li><a href="@Url.Action("Checkout", "Account")">Оформить заказ</a></li>
+                                            <li><a href="@Url.Action("Index", "Account")">Мой аккаунт</a></li>
+                                            <li><a href="@Url.Action("Cart", "Account")">Корзина</a></li>
+                                            <li><a href="@Url.Action("Wishlist", "Account")">Избранное</a></li>
+                                            <li><a href="@Url.Action("Logout", "Account")">Выйти</a></li>
+                                        </ul>
+                                    }
+                                    else
+                                    {
+                                        <a href="@Url.Action("Login", "Account")">Войти</a>
+                                    }
                                 </li>
                             </ul>
                         </nav>
@@ -377,7 +397,7 @@
     <script src="~/assets/js/vendor/bootstrap.min.js"></script>
     <script src="~/assets/js/plugins/plugins.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
-    <script src="~/assets/js/main.js"></script>
+    <script src="~/assets/js/main.js" charset="utf-8"></script>
     @RenderSection("Scripts", false)
 </body>
 </html>

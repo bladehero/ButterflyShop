@@ -1094,7 +1094,7 @@ header.header {
         .header-search-cart-area > ul > li > a {
             font-size: 24px;
             height: 40px;
-            width: 40px;
+            /*width: 40px;*/
             display: block;
             line-height: 40px;
             text-align: center;
@@ -3464,6 +3464,11 @@ ul.cart-items > li {
                 }
 
                     .single-grid-product .product-image .product-action > ul > li a:hover {
+                        color: #ffffff;
+                        background: #151515;
+                    }
+
+                    .single-grid-product .product-image .product-action > ul > li a.active {
                         color: #ffffff;
                         background: #151515;
                     }

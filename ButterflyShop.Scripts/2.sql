@@ -55,7 +55,10 @@ begin
   , i.Price
   , i.OldPrice
   , pimg.Image
-  , fp.IsDeleted as Favourite
+  , case 
+      when isnull(fp.IsDeleted, 1) = 1 then 0
+      else 1
+    end as Favourite
     from dbo.Products p
     left join dbo.FavouriteProducts fp on fp.ProductId = p.Id and fp.UserId = @userId
     join (select i1.* 
