@@ -35,4 +35,12 @@ namespace ButterflyShop.Web
         [Description("Администратор")]
         Administrator
     }
+
+    public enum AccountTab
+    {
+        Dashboard,
+        Favourite,
+        Orders,
+        Info
+    }
 }

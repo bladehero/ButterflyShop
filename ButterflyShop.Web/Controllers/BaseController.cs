@@ -32,6 +32,7 @@ namespace ButterflyShop.Web.Controllers
                 SystemUser = UnitOfWork.Users.FindByToken(token);
             }
 
+            ViewBag.CategoryHierarchy = UnitOfWork.StoredProcedures.GetCategoryHierarchy();
             ViewBag.SystemUser = SystemUser;
             ViewBag.Anonymous = Anonymous;
 

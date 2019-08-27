@@ -1,4 +1,5 @@
 ﻿@model ButterflyShop.Web.Models.AccountModels.IndexVM
+@using static ButterflyShop.Web.Extensions.ImagePathExtension
 <!-- Page Banner Section Start -->
 <div class="container">
     <div class="row">
@@ -20,15 +21,15 @@
 <div class="my-account-section section pt-90 pt-lg-70 pt-md-60 pt-sm-50 pt-xs-45  pb-100 pb-lg-80 pb-md-70 pb-sm-60 pb-xs-50">
     <div class="container">
         <div class="row">
-
             <div class="col-12">
                 <div class="row">
                     <!-- My Account Tab Menu Start -->
                     <div class="col-lg-3 col-12">
                         <div class="myaccount-tab-menu nav" role="tablist">
-                            <a href="#dashboad" class="active" data-toggle="tab"><i class="fa fa-dashboard"></i>Панель управления</a>
-                            <a href="#orders" data-toggle="tab"><i class="fa fa-cart-arrow-down"></i>Мои заказы</a>
-                            <a href="#account-info" data-toggle="tab"><i class="fa fa-user"></i>Мои данные</a>
+                            <a href="#dashboad" class="@(Model.Tab == AccountTab.Dashboard ? "active" : null)" data-toggle="tab"><i class="fa fa-dashboard"></i>Панель управления</a>
+                            <a href="#favourite" class="@(Model.Tab == AccountTab.Favourite ? "active" : null)" data-toggle="tab"><i class="fa fa-star"></i>Избранное</a>
+                            <a href="#orders" class="@(Model.Tab == AccountTab.Orders ? "active" : null)" data-toggle="tab"><i class="fa fa-cart-arrow-down"></i>Мои заказы</a>
+                            <a href="#account-info" class="@(Model.Tab == AccountTab.Info ? "active" : null)" data-toggle="tab"><i class="fa fa-user"></i>Мои данные</a>
                             <a href="@Url.Action("Logout", "Account")"><i class="fa fa-sign-out"></i>Выйти</a>
                         </div>
                     </div>
@@ -37,7 +38,7 @@
                     <div class="col-lg-9 col-12">
                         <div class="tab-content" id="myaccountContent">
                             <!-- Single Tab Content Start -->
-                            <div class="tab-pane fade show active" id="dashboad" role="tabpanel">
+                            <div class="tab-pane fade@(Model.Tab == AccountTab.Dashboard ? " show active" : null)" id="dashboad" role="tabpanel">
                                 <div class="myaccount-content">
                                     <h3>Панель управления</h3>
 
@@ -52,7 +53,47 @@
                             </div>
                             <!-- Single Tab Content End -->
                             <!-- Single Tab Content Start -->
-                            <div class="tab-pane fade" id="orders" role="tabpanel">
+                            <div class="tab-pane fade@(Model.Tab == AccountTab.Favourite ? " show active" : null)" id="favourite" role="tabpanel">
+                                <div class="myaccount-content">
+                                    <h3>Избранное</h3>
+                                    <div class="row">
+                                        @foreach (var product in Model.Products)
+                                        {
+                                            <!--  Single Grid Product Start -->
+                                            <div class="col-lg-4 col-md-6 col-sm-12">
+                                                <div class="single-grid-product mb-40">
+                                                    <div class="product-image text-center">
+                                                        @if (product.Discount.HasValue)
+                                                        {
+                                                            <div class="product-label">
+                                                                <span>@product.Discount.Value%</span>
+                                                            </div>
+                                                        }
+                                                        <a href="@Url.Action("Product", "Shop", new { id = product.ProductId })">
+                                                            <img src="~/@ProductImage(product.Image)" class="img-fluid" alt="">
+                                                        </a>
+                                                    </div>
+                                                    <div class="product-content">
+                                                        <h3 class="title"> <a href="@Url.Action("Product", "Shop", new { id = product.ProductId })">@product.Name</a></h3>
+                                                        @if (product.OldPrice.HasValue)
+                                                        {
+                                                            <p class="product-price"><span class="discounted-price">@product.Price₴</span> <span class="main-price discounted">@product.OldPrice₴</span></p>
+                                                        }
+                                                        else
+                                                        {
+                                                            <p class="product-price"><span class="regular-price">@product.Price₴</span></p>
+                                                        }
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--  Single Grid Product End -->
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Single Tab Content End -->
+                            <!-- Single Tab Content Start -->
+                            <div class="tab-pane fade@(Model.Tab == AccountTab.Orders ? " show active" : null)" id="orders" role="tabpanel">
                                 <div class="myaccount-content">
                                     <h3>Orders</h3>
                                     <div class="myaccount-table table-responsive text-center">
@@ -100,7 +141,7 @@
                             </div>
                             <!-- Single Tab Content End -->
                             <!-- Single Tab Content Start -->
-                            <div class="tab-pane fade" id="account-info" role="tabpanel">
+                            <div class="tab-pane fade@(Model.Tab == AccountTab.Info ? " show active" : null)" id="account-info" role="tabpanel">
                                 <div class="myaccount-content">
                                     <h3>Мои данные</h3>
 
@@ -147,9 +188,7 @@
                     </div>
                     <!-- My Account Tab Content End -->
                 </div>
-
             </div>
-
         </div>
     </div>
 </div>

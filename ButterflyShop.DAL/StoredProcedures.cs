@@ -11,7 +11,7 @@ namespace ButterflyShop.DAL
     {
         public StoredProcedures(IDbConnection connection) : base(connection) { }
 
-        public IEnumerable<ProductItemInfo_Result> GetItemsInfo(int count, bool? newItems = null, bool? saleItems = null, int? userId = null)
+        public IEnumerable<ProductItemInfo_Result> GetItemsInfo(int? count, bool? newItems = null, bool? saleItems = null, int? userId = null)
         {
             var obj = new
             {
@@ -58,6 +58,24 @@ namespace ButterflyShop.DAL
         public int GetUserRoleId(string role)
         {
             var result = Connection.ExecuteScalar<int>($"select dbo.GetUserRoleId(N'{role}')");
+            return result;
+        }
+        public IEnumerable<GetCategoryHierarchy_Result> GetCategoryHierarchy(int? toLevelId = null)
+        {
+            var obj = new
+            {
+                @toLevelId = toLevelId
+            };
+            var result = Connection.Query<GetCategoryHierarchy_Result>("dbo.GetCategoryHierarchy", obj, commandType: CommandType.StoredProcedure);
+            return result;
+        }
+        public IEnumerable<ProductItemInfo_Result> GetFavouriteProductInfo(int userId)
+        {
+            var obj = new
+            {
+                @userId = userId
+            };
+            var result = Connection.Query<ProductItemInfo_Result>("dbo.GetFavouriteProductInfo", obj, commandType: CommandType.StoredProcedure);
             return result;
         }
     }

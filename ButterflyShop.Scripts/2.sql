@@ -31,7 +31,7 @@ if object_id(N'dbo.GetItemsInfo') is null
 go
 
 -- ============================================================================
--- Example    : exec dbo.GetItemsInfo 4, 1, 0, 5
+-- Example    : exec dbo.GetItemsInfo null, null, null, 5
 -- Author     : Nikita Dermenzhi
 -- Date       : 25/07/2019
 -- Description: —
@@ -46,43 +46,79 @@ alter procedure dbo.GetItemsInfo
 )
 as  
 begin  
-  
-  select top (@count) 
-    p.Id as ProductId
-  , i.Id as ItemId
-  , p.Name
-  , p.Description
-  , i.Price
-  , i.OldPrice
-  , pimg.Image
-  , case 
-      when isnull(fp.IsDeleted, 1) = 1 then 0
-      else 1
-    end as Favourite
-    from dbo.Products p
-    left join dbo.FavouriteProducts fp on fp.ProductId = p.Id and fp.UserId = @userId
-    join (select i1.* 
-            from dbo.Items i1
-            join (select min(Id) as Id
-                       , min(Price) as Price 
-                       from dbo.Items 
-                       group by ProductId) i2 
-            on i1.Id = i2.Id) i 
-          on i.ProductId = p.Id
-    outer apply
-    (
-      select top 1 * 
-        from dbo.ProductImages pim where pim.ProductId = p.Id
-                                     and pim.IsDeleted = 0
-    ) pimg
-    where p.IsDeleted = 0 
-      and i.IsDeleted = 0
-      and (isnull(@saleItems, 0) = 0
-        or (@saleItems = 1 
-        and i.OldPrice is not null))
-    order by
-      case when isnull(@newItems, 0) = 1 then p.DateCreated end desc
-    , newid() 
+  if @count is not null
+    select top (@count) 
+      p.Id as ProductId
+    , i.Id as ItemId
+    , p.Name
+    , p.Description
+    , i.Price
+    , i.OldPrice
+    , pimg.Image
+    , case 
+        when isnull(fp.IsDeleted, 1) = 1 then 0
+        else 1
+      end as Favourite
+      from dbo.Products p
+      left join dbo.FavouriteProducts fp on fp.ProductId = p.Id and fp.UserId = @userId
+      join (select i1.* 
+              from dbo.Items i1
+              join (select min(Id) as Id
+                         , min(Price) as Price 
+                         from dbo.Items 
+                         group by ProductId) i2 
+              on i1.Id = i2.Id) i 
+            on i.ProductId = p.Id
+      outer apply
+      (
+        select top 1 * 
+          from dbo.ProductImages pim where pim.ProductId = p.Id
+                                       and pim.IsDeleted = 0
+      ) pimg
+      where p.IsDeleted = 0 
+        and i.IsDeleted = 0
+        and (isnull(@saleItems, 0) = 0
+          or (@saleItems = 1 
+          and i.OldPrice is not null))
+      order by
+        case when isnull(@newItems, 0) = 1 then p.DateCreated end desc
+      , newid()
+  else
+    select
+      p.Id as ProductId
+    , i.Id as ItemId
+    , p.Name
+    , p.Description
+    , i.Price
+    , i.OldPrice
+    , pimg.Image
+    , case 
+        when isnull(fp.IsDeleted, 1) = 1 then 0
+        else 1
+      end as Favourite
+      from dbo.Products p
+      left join dbo.FavouriteProducts fp on fp.ProductId = p.Id and fp.UserId = @userId
+      join (select i1.* 
+              from dbo.Items i1
+              join (select min(Id) as Id
+                         , min(Price) as Price 
+                         from dbo.Items 
+                         group by ProductId) i2 
+              on i1.Id = i2.Id) i 
+            on i.ProductId = p.Id
+      outer apply
+      (
+        select top 1 * 
+          from dbo.ProductImages pim where pim.ProductId = p.Id
+                                       and pim.IsDeleted = 0
+      ) pimg
+      where p.IsDeleted = 0 
+        and i.IsDeleted = 0
+        and (isnull(@saleItems, 0) = 0
+          or (@saleItems = 1 
+          and i.OldPrice is not null))
+      order by
+        case when isnull(@newItems, 0) = 1 then p.DateCreated end desc
 end;
 go
 
@@ -105,7 +141,7 @@ alter procedure dbo.CategoriesForProduct
 as  
 begin
 
-with CategoryParents as 
+;with CategoryParents as 
 (
   select *
     from Categories
@@ -234,4 +270,108 @@ as
 begin 
   return (select top 1 r.Id from dbo.Roles r where r.Name = @role)
 end
+go
+
+
+
+if object_id(N'dbo.GetCategoryHierarchy') is null
+  exec('create procedure dbo.GetCategoryHierarchy as set nocount on;');
+go
+
+-- ============================================================================
+-- Example    : exec dbo.GetCategoryHierarchy 2
+-- Author     : Nikita Dermenzhi
+-- Date       : 25/07/2019
+-- Description: —
+-- ============================================================================
+
+alter procedure dbo.GetCategoryHierarchy 
+(  
+    @toLevelId as int = null
+)  
+as  
+begin
+ 
+  ;with CategoryHierarchy as 
+  (
+    select *
+      , 0 as Level
+      , cast(row_number() over(partition by ParentId order by Name) as varchar(max)) as Path 
+      , 1 as IsParent
+      from Categories
+      where ParentId is null
+    union all
+    select c.*
+      , Level + 1
+      , Path + cast(row_number() over(partition by c.ParentId order by c.Name) as varchar(max))
+      , case
+          when exists (select * from Categories where ParentId = c.Id)
+          then 1
+          else 0
+        end as IsParent
+      from Categories c
+      inner join CategoryHierarchy ch on ch.Id = c.ParentId
+  )
+  select ch.Id
+       , ch.Name
+       , ch.ParentId
+       , ch.DateCreated
+       , ch.DateModified
+       , ch.IsDeleted
+       , ch.Level
+       , ch.IsParent
+    from CategoryHierarchy ch
+    where (@toLevelId is null or ch.Level <= @toLevelId)
+    order by Path
+
+end;
+go
+
+if object_id(N'dbo.GetFavouriteProductInfo') is null
+  exec('create procedure dbo.GetFavouriteProductInfo as set nocount on;');
+go
+ 
+ -- ============================================================================
+ -- Example    : exec dbo.GetFavouriteProductInfo 5
+ -- Author     : Nikita Dermenzhi
+ -- Date       : 25/07/2019
+ -- Description: —
+ -- ============================================================================
+ 
+alter procedure dbo.GetFavouriteProductInfo
+(  
+  @userId int = null
+)  
+as  
+begin
+
+  select
+        p.Id as ProductId
+      , i.Id as ItemId
+      , p.Name
+      , p.Description
+      , i.Price
+      , i.OldPrice
+      , pimg.Image
+      , 1 as Favourite
+        from dbo.Products p
+        join dbo.FavouriteProducts fp on fp.ProductId = p.Id and fp.UserId = @userId
+        join (select i1.* 
+                from dbo.Items i1
+                join (select min(Id) as Id
+                           , min(Price) as Price 
+                           from dbo.Items 
+                           group by ProductId) i2 
+                on i1.Id = i2.Id) i 
+              on i.ProductId = p.Id
+        outer apply
+        (
+          select top 1 * 
+            from dbo.ProductImages pim where pim.ProductId = p.Id
+                                         and pim.IsDeleted = 0
+        ) pimg
+        where p.IsDeleted = 0 
+          and i.IsDeleted = 0
+ 
+end;
 go

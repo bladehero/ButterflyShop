@@ -9,18 +9,20 @@ namespace ButterflyShop.Web.Controllers
 {
     public class AccountController : BaseController
     {
-        public IActionResult Index()
+        public IActionResult Index(AccountTab tab = AccountTab.Dashboard)
         {
-            return Index(null);
+            return Index(null, tab: tab);
         }
 
-        private IActionResult Index(string error = null, bool updatedUserInfo = false)
+        private IActionResult Index(string error = null, bool updatedUserInfo = false, AccountTab tab = AccountTab.Dashboard)
         {
             var model = new IndexVM
             {
-                User = ViewBag.SystemUser ?? new User(),
+                User = SystemUser,
                 Error = error,
-                UpdatedUserInfo = updatedUserInfo
+                UpdatedUserInfo = updatedUserInfo,
+                Tab = tab,
+                Products = UnitOfWork.StoredProcedures.GetFavouriteProductInfo(SystemUser.Id)
             };
 
             return View("Index", model);

@@ -27,7 +27,7 @@ namespace ButterflyShop.DAL.Dao
         public T FindById(int id) => Connection.QueryFirstOrDefault<T>($"select top 1 * from {TableName} where Id = {id}");
         public virtual IEnumerable<T> FindAll(bool withDeleted = false) => Connection.Query<T>($"{SelectFromString}{(withDeleted ? string.Empty : " where IsDeleted = 0")}");
         public virtual IEnumerable<T> Find(Func<T, bool> predicate, bool withDeleted = false) => Connection.Query<T>($"{SelectFromString}{(withDeleted ? string.Empty : " where IsDeleted = 0")}").Where(predicate);
-        public virtual T FirstOrDefault(Func<T, bool> predicate, bool withDeleted = false) => Connection.QueryFirstOrDefault<T>($"select top 1 * from {TableName}{(withDeleted ? string.Empty : " where IsDeleted = 0")}");
+        public virtual T FirstOrDefault(Func<T, bool> predicate, bool withDeleted = false) => Connection.Query<T>($"{SelectFromString}{(withDeleted ? string.Empty : " where IsDeleted = 0")}").FirstOrDefault(predicate);
         public virtual IEnumerable<T> Take(int count, int skip = 0, bool withDeleted = false)
         {
             return Connection.Query<T>($"{SelectFromString}{(withDeleted ? string.Empty : " where IsDeleted = 0")} order by Id desc offset ({skip}) rows fetch next ({count}) rows only");
