@@ -14,7 +14,7 @@ namespace ButterflyShop.Web.Extensions
                 if (category.IsParent)
                 {
                     sb.Append("<li class=\"menu-item-has-children\"><a class=\"font-weight-bold\" href=\"");
-                    sb.Append("/Shop/Search/");
+                    sb.Append("/Shop/Index?categoryId=");
                     sb.Append(category.Id);
                     sb.Append("\">");
                     sb.Append(category.Name);
@@ -26,7 +26,7 @@ namespace ButterflyShop.Web.Extensions
                 else
                 {
                     sb.Append("<li><a href=\"");
-                    sb.Append("/Shop/Search/");
+                    sb.Append("/Shop/Index?categoryId=");
                     sb.Append(category.Id);
                     sb.Append("\">");
                     sb.Append(category.Name);

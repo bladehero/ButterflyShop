@@ -11,13 +11,14 @@ namespace ButterflyShop.Web.Controllers
         [AllowAnonymous]
         public IActionResult Index(int? categoryId = null, int? brandId = null, string search = null)
         {
-            var products = UnitOfWork.StoredProcedures.GetItemsInfo(null, userId: SystemUser?.Id);
+            var products = UnitOfWork.StoredProcedures.SearchItemsInfo(SystemUser?.Id, categoryId, brandId, search);
+            var hasProducts = products.Count() == 0;
             var model = new IndexVM
             {
                 Products = products.ChunkBy(6),
                 CategoryHierarchy = UnitOfWork.StoredProcedures.GetCategoryHierarchy(),
-                MinPrice = products.Min(x => x.Price),
-                MaxPrice = products.Max(x => x.Price)
+                MinPrice = hasProducts ? 0 : products.Min(x => x.Price),
+                MaxPrice = hasProducts ? 0 : products.Max(x => x.Price)
             };
             return View(model);
         }

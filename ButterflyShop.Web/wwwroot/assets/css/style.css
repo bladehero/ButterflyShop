@@ -1523,7 +1523,7 @@ ul.cart-items > li {
         border: 0;
         border-bottom: 5px solid transparent;
         background-color: transparent;
-        font-size: 200px;
+        font-size: 90px;
         width: 100%;
         height: auto;
         color: #ffffff;
@@ -1541,19 +1541,19 @@ ul.cart-items > li {
 
 @media only screen and (min-width: 1200px) and (max-width: 1499px) {
     .sidebar-search-input form .form-search input {
-        font-size: 150px;
+        font-size: 80px;
     }
 }
 
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
     .sidebar-search-input form .form-search input {
-        font-size: 120px;
+        font-size: 70px;
     }
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
     .sidebar-search-input form .form-search input {
-        font-size: 80px;
+        font-size: 60px;
     }
 }
 

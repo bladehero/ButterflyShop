@@ -430,18 +430,18 @@ begin
 end
 go
 
-if object_id(N'dbo.SearchItemsInfo') is null
-  exec('create procedure dbo.SearchItemsInfo as set nocount on;');
+if object_id(N'dbo.SearchItemInfo') is null
+  exec('create procedure dbo.SearchItemInfo as set nocount on;');
 go
  
  -- ============================================================================
- -- Example    : exec dbo.SearchItemsInfo 5, 4, 1, N'Помада'
+ -- Example    : exec dbo.SearchItemInfo 5, 4, 1, N'Помада'
  -- Author     : Nikita Dermenzhi
  -- Date       : 25/07/2019
  -- Description: —
  -- ============================================================================
  
-alter procedure dbo.SearchItemsInfo
+alter procedure dbo.SearchItemInfo
 (  
   @userId int = null,
   @categoryId int = null,
