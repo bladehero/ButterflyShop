@@ -435,7 +435,7 @@ if object_id(N'dbo.SearchItemInfo') is null
 go
  
  -- ============================================================================
- -- Example    : exec dbo.SearchItemInfo 5, 4, 1, N'Помада'
+ -- Example    : exec dbo.SearchItemInfo 5, 4, 1, N'Помада', 150, 200
  -- Author     : Nikita Dermenzhi
  -- Date       : 25/07/2019
  -- Description: —
@@ -446,7 +446,9 @@ alter procedure dbo.SearchItemInfo
   @userId int = null,
   @categoryId int = null,
   @brandId int = null,
-  @search nvarchar(100) = null
+  @search nvarchar(100) = null,
+  @minPrice float = null,
+  @maxPrice float = null
 )  
 as  
 begin
@@ -499,7 +501,9 @@ begin
                           left join Categories ec on ec.Id = ecp.CategoryId and ec.Name like concat('%', es.value, '%')
                           where ep.Id = p.Id
                       )
-            )
+            )                                           -- Filter by search
+        and (@minPrice is null or i.Price >= @minPrice)
+        and (@maxPrice is null or i.Price <= @maxPrice)
       order by
         p.DateCreated
  

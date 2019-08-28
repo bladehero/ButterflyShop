@@ -78,16 +78,18 @@ namespace ButterflyShop.DAL
             var result = Connection.Query<ProductItemInfo_Result>("dbo.GetFavouriteProductInfo", obj, commandType: CommandType.StoredProcedure);
             return result;
         }
-        public IEnumerable<ProductItemInfo_Result> SearchItemsInfo(int? userId, int? categoryId = null, int? brandId = null, string search = null)
+        public IEnumerable<ProductItemInfo_Result> SearchItemInfo(int? userId, int? categoryId = null, int? brandId = null, string search = null, double? minPrice = null, double? maxPrice = null)
         {
             var obj = new
             {
                 @userId = userId,
                 @categoryId = categoryId,
                 @brandId = brandId,
-                @search = search
+                @search = search,
+                @minPrice = minPrice,
+                @maxPrice = maxPrice
             };
-            var result = Connection.Query<ProductItemInfo_Result>("dbo.SearchItemsInfo", obj, commandType: CommandType.StoredProcedure);
+            var result = Connection.Query<ProductItemInfo_Result>("dbo.SearchItemInfo", obj, commandType: CommandType.StoredProcedure);
             return result;
         }
         

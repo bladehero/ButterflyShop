@@ -9,6 +9,9 @@ namespace ButterflyShop.Web.Models.ShopModels
         public IEnumerable<GetCategoryHierarchy_Result> CategoryHierarchy { get; set; }
         public double MinPrice { get; set; }
         public double MaxPrice { get; set; }
+        public double? SelectedMinPrice { get; set; }
+        public double? SelectedMaxPrice { get; set; }
+        public IEnumerable<int> Categories { get; set; }
 
         public IndexVM()
         {

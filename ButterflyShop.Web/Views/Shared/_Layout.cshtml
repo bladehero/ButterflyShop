@@ -393,7 +393,7 @@
         });
         $('#search-btn').click(function () {
             var value = $('#search').val();
-            window.location.href = 'Shop/Index?search=' + value;
+            window.location.replace('@Url.Action("Index", "Shop")?search=' + value);
         });
     </script>
     @RenderSection("Scripts", false)

@@ -4,15 +4,15 @@
     var havePages = Model.Products?.Count() > 0;
 }
 <!-- Page Banner Section Start -->
-<div class="container-fluid bg-secondary py-5">
+<div class="container-fluid bg-skyblue py-5">
     <div class="container">
         <div class="row">
             <div class="col">
                 <div class="page-banner text-left">
-                    <h2>Shop</h2>
+                    <h2>Магазин</h2>
                     <ul class="page-breadcrumb">
-                        <li><a href="index.html">Home</a></li>
-                        <li>Shop</li>
+                        <li><a href="index.html">Главная</a></li>
+                        <li>Магазин</li>
                     </ul>
                 </div>
             </div>
@@ -35,12 +35,11 @@
                                     <div class="toolbar-shorter ">
                                         <label>Сортировать:</label>
                                         <select class="wide">
-                                            <option data-display="Select">Nothing</option>
-                                            <option value="Relevance">Relevance</option>
-                                            <option value="Name, A to Z">Name, A to Z</option>
-                                            <option value="Name, Z to A">Name, Z to A</option>
-                                            <option value="Price, low to high">Price, low to high</option>
-                                            <option value="Price, high to low">Price, high to low</option>
+                                            <option data-display="Выберите">Без сортировки</option>
+                                            <option value="1">По алфавиту (возрастание)</option>
+                                            <option value="2">По алфавиту (убывание)</option>
+                                            <option value="3">По цене (возрастание)</option>
+                                            <option value="4">По цене (убывание)</option>
                                         </select>
                                     </div>
                                 </div>
@@ -70,13 +69,14 @@
                                 <h3 class="sidebar-title">Диапазон цен</h3>
                                 <div class="sidebar-price">
                                     <div id="price-range" class="mb-20"></div>
-                                    <input type="text" id="price-amount" class="price-amount" value="@($"{Model.MinPrice} - {Model.MaxPrice}")" readonly>
+                                    <input type="text" id="price-amount" class="price-amount" readonly>
                                 </div>
                             </div>
                             <!-- Single Sidebar End  -->
                             <div class="row">
                                 <div class="col text-center">
-                                    <button type="button" class="btn">Применить</button>
+                                    <button type="button" class="btn" id="filter-btn">Найти</button>
+                                    <button type="button" class="btn" id="clear-filter-btn">Отмена</button>
                                 </div>
                             </div>
                         </div>
@@ -144,18 +144,36 @@
 
 @section Scripts {
     <script>
-            /*-----------------------------------
-                Price slider Active
-            ----------------------------------*/
-            $('#price-range').slider({
-                range: true,
-                min: @Model.MinPrice,
-                max: @Model.MaxPrice,
-                values: [@Model.MinPrice, @Model.MaxPrice],
-                slide: function (event, ui) {
-                    $('#price-amount').val('₴' + ui.values[0] + ' - ₴' + ui.values[1]);
+        /*-----------------------------------
+            Price slider Active
+        ----------------------------------*/
+        $('#price-range').slider({
+            range: true,
+            min: @Model.MinPrice,
+            max: @Model.MaxPrice,
+            values: [@((Model.SelectedMinPrice).HasValue ? Model.SelectedMinPrice : Model.MinPrice), @((Model.SelectedMaxPrice).HasValue ? Model.SelectedMaxPrice : Model.MaxPrice)],
+            slide: function (event, ui) {
+                $('#price-amount').val('₴' + ui.values[0] + ' - ₴' + ui.values[1]);
+            }
+        });
+        $('#price-amount').val($('#price-range').slider('values', 0) + '₴ - ' + $('#price-range').slider('values', 1) + '₴');
+        $('#filter-btn').click(function () {
+            var min = $('#price-range').slider('values')[0];
+            var max = $('#price-range').slider('values')[1];
+            var categories = '';
+            var isFirst = true;
+            $('ul.sidebar-list li input[type="checkbox"]:checked').each(function (a, b) {
+                if (isFirst) {
+                    isFirst = false;
+                } else {
+                    categories += ',';
                 }
+            	categories += $(b).val();
             });
-            $('#price-amount').val($('#price-range').slider('values', 0) + '₴ - ' + $('#price-range').slider('values', 1) + '₴');
+            window.location.href = '@Url.Action("Search", "Shop")?categoriesStr=' + categories + '&minPrice=' + min + '&maxPrice=' + max;
+        });
+        $('#clear-filter-btn').click(function () {
+            window.location.href = '@Url.Action("Index", "Shop")';
+        });
     </script>
 }
