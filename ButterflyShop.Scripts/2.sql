@@ -50,6 +50,7 @@ begin
     select top (@count) 
       p.Id as ProductId
     , i.Id as ItemId
+    , p.BrandId
     , p.Name
     , p.Description
     , i.Price
@@ -364,6 +365,61 @@ begin
                            group by ProductId) i2 
                 on i1.Id = i2.Id) i 
               on i.ProductId = p.Id
+        outer apply
+        (
+          select top 1 * 
+            from dbo.ProductImages pim where pim.ProductId = p.Id
+                                         and pim.IsDeleted = 0
+        ) pimg
+        where p.IsDeleted = 0 
+          and i.IsDeleted = 0
+          and fp.IsDeleted = 0
+ 
+end;
+go
+
+
+if object_id(N'dbo.SearchItemsInfo') is null
+  exec('create procedure dbo.SearchItemsInfo as set nocount on;');
+go
+ 
+ -- ============================================================================
+ -- Example    : exec dbo.SearchItemsInfo 5
+ -- Author     : Nikita Dermenzhi
+ -- Date       : 25/07/2019
+ -- Description: —
+ -- ============================================================================
+ 
+alter procedure dbo.SearchItemsInfo
+(  
+  @userId int = null,
+  @categoryId int = null,
+  @brandId int = null,
+  @search nvarchar(100) = null
+)  
+as  
+begin
+
+  select
+        p.Id as ProductId
+      , i.Id as ItemId
+      , p.Name
+      , p.Description
+      , i.Price
+      , i.OldPrice
+      , pimg.Image
+      , 1 as Favourite
+        from dbo.Products p
+        join dbo.FavouriteProducts fp on fp.ProductId = p.Id and fp.UserId = @userId
+        join (select i1.* 
+                from dbo.Items i1
+                join (select min(Id) as Id
+                           , min(Price) as Price 
+                           from dbo.Items 
+                           group by ProductId) i2 
+                on i1.Id = i2.Id) i 
+              on i.ProductId = p.Id
+        join dbo.CategoryProducts cp on cp.ProductId = p.Id
         outer apply
         (
           select top 1 * 

@@ -9,7 +9,7 @@ namespace ButterflyShop.Web.Controllers
     public class ShopController : BaseController
     {
         [AllowAnonymous]
-        public IActionResult Index()
+        public IActionResult Index(int? categoryId = null, int? brandId = null, string search = null)
         {
             var products = UnitOfWork.StoredProcedures.GetItemsInfo(null, userId: SystemUser?.Id);
             var model = new IndexVM
