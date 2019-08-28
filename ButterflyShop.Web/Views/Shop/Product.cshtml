@@ -226,7 +226,7 @@
 
             $('.product-details-nav').slick({
                 arrows: false,
-                slidesToShow: @(images.Count() > 4 ? 4 : images.Count()),
+                slidesToShow: @(images.Count() > 4 ? 4 : images.Count() > 0 ? images.Count() : 1),
                 slidesToScroll: 1,
                 vertical: true,
                 verticalSwiping: true,
