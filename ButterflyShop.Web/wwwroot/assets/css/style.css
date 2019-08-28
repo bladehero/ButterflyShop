@@ -734,8 +734,8 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
             color: #151515;
         }
 
-        .page-pagination li.active a {
-            color: #151515;
+        .page-pagination li a.active {
+            font-weight: 900;
         }
 
 .grid-filter {
@@ -1089,6 +1089,9 @@ header.header {
         display: inline-block;
         list-style: none;
         position: relative;
+        margin: 0px 3px;
+        padding: 0px 5px;
+        text-align: center;
     }
 
         .header-search-cart-area > ul > li > a {
@@ -1113,6 +1116,10 @@ header.header {
         position: relative;
         width: auto;
     }
+
+.mini-cart {
+    margin-left: 40px !important;
+}
 
 .cart-quantity {
     position: absolute;
@@ -6666,7 +6673,7 @@ a.popup-img {
 
 /*-- Sidebar List --*/
 .sidebar-list li {
-    margin-bottom: 12px;
+    margin-bottom: -5px;
 }
 
     .sidebar-list li:last-child {

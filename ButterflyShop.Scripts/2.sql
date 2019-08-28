@@ -372,6 +372,7 @@ begin
         ) pimg
         where p.IsDeleted = 0 
           and i.IsDeleted = 0
+          and fp.IsDeleted = 0
  
 end;
 go

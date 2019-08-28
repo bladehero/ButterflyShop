@@ -186,7 +186,9 @@
         <div class="row product-slider">
             @foreach (var product in products)
             {
-                @await Html.PartialAsync("~/Views/Shared/_ProductCard.cshtml", product)
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    @await Html.PartialAsync("~/Views/Shared/_ProductCard.cshtml", product)
+                </div>
             }
         </div>
     </div>

@@ -56,37 +56,45 @@
                             <div class="tab-pane fade@(Model.Tab == AccountTab.Favourite ? " show active" : null)" id="favourite" role="tabpanel">
                                 <div class="myaccount-content">
                                     <h3>Избранное</h3>
-                                    <div class="row">
-                                        @foreach (var product in Model.Products)
+                                    <div class="row justify-content-center">
+                                        @if (Model.Products?.Count() > 0)
                                         {
-                                            <!--  Single Grid Product Start -->
-                                            <div class="col-lg-4 col-md-6 col-sm-12">
-                                                <div class="single-grid-product mb-40">
-                                                    <div class="product-image text-center">
-                                                        @if (product.Discount.HasValue)
-                                                        {
-                                                            <div class="product-label">
-                                                                <span>@product.Discount.Value%</span>
-                                                            </div>
-                                                        }
-                                                        <a href="@Url.Action("Product", "Shop", new { id = product.ProductId })">
-                                                            <img src="~/@ProductImage(product.Image)" class="img-fluid" alt="">
-                                                        </a>
-                                                    </div>
-                                                    <div class="product-content">
-                                                        <h3 class="title"> <a href="@Url.Action("Product", "Shop", new { id = product.ProductId })">@product.Name</a></h3>
-                                                        @if (product.OldPrice.HasValue)
-                                                        {
-                                                            <p class="product-price"><span class="discounted-price">@product.Price₴</span> <span class="main-price discounted">@product.OldPrice₴</span></p>
-                                                        }
-                                                        else
-                                                        {
-                                                            <p class="product-price"><span class="regular-price">@product.Price₴</span></p>
-                                                        }
+                                            foreach (var product in Model.Products)
+                                            {
+                                                <!--  Single Grid Product Start -->
+                                                <div class="col-lg-4 col-md-6 col-sm-10 favourite-product">
+                                                    <div class="single-grid-product mb-40">
+                                                        <div class="product-image text-center">
+                                                            @if (product.Discount.HasValue)
+                                                            {
+                                                                <div class="product-label">
+                                                                    <span>@product.Discount.Value%</span>
+                                                                </div>
+                                                            }
+                                                            <a href="@Url.Action("Product", "Shop", new { id = product.ProductId })">
+                                                                <img src="~/@ProductImage(product.Image)" class="img-fluid" alt="">
+                                                            </a>
+                                                        </div>
+                                                        <div class="product-content">
+                                                            <h3 class="title"> <a href="@Url.Action("Product", "Shop", new { id = product.ProductId })">@product.Name</a></h3>
+                                                            @if (product.OldPrice.HasValue)
+                                                            {
+                                                                <p class="product-price"><span class="discounted-price">@product.Price₴</span> <span class="main-price discounted">@product.OldPrice₴</span></p>
+                                                            }
+                                                            else
+                                                            {
+                                                                <p class="product-price"><span class="regular-price">@product.Price₴</span></p>
+                                                            }
+                                                            <button class="btn text-center delete-favourite" data-product-id="@product.ProductId">Удалить</button>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <!--  Single Grid Product End -->
+                                                <!--  Single Grid Product End -->
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <p class="lead">Список пока пуст...</p>
                                         }
                                     </div>
                                 </div>
@@ -217,4 +225,24 @@ else if (Model.UpdatedUserInfo)
             });
         </script>
     }
+}
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $('.delete-favourite').click(function () {
+                var _this = $(this);
+                var productId = _this.data('product-id');
+                $.ajax({
+                    url: '@Url.Action("RemoveFromWishlist", "Account")',
+                    method: 'POST',
+                    data: { productId: productId },
+                    success: function (data) {
+                        if (data.success) {
+                            _this.parents('.favourite-product').remove();
+                        }
+                    }
+                });
+            })
+        });
+    </script>
 }

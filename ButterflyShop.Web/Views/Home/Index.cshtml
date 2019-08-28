@@ -94,7 +94,9 @@
                 <div class="row">
                     @foreach (var item in newItems)
                     {
-                        @await Html.PartialAsync("~/Views/Shared/_ProductCard.cshtml", item)
+                        <div class="col-lg-3 col-md-4 col-sm-6">
+                            @await Html.PartialAsync("~/Views/Shared/_ProductCard.cshtml", item)
+                        </div>
                     }
                 </div>
             </div>
@@ -105,7 +107,9 @@
                 <div class="row">
                     @foreach (var item in saleItems)
                     {
-                        @await Html.PartialAsync("~/Views/Shared/_ProductCard.cshtml", item)
+                        <div class="col-lg-3 col-md-4 col-sm-6">
+                            @await Html.PartialAsync("~/Views/Shared/_ProductCard.cshtml", item)
+                        </div>
                     }
                 </div>
                 <!--  Single Grid product End -->

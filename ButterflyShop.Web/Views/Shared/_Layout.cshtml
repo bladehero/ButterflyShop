@@ -1,34 +1,8 @@
 ﻿@using ButterflyShop.DAL.Models.StoredProcedureModels
+@using static ButterflyShop.Web.Extensions.CustomExtensions
 @{
     bool isAuthorized = !(ViewBag.Anonymous ?? true);
     IEnumerable<GetCategoryHierarchy_Result> categoryHierarchy = ViewBag.CategoryHierarchy ?? new List<GetCategoryHierarchy_Result>();
-    string Menu(IEnumerable<GetCategoryHierarchy_Result> categories, int level = 0)
-    {
-        var sb = new System.Text.StringBuilder();
-        foreach (var category in categories.Where(x => x.Level == level))
-        {
-            if (category.IsParent)
-            {
-                sb.Append("<li class=\"menu-item-has-children\"><a class=\"font-weight-bold\" href=\"");
-                sb.Append(Url.Action("Search", "Shop", new { categoryId = category.Id }));
-                sb.Append("\">");
-                sb.Append(category.Name);
-                sb.Append("</a>");
-                sb.Append("<ul class=\"submenu2\">");
-                sb.Append(Menu(categories.Where(x => x.Level == level + 1 && x.ParentId == category.Id || x.Level > level + 1), level + 1));
-                sb.Append("</ul>");
-            }
-            else
-            {
-                sb.Append("<li><a href=\"");
-                sb.Append(Url.Action("Search", "Shop", new { categoryId = category.Id }));
-                sb.Append("\">");
-                sb.Append(category.Name);
-                sb.Append("</a></li>");
-            }
-        }
-        return sb.ToString();
-    }
 }
 
 <!doctype html>
@@ -64,7 +38,7 @@
                             </div>
                             <!--Logo Area End-->
                         </div>
-                        <div class="col-xl-6 col-lg-6 col-md-4 d-none d-lg-block col-12">
+                        <div class="col-xl-5 col-lg-6 col-md-4 d-none d-lg-block col-12">
                             <!--Header Menu Area Start-->
                             <div class="header-menu-area text-center">
                                 <nav class="main-menu">
@@ -94,37 +68,14 @@
                             </div>
                             <!--Header Menu Area End-->
                         </div>
-                        <div class="col-xl-3 col-lg-4 col-md-5 col-12">
+                        <div class="col-xl-4 col-lg-4 col-md-5 col-12">
                             <!--Header Search And Mini Cart Area Start-->
                             <div class="header-search-cart-area">
                                 <ul>
-                                    <li><a class="header-search-toggle" href="#"><i class="flaticon-magnifying-glass"></i></a></li>
-                                    <li class="currency-menu">
-                                        <a href="@Url.Action("Login", "Account")"><i class="flaticon-user"></i></a>
-                                        @if (isAuthorized)
-                                        {
-                                            <!--Crunccy dropdown-->
-                                            <ul class="currency-dropdown">
-                                                <!--Account Currency Start-->
-                                                <li>
-                                                    <a href="@Url.Action("Index", "Account")">Личный кабинет</a>
-                                                    <ul>
-                                                        <li><a href="@Url.Action("Checkout", "Account")">Оформить заказ</a></li>
-                                                        <li><a href="@Url.Action("Index", "Account")">Мой аккаунт</a></li>
-                                                        <li><a href="@Url.Action("Cart", "Account")">Корзина</a></li>
-                                                        <li><a href="@Url.Action("Index", "Account", new { tab = (int)AccountTab.Favourite })">Избранное</a></li>
-                                                        <li><a href="@Url.Action("Logout", "Account")">Выйти</a></li>
-                                                    </ul>
-                                                </li>
-                                                <!--Account Currency End-->
-                                            </ul>
-                                            <!--Crunccy dropdown-->
-                                        }
-                                    </li>
                                     @if (isAuthorized)
                                     {
                                         <li class="mini-cart">
-                                            <a href="#"><i class="flaticon-shopping-cart"></i> <span class="mini-cart-total">$300.00(2)</span></a>
+                                            <a href="#"><i class="flaticon-shopping-cart"></i><span class="mini-cart-total">$300.00(2)</span></a>
                                             <!--Mini Cart Dropdown Start-->
                                             <div class="header-cart">
                                                 <ul class="cart-items">
@@ -169,6 +120,29 @@
                                             <!--Mini Cart Dropdown End-->
                                         </li>
                                     }
+                                    <li><a class="header-search-toggle" href="#"><i class="flaticon-magnifying-glass"></i></a></li>
+                                    <li class="currency-menu">
+                                        <a href="@Url.Action("Login", "Account")"><i class="flaticon-user"></i></a>
+                                        @if (isAuthorized)
+                                        {
+                                            <!--Crunccy dropdown-->
+                                            <ul class="currency-dropdown">
+                                                <!--Account Currency Start-->
+                                                <li>
+                                                    <a href="@Url.Action("Index", "Account")">Личный кабинет</a>
+                                                    <ul>
+                                                        <li><a href="@Url.Action("Checkout", "Account")">Оформить заказ</a></li>
+                                                        <li><a href="@Url.Action("Index", "Account")">Мой аккаунт</a></li>
+                                                        <li><a href="@Url.Action("Cart", "Account")">Корзина</a></li>
+                                                        <li><a href="@Url.Action("Index", "Account", new { tab = (int)AccountTab.Favourite })">Избранное</a></li>
+                                                        <li><a href="@Url.Action("Logout", "Account")">Выйти</a></li>
+                                                    </ul>
+                                                </li>
+                                                <!--Account Currency End-->
+                                            </ul>
+                                            <!--Crunccy dropdown-->
+                                        }
+                                    </li>
                                 </ul>
                             </div>
                             <!--Header Search And Mini Cart Area End-->
@@ -252,7 +226,7 @@
                             <li class="menu-item-has-children">
                                 <a href="@Url.Action("Index", "Shop")">Купить</a>
                                 <ul class="submenu2">
-                                    @Html.Raw(Menu(categoryHierarchy))
+                                    @Html.Raw(GetCategoryTree(categoryHierarchy))
                                 </ul>
                             </li>
                             <li><a href="@Url.Action("Index", "Shop")">Контакты</a></li>

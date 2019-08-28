@@ -186,5 +186,23 @@ namespace ButterflyShop.Web.Controllers
             }
             return Json(new { success, isDeleted = favouriteProduct?.IsDeleted });
         }
+
+        [HttpPost]
+        public IActionResult RemoveFromWishlist(int productId)
+        {
+            var success = false;
+            try
+            {
+                if (UnitOfWork.FavouriteProducts.FirstOrDefault(x => x.UserId == SystemUser.Id && x.ProductId == productId) is FavouriteProduct favouriteProduct)
+                {
+                    success = UnitOfWork.FavouriteProducts.Delete(favouriteProduct);
+                }
+            }
+            catch (System.Exception)
+            {
+                success = false;
+            }
+            return Json(new { success });
+        }
     }
 }

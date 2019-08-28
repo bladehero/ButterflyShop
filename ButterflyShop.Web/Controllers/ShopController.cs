@@ -1,4 +1,5 @@
-﻿using ButterflyShop.Web.Models.ShopModels;
+﻿using ButterflyShop.Web.Extensions;
+using ButterflyShop.Web.Models.ShopModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
@@ -10,11 +11,15 @@ namespace ButterflyShop.Web.Controllers
         [AllowAnonymous]
         public IActionResult Index()
         {
+            var products = UnitOfWork.StoredProcedures.GetItemsInfo(null, userId: SystemUser?.Id);
             var model = new IndexVM
             {
-                Products = UnitOfWork.StoredProcedures.GetItemsInfo(8, userId: SystemUser?.Id),
+                Products = products.ChunkBy(6),
+                CategoryHierarchy = UnitOfWork.StoredProcedures.GetCategoryHierarchy(),
+                MinPrice = products.Min(x => x.Price),
+                MaxPrice = products.Max(x => x.Price)
             };
-            return View();
+            return View(model);
         }
 
         [AllowAnonymous]

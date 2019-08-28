@@ -298,22 +298,6 @@
         nextArrow: '<button class="slick-next"><i class="fa fa-angle-right"></i></button>',
     });
 
-
-    /*----------------------------------- 
-        Price slider Active 
-    ----------------------------------*/
-    $('#price-range').slider({
-        range: true,
-        min: 0,
-        max: 1000,
-        values: [0, 900],
-        slide: function (event, ui) {
-            $('#price-amount').val('$' + ui.values[0] + ' - $' + ui.values[1]);
-        }
-    });
-    $('#price-amount').val('$' + $('#price-range').slider('values', 0) +
-        ' - $' + $('#price-range').slider('values', 1));
-
     /*----------------------------------- 
         Count Down Active 
     ----------------------------------*/
