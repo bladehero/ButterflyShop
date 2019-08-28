@@ -153,6 +153,8 @@ begin
                     join Products p on p.Id = cp.ProductId
                     where p.Id = @ProductId 
                       and c.IsDeleted = 0
+                      and cp.IsDeleted = 0
+                      and p.IsDeleted = 0
                 )
   union all
   select c.*
@@ -378,13 +380,62 @@ begin
 end;
 go
 
+if (object_ID('dbo.GetCategoryForProducts') is not null)
+   drop function dbo.GetCategoryForProducts
+go
+
+-- ============================================================================
+-- Example    : select * from dbo.GetCategoryForProducts(5)
+-- Author     : Nikita Dermenzhi
+-- Date       : 25/07/2019
+-- Description: —
+-- ============================================================================
+create function dbo.GetCategoryForProducts(@productId as int) 
+    returns @categories table
+    (
+        Id int not null
+      , Name nvarchar(100)
+      , ParentId int
+      , DateCreated datetime
+      , DateModified datetime
+      , IsDeleted bit
+    )
+as
+begin
+  ;with CategoryParents as 
+  (
+    select *
+      from Categories
+      where Id in (
+                    select c.Id
+                      from Categories c
+                      join CategoryProducts cp on cp.CategoryId = c.Id
+                      join Products p on p.Id = cp.ProductId
+                      where p.Id = @ProductId 
+                        and c.IsDeleted = 0
+                        and cp.IsDeleted = 0
+                        and p.IsDeleted = 0
+                  )
+    union all
+    select c.*
+      from Categories c
+      inner join CategoryParents cp on cp.ParentId = c.Id
+  )
+  insert into @categories
+    select *
+      from CategoryParents
+      order by Id
+
+  return
+end
+go
 
 if object_id(N'dbo.SearchItemsInfo') is null
   exec('create procedure dbo.SearchItemsInfo as set nocount on;');
 go
  
  -- ============================================================================
- -- Example    : exec dbo.SearchItemsInfo 5
+ -- Example    : exec dbo.SearchItemsInfo 5, 4, 1, N'Помада'
  -- Author     : Nikita Dermenzhi
  -- Date       : 25/07/2019
  -- Description: —
@@ -401,34 +452,56 @@ as
 begin
 
   select
-        p.Id as ProductId
-      , i.Id as ItemId
-      , p.Name
-      , p.Description
-      , i.Price
-      , i.OldPrice
-      , pimg.Image
-      , 1 as Favourite
-        from dbo.Products p
-        join dbo.FavouriteProducts fp on fp.ProductId = p.Id and fp.UserId = @userId
-        join (select i1.* 
-                from dbo.Items i1
-                join (select min(Id) as Id
-                           , min(Price) as Price 
-                           from dbo.Items 
-                           group by ProductId) i2 
-                on i1.Id = i2.Id) i 
-              on i.ProductId = p.Id
-        join dbo.CategoryProducts cp on cp.ProductId = p.Id
-        outer apply
-        (
-          select top 1 * 
-            from dbo.ProductImages pim where pim.ProductId = p.Id
-                                         and pim.IsDeleted = 0
-        ) pimg
-        where p.IsDeleted = 0 
-          and i.IsDeleted = 0
-          and fp.IsDeleted = 0
+      p.Id as ProductId
+    , i.Id as ItemId
+    , p.Name
+    , p.Description
+    , i.Price
+    , i.OldPrice
+    , pimg.Image
+    , case 
+        when isnull(fp.IsDeleted, 1) = 1 then 0
+        else 1
+      end as Favourite
+      from dbo.Products p
+      left join dbo.FavouriteProducts fp on fp.ProductId = p.Id and fp.UserId = @userId
+      join (select i1.* 
+              from dbo.Items i1
+              join (select min(Id) as Id
+                         , min(Price) as Price 
+                         from dbo.Items 
+                         group by ProductId) i2 
+              on i1.Id = i2.Id) i 
+            on i.ProductId = p.Id
+      outer apply
+      (
+        select top 1 * 
+          from dbo.ProductImages pim where pim.ProductId = p.Id
+                                       and pim.IsDeleted = 0
+      ) pimg
+      outer apply
+      (
+        select cpp.* 
+          from dbo.GetCategoryForProducts(p.Id) as cpp
+          where cpp.Id = @categoryId
+      ) cfp
+      where p.IsDeleted = 0 
+        and i.IsDeleted = 0
+        and (@categoryId is null or cfp.Id is not null) -- Filter by category 
+        and (@brandId is null or p.BrandId = @brandId)  -- Filter by brand
+        and (@search is null 
+             or exists(
+                        select *
+                          from string_split(@search, ' ') es
+                          left join Products ep on ep.Name like concat('%', es.value, '%')
+                          left join Brands eb on eb.Id = ep.BrandId and ep.Name like concat('%', es.value, '%')
+                          left join CategoryProducts ecp on ecp.ProductId = ep.Id
+                          left join Categories ec on ec.Id = ecp.CategoryId and ec.Name like concat('%', es.value, '%')
+                          where ep.Id = p.Id
+                      )
+            )
+      order by
+        p.DateCreated
  
 end;
 go
