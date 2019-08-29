@@ -18,7 +18,7 @@ namespace ButterflyShop.Web.Extensions
                 return ImageFolderNames.NoImagePath;
             }
             var path = Path.Combine(folder, source);
-            return File.Exists(Path.Combine(GlobalVariables.ResourceDirectory, path)) ? path : ImageFolderNames.NoImagePath;
+            return File.Exists(Path.Combine(GlobalVariables.ResourceDirectory, path)) ? path.Replace("\\", "/") : ImageFolderNames.NoImagePath;
         }
     }
 }

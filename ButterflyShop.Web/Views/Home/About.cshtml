@@ -1,7 +1,7 @@
 ﻿@model ButterflyShop.Web.Models.HomeModels.AboutVM
 @using static ButterflyShop.Web.Extensions.ImagePathExtension
 <!-- Page Banner Section Start -->
-<div class="container-fluid bg-light p-5">
+<div class="container-fluid bg-light py-5">
     <div class="container">
         <div class="row">
             <div class="col">
@@ -136,14 +136,13 @@
                     <!-- Brand Info Start-->
                     <div class="col-md-4 col-sm-6">
                         <div class="single-team mb-30">
-                            <div class="team-image img-full">
-                                <a href="#"><img src="~/@BrandBackgroundImage(brand.BackgroundImage)" alt="@brand.Name"></a>
+                            <div class="team-image img-full" style="height: 300px; background-image: url('../@BrandBackgroundImage(brand.BackgroundImage)'); background-repeat: no-repeat; background-position: center; background-size: 75%;">
                             </div>
                             <div class="team-content">
                                 <div class="team-hover-info">
                                     <h2><a href="@Url.Action("Index", "Shop", new { brandId = brand.Id })">@brand.Name</a></h2>
                                     <ul class="team-social">
-                                        <li><span><i class="fa fa-twitter"></i>@brand.Country</span></li>
+                                        <li><span class="text-white country-producer" data-toggle="tooltip"><i class="fa fa-flag"></i> @brand.Country</span></li>
                                     </ul>
                                 </div>
                             </div>
@@ -155,4 +154,14 @@
         </div>
     </div>
     <!--About Us Brands End-->
+}
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $('.country-producer').tooltip({
+                title: "Страна производитель", placement: "bottom"
+            });
+        });
+    </script>
 }

@@ -2,7 +2,6 @@
 using ButterflyShop.Web.Models.ShopModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace ButterflyShop.Web.Controllers
@@ -57,8 +56,8 @@ namespace ButterflyShop.Web.Controllers
             {
                 Products = products.ChunkBy(6),
                 CategoryHierarchy = UnitOfWork.StoredProcedures.GetCategoryHierarchy(),
-                MinPrice = _minPrice,
-                MaxPrice = _maxPrice,
+                MinPrice = UnitOfWork.StoredProcedures.GetProductNumericValueByOption(ProductOption.MinPrice.GetDescription()),
+                MaxPrice = UnitOfWork.StoredProcedures.GetProductNumericValueByOption(ProductOption.MaxPrice.GetDescription()),
                 SelectedMinPrice = minPrice,
                 SelectedMaxPrice = maxPrice,
                 Categories = categories

@@ -1,75 +1,89 @@
 ﻿<!-- Page Banner Section Start -->
-<div class="page-banner-section section bg-image" data-bg="assets/images/bg/breadcrumb.png">
+<div class="container-fluid bg-warning py-5">
     <div class="container">
         <div class="row">
             <div class="col">
-
                 <div class="page-banner text-left">
-                    <h2>Contact</h2>
+                    <h2>Контакты</h2>
                     <ul class="page-breadcrumb">
-                        <li><a href="index.html">Home</a></li>
-                        <li>Contact</li>
+                        <li><a href="@Url.Action("Index", "Home")">Главная</a></li>
+                        <li>Контакты</li>
                     </ul>
                 </div>
-
             </div>
         </div>
     </div>
 </div>
 <!-- Page Banner Section End -->
 <!--Contact section start-->
-<div class="conact-section section pt-85 pt-lg-65 pt-md-55 pt-sm-45 pt-xs-35  pb-100 pb-lg-80 pb-md-70 pb-sm-60 pb-xs-50">
-    <div class="container">
-
+<div class="conact-section section pt-85 pt-lg-65 pt-md-55 pt-sm-45 pt-xs-35 pb-100 pb-lg-80 pb-md-70 pb-sm-60 pb-xs-50">
+    <div class="container mb-50">
         <div class="row">
-            <div class="col-12">
-                <div class="contact-form-wrap">
-                    <h3 class="contact-title">Write Us</h3>
-                    <form id="contact-form" action="assets/php/mail.php" method="post">
-                        <div class="row">
-                            <div class="col-lg-5">
-                                <div class="name-fild-padding mb-sm-30 mb-xs-30">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="contact-form-style mb-20">
-                                                <label class="fild-name">Name</label>
-                                                <input name="name" placeholder="" type="text">
+            <div class="row">
+                <div class="col-12">
+                    <div class="contact-form-wrap">
+                        <h3 class="contact-title">Напишите нам</h3>
+                        <form id="contact-form" asp-action="SendMessage" asp-controller="Home" method="post">
+                            <div class="row">
+                                <div class="col-lg-5">
+                                    <div class="name-fild-padding mb-sm-30 mb-xs-30">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="contact-form-style mb-20">
+                                                    <label class="fild-name">Имя:</label>
+                                                    <input name="name" placeholder="Ваше имя..." type="text">
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="contact-form-style mb-20">
-                                                <label class="fild-name">Email</label>
-                                                <input name="email" placeholder="" type="email">
+                                            <div class="col-md-12">
+                                                <div class="contact-form-style mb-20">
+                                                    <label class="fild-name">Email:</label>
+                                                    <input name="email" placeholder="Ваша почта..." type="email">
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="check-box">
-                                                <input type="checkbox" id="create_account">
-                                                <label for="create_account">I am not a robot</label>
+                                            <div class="col-md-12">
+                                                <div class="check-box">
+                                                    <input type="checkbox" id="create_account">
+                                                    <label for="create_account">Я не робот</label>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-lg-7">
-                                <div class="contact-form-style bl">
-                                    <label class="fild-name pl-15">Message</label>
-                                    <textarea class="pl-15" name="message" placeholder="Type your message here.."></textarea>
-                                    <button class="btn" type="submit"><span>Send message</span></button>
+                                <div class="col-lg-7">
+                                    <div class="contact-form-style bl">
+                                        <label class="fild-name pl-15">Сообщение:</label>
+                                        <textarea class="pl-15" name="message" placeholder="Текст вашего сообщения.."></textarea>
+                                        <button class="btn" type="submit"><span>Отправить</span></button>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </form>
-                    <p class="form-messege"></p>
+                        </form>
+                        <p class="form-messege"></p>
+                    </div>
                 </div>
             </div>
-        </div>
 
+        </div>
     </div>
+    <!--Contact section end-->
+    <!--Contact Map section start-->
+    <div class="contact-map-section section">
+        <p class="display-4 mb-0 map-title">ул. Ивана и Юрия Лип, 24</p>
+        <div id="contact-map" class="contact-map mt-0">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2749.7639242662053!2d30.704529215354842!3d46.43355857912436!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40c633a977c111bd%3A0x913832fa5868fc6e!2sIvana%20ta%20Yuriia%20Lyp%20St%2C%2024%2C%20Odesa%2C%20Odes&#39;ka%20oblast%2C%2065000!5e0!3m2!1sen!2sua!4v1567118023643!5m2!1sen!2sua" frameborder="0" style="border:0; width: 100%; height: 100%;" allowfullscreen="true"></iframe>
+        </div>
+    </div>
+    <div class="contact-map-section section">
+        <p class="display-4 mb-0 map-title">ул. Сегедская, 13</p>
+        <div id="contact-map" class="contact-map mt-0">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2749.021764797926!2d30.74128001535538!3d46.44826577912486!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40c633c3bc1bbf4f%3A0x6aae11999f595f36!2sSeheds&#39;ka%20St%2C%2013%2C%20Odesa%2C%20Odes&#39;ka%20oblast%2C%2065000!5e0!3m2!1sen!2sua!4v1567120490029!5m2!1sen!2sua" frameborder="0" style="border:0; width: 100%; height: 100%;" allowfullscreen="true"></iframe>
+        </div>
+    </div>
+    <div class="contact-map-section section">
+        <p class="display-4 mb-0 map-title">Фонтанская дорога, 12-а</p>
+        <div id="contact-map" class="contact-map mt-0">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2749.575353643036!2d30.74124781535496!3d46.437295779124476!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40c6339415613723%3A0x538dfdf4af8e715a!2s12A%2C%20Fontans&#39;ka%20Road%2C%2012%D0%90%2C%20Odesa%2C%20Odes&#39;ka%20oblast%2C%2065000!5e0!3m2!1sen!2sua!4v1567120539032!5m2!1sen!2sua" frameborder="0" style="border:0; width: 100%; height: 100%;" allowfullscreen="true"></iframe>
+        </div>
+    </div>
+    <!--Contact Map section End-->
 </div>
-<!--Contact section end-->
-<!--Contact Map section start-->
-<div class="contact-map-section section">
-    <div id="contact-map" class="contact-map"></div>
-</div>
-<!--Contact Map section End-->

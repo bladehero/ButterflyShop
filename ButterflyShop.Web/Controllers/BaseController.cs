@@ -26,8 +26,8 @@ namespace ButterflyShop.Web.Controllers
 
         public override void OnActionExecuting(ActionExecutingContext context)
         {
-            var authCookieValue = GetAuth(AuthKey);
-            if (Guid.TryParse(authCookieValue, out Guid token))
+            var authValue = GetAuth(AuthKey);
+            if (Guid.TryParse(authValue, out Guid token))
             {
                 SystemUser = UnitOfWork.Users.FindByToken(token);
             }

@@ -2,6 +2,7 @@
 @using static ButterflyShop.Web.Extensions.CustomExtensions
 @{
     var havePages = Model.Products?.Count() > 0;
+    var categories = Model.Categories ?? new List<int>();
 }
 <!-- Page Banner Section Start -->
 <div class="container-fluid bg-skyblue py-5">
@@ -30,7 +31,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="shop-area">
-                    <div class="row">
+                    @*<div class="row">
                         <div class="col-12">
                             <!-- Grid & List View Start -->
                             <div class="shop-topbar-wrapper d-flex justify-content-between align-items-center">
@@ -38,7 +39,7 @@
                                 <div class="toolbar-short-area d-md-flex align-items-center">
                                     <div class="toolbar-shorter ">
                                         <label>Сортировать:</label>
-                                        <select class="wide">
+                                        <select class="wide" id="sortBy">
                                             <option data-display="Выберите">Без сортировки</option>
                                             <option value="1">По алфавиту (возрастание)</option>
                                             <option value="2">По алфавиту (убывание)</option>
@@ -51,7 +52,7 @@
                             </div>
                             <!-- Grid & List View End -->
                         </div>
-                    </div>
+                    </div>*@
                     <div class="row">
                         <div class="col-lg-3 order-lg-1 order-2">
                             <!-- Single Sidebar Start  -->
@@ -61,7 +62,7 @@
                                     @foreach (var category in Model.CategoryHierarchy)
                                     {
                                         <li>
-                                            <input type="checkbox" name="category_@category.Id" value="@category.Id" class="category-input" style="margin-left: @(category.Level * 12)px;" />
+                                            <input type="checkbox" name="category_@category.Id" value="@category.Id" class="category-input" style="margin-left: @(category.Level * 12)px;" @(categories.Contains(category.Id) ? "checked" : null)/>
                                             <label for="category_@category.Id" class="@(category.IsParent ? "font-weight-bold" : null)">@category.Name</label>
                                         </li>
                                     }
@@ -179,5 +180,21 @@
         $('#clear-filter-btn').click(function () {
             window.location.href = '@Url.Action("Index", "Shop")';
         });
+        @*$('#sortBy').change(function () {
+            var _this = $(this);
+            var option = _this.children("option:selected").val();
+            switch (option) {
+                case 1:
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    break;
+                case 4:
+                    break;
+                default:
+                    break;
+            }
+        });*@
     </script>
 }

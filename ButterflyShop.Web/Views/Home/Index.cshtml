@@ -181,7 +181,7 @@
                     <div class="col">
                         <div class="single-brand">
                             <div class="brand-image">
-                                <img src="~/@BrandLogoImage(brand.Logo)" alt="@brand.Name">
+                                <a href="@Url.Action("Index", "Shop", new { brandId = brand.Id})"><img src="~/@BrandLogoImage(brand.Logo)" alt="@brand.Name"></a>
                             </div>
                         </div>
                     </div>
