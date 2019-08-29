@@ -43,4 +43,12 @@ namespace ButterflyShop.Web
         Orders,
         Info
     }
+
+    public enum ProductOption
+    {
+        [Description("MinPrice")]
+        MinPrice,
+        [Description("MaxPrice")]
+        MaxPrice
+    }
 }

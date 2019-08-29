@@ -13,8 +13,7 @@
     <title>Butterfly</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Place favicon.ico in the root directory -->
-    <link href="~/assets/images/favicon.ico" type="img/x-icon" rel="shortcut icon">
+    <link rel="icon" href="data:,">
     <!-- All css files are included here. -->
     <link rel="stylesheet" href="~/assets/css/vendor/bootstrap.min.css">
     <link rel="stylesheet" href="~/assets/css/vendor/iconfont.min.css">
@@ -31,14 +30,14 @@
             <div class="header-deafult-area">
                 <div class="container">
                     <div class="row align-items-center">
-                        <div class="col-xl-3 col-lg-2 col-md-4 col-12">
+                        <div class="col-xl-3 col-lg-2 col-md-2 col-12">
                             <!--Logo Area Start-->
                             <div class="logo-area">
                                 <a href="@Url.Action("Index", "Home")"><img src="~/assets/images/logo.png" alt=""></a>
                             </div>
                             <!--Logo Area End-->
                         </div>
-                        <div class="col-xl-5 col-lg-6 col-md-4 d-none d-lg-block col-12">
+                        <div class="col-xl-5 col-lg-5 col-md-5 d-none d-lg-block col-12">
                             <!--Header Menu Area Start-->
                             <div class="header-menu-area text-center">
                                 <nav class="main-menu">
@@ -68,7 +67,7 @@
                             </div>
                             <!--Header Menu Area End-->
                         </div>
-                        <div class="col-xl-4 col-lg-4 col-md-5 col-12">
+                        <div class="col-xl-4 col-lg-5 col-md-7 col-12">
                             <!--Header Search And Mini Cart Area Start-->
                             <div class="header-search-cart-area">
                                 <ul>
@@ -81,7 +80,7 @@
                                                 <ul class="cart-items">
                                                     <li class="single-cart-item">
                                                         <div class="cart-img">
-                                                            <a href="@Url.Action("Cart", "Account")"><img src="~/assets/images/cart/cart1.jpg" alt=""></a>
+                                                            <a href="@Url.Action("Product", "Shop")"><img src="~/assets/images/cart/cart1.jpg" alt=""></a>
                                                         </div>
                                                         <div class="cart-content">
                                                             <h5 class="product-name"><a href="@Url.Action("Product", "Shop")">Dell Inspiron 24</a></h5>
@@ -94,7 +93,7 @@
                                                     </li>
                                                     <li class="single-cart-item">
                                                         <div class="cart-img">
-                                                            <a href="@Url.Action("Cart", "Account")"><img src="~/assets/images/cart/cart2.jpg" alt=""></a>
+                                                            <a href="@Url.Action("Product", "Shop")"><img src="~/assets/images/cart/cart2.jpg" alt=""></a>
                                                         </div>
                                                         <div class="cart-content">
                                                             <h5 class="product-name"><a href="@Url.Action("Product", "Shop")">Lenovo Ideacentre 300</a></h5>
@@ -132,7 +131,7 @@
                                                     <a href="@Url.Action("Index", "Account")">Личный кабинет</a>
                                                     <ul>
                                                         <li><a href="@Url.Action("Checkout", "Account")">Оформить заказ</a></li>
-                                                        <li><a href="@Url.Action("Index", "Account")">Мой аккаунт</a></li>
+                                                        <li><a href="@Url.Action("Index", "Account", new { tab = (int)AccountTab.Info })">Профиль</a></li>
                                                         <li><a href="@Url.Action("Cart", "Account")">Корзина</a></li>
                                                         <li><a href="@Url.Action("Index", "Account", new { tab = (int)AccountTab.Favourite })">Избранное</a></li>
                                                         <li><a href="@Url.Action("Logout", "Account")">Выйти</a></li>
@@ -215,14 +214,14 @@
 
                 <div class="offcanvas-inner-content">
                     <div class="offcanvas-mobile-search-area">
-                        <form action="#">
-                            <input type="search" placeholder="Поиск ...">
-                            <button type="submit"><i class="fa fa-search"></i></button>
+                        <form asp-action="FuzzyMatch" asp-controller="Shop" method="get">
+                            <input id="search-mob" class="input-text" value="" placeholder="Поиск ..." name="search" type="search">
+                            <button id="search-mob-btn" type="submit"><i class="fa fa-search"></i></button>
                         </form>
                     </div>
                     <nav class="offcanvas-navigation">
                         <ul>
-                            <li class="menu-item-has-children"><a href="#">Главная</a></li>
+                            <li class="menu-item-has-children"><a href="@Url.Action("Index", "Home")">Главная</a></li>
                             <li class="menu-item-has-children">
                                 <a href="@Url.Action("Index", "Shop")">Купить</a>
                                 <ul class="submenu2">
@@ -240,10 +239,10 @@
                                 <li class="menu-item-has-children">
                                     @if (isAuthorized)
                                     {
-                                        <a href="#">Личный кабинет</a>
+                                        <a href="@Url.Action("Index", "Account")">Личный кабинет</a>
                                         <ul class="submenu2">
                                             <li><a href="@Url.Action("Checkout", "Account")">Оформить заказ</a></li>
-                                            <li><a href="@Url.Action("Index", "Account")">Мой аккаунт</a></li>
+                                            <li><a href="@Url.Action("Index", "Account", new { tab = (int)AccountTab.Info })">Профиль</a></li>
                                             <li><a href="@Url.Action("Cart", "Account")">Корзина</a></li>
                                             <li><a href="@Url.Action("Index", "Account", new { tab = (int)AccountTab.Favourite })">Избранное</a></li>
                                             <li><a href="@Url.Action("Logout", "Account")">Выйти</a></li>
@@ -287,12 +286,10 @@
                 <button class="search-close"><i class="fa fa-times"></i></button>
             </div>
             <div class="sidebar-search-input">
-                <form action="#">
+                <form asp-action="FuzzyMatch" asp-controller="Shop" method="get">
                     <div class="form-search">
-                        <input id="search" class="input-text" value="" placeholder="" type="search">
-                        <button id="search-btn">
-                            <i class="fa fa-search"></i>
-                        </button>
+                        <input id="search" class="input-text" value="" placeholder="" name="search" type="search">
+                        <button id="search-btn" type="submit"><i class="fa fa-search"></i></button>
                     </div>
                 </form>
                 <p class="form-description">Нажмите Enter, чтобы начать поиск или Esc, чтобы отменить</p>
@@ -320,10 +317,10 @@
                         <div class="footer-widget col-xl-3 col-lg-3 col-md-6 col-sm-6 col-12 mb-40 mb-xs-35">
                             <h4 class="title"><span class="text">Горячие ссылки</span></h4>
                             <ul class="ft-menu">
-                                <li><a href="#">Магазин</a></li>
-                                <li><a href="#">Аккаунт</a></li>
-                                <li><a href="#">Избранное</a></li>
-                                <li><a href="#">Корзина</a></li>
+                                <li><a href="@Url.Action("Index", "Shop")">Магазин</a></li>
+                                <li><a href="@Url.Action("Index", "Account")">Аккаунт</a></li>
+                                <li><a href="@Url.Action("Index", "Account", new { tab = (int)AccountTab.Favourite })">Избранное</a></li>
+                                <li><a href="@Url.Action("Cart", "Account")">Корзина</a></li>
                             </ul>
                         </div>
                         <!--Footer Widget end-->
@@ -331,9 +328,9 @@
                         <div class="footer-widget col-xl-3 col-lg-3 col-md-6 col-sm-6 col-12 mb-40 mb-xs-35">
                             <h4 class="title"><span class="text">Информация</span></h4>
                             <ul class="ft-menu">
-                                <li><a href="#">Главная</a></li>
-                                <li><a href="#">О нас</a></li>
-                                <li><a href="#">Контакты</a></li>
+                                <li><a href="@Url.Action("Index", "Home")">Главная</a></li>
+                                <li><a href="@Url.Action("About", "Home")">О нас</a></li>
+                                <li><a href="@Url.Action("Contact", "Home")">Контакты</a></li>
                             </ul>
                         </div>
                         <!--Footer Widget end-->
@@ -358,7 +355,7 @@
                                 <div class="col-12">
                                     <div class="copyright text-center">
                                         <p>
-                                            Copyright &copy;2019 <a href="#">Butterfly</a>. Все права защищены.
+                                            Copyright &copy;2019 <a href="@Url.Action("Index", "Home")">ButterflyShop</a>. Все права защищены.
                                             <br />
                                             <span class="font-weight-light">Сайт создан: <a class="text-dark font-weight-bold" href="mailto:nikita.dermenzhi@gmail.com">Dermenzhi N.</a></span>
                                         </p>
@@ -384,17 +381,8 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
     <script src="~/assets/js/main.js" charset="utf-8"></script>
     <script>
-        $('#search').keypress(function (e) {
-            var key = e.which;
-            if (key == 13) {
-                $('#search-btn').click();
-                return false;
-            }
-        });
-        $('#search-btn').click(function () {
-            var value = $('#search').val();
-            window.location.replace('@Url.Action("Index", "Shop")?search=' + value);
-        });
+        $('#search').keypress(function (e) { if (e.which == 13) $('#search-btn').click(); });
+        $('#search-mob').keypress(function (e) { if (e.which == 13) $('#search-mob-btn').click(); });
     </script>
     @RenderSection("Scripts", false)
 </body>

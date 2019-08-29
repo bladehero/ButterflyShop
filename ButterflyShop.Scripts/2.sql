@@ -435,7 +435,7 @@ if object_id(N'dbo.SearchItemInfo') is null
 go
  
  -- ============================================================================
- -- Example    : exec dbo.SearchItemInfo 5, 4, 1, N'Помада', 150, 200
+ -- Example    : exec dbo.SearchItemInfo 5, 4, 1, N'Помада', 150, 200; exec dbo.SearchItemInfo null, null, null, N'Мужская'
  -- Author     : Nikita Dermenzhi
  -- Date       : 25/07/2019
  -- Description: —
@@ -495,11 +495,16 @@ begin
              or exists(
                         select *
                           from string_split(@search, ' ') es
-                          left join Products ep on ep.Name like concat('%', es.value, '%')
-                          left join Brands eb on eb.Id = ep.BrandId and ep.Name like concat('%', es.value, '%')
-                          left join CategoryProducts ecp on ecp.ProductId = ep.Id
-                          left join Categories ec on ec.Id = ecp.CategoryId and ec.Name like concat('%', es.value, '%')
-                          where ep.Id = p.Id
+                          left join Products ep on ep.Id = p.Id
+                          left join Brands eb on eb.Id = ep.BrandId
+                          outer apply
+                          (
+                            select cpp.* 
+                              from dbo.GetCategoryForProducts(p.Id) as cpp
+                          ) ecfp
+                          where ep.Name like concat('%', es.value, '%')
+                             or eb.Name like concat('%', es.value, '%')
+                             or ecfp.Name like concat('%', es.value, '%')
                       )
             )                                           -- Filter by search
         and (@minPrice is null or i.Price >= @minPrice)
@@ -508,4 +513,28 @@ begin
         p.DateCreated
  
 end;
+go
+
+if (object_ID('dbo.GetProductNumericValueByOption') is not null)
+   drop function dbo.GetProductNumericValueByOption
+go
+
+-- ============================================================================
+-- Example    : select dbo.GetProductNumericValueByOption('MinPrice')
+-- Author     : Nikita Dermenzhi
+-- Date       : 25/07/2019
+-- Description: —
+-- ============================================================================
+
+create function dbo.GetProductNumericValueByOption(@option char(10))
+returns float
+as 
+begin
+  declare @value float = null;
+  if (@option = 'MinPrice')
+    select @value = min(i.Price) from dbo.Items i
+  if (@option = 'MaxPrice')
+    select @value = max(i.Price) from dbo.Items i
+  return @value;  
+end
 go

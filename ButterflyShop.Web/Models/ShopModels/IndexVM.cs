@@ -12,6 +12,7 @@ namespace ButterflyShop.Web.Models.ShopModels
         public double? SelectedMinPrice { get; set; }
         public double? SelectedMaxPrice { get; set; }
         public IEnumerable<int> Categories { get; set; }
+        public string Search { get; set; }
 
         public IndexVM()
         {

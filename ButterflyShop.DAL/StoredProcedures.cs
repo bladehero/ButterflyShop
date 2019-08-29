@@ -92,6 +92,10 @@ namespace ButterflyShop.DAL
             var result = Connection.Query<ProductItemInfo_Result>("dbo.SearchItemInfo", obj, commandType: CommandType.StoredProcedure);
             return result;
         }
-        
+        public int GetProductNumericValueByOption(string option)
+        {
+            var result = Connection.ExecuteScalar<int>($"select dbo.GetProductNumericValueByOption('{option}')");
+            return result;
+        }
     }
 }

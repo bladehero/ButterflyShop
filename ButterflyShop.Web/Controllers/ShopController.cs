@@ -11,18 +11,33 @@ namespace ButterflyShop.Web.Controllers
     {
         [HttpGet]
         [AllowAnonymous]
-        public IActionResult Index(int? categoryId = null, int? brandId = null, string search = null)
+        public IActionResult Index(int? categoryId = null, int? brandId = null)
         {
-            var products = UnitOfWork.StoredProcedures.SearchItemInfo(SystemUser?.Id, categoryId, brandId, search);
-            var hasProducts = products.Count() == 0;
+            var products = UnitOfWork.StoredProcedures.SearchItemInfo(SystemUser?.Id, categoryId, brandId);
             var model = new IndexVM
             {
                 Products = products.ChunkBy(6),
                 CategoryHierarchy = UnitOfWork.StoredProcedures.GetCategoryHierarchy(),
-                MinPrice = hasProducts ? 0 : products.Min(x => x.Price),
-                MaxPrice = hasProducts ? 0 : products.Max(x => x.Price)
+                MinPrice = UnitOfWork.StoredProcedures.GetProductNumericValueByOption(ProductOption.MinPrice.GetDescription()),
+                MaxPrice = UnitOfWork.StoredProcedures.GetProductNumericValueByOption(ProductOption.MaxPrice.GetDescription())
             };
             return View(model);
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult FuzzyMatch(string search)
+        {
+            var products = UnitOfWork.StoredProcedures.SearchItemInfo(SystemUser?.Id, search: search);
+            var model = new IndexVM
+            {
+                Products = products.ChunkBy(6),
+                CategoryHierarchy = UnitOfWork.StoredProcedures.GetCategoryHierarchy(),
+                MinPrice = UnitOfWork.StoredProcedures.GetProductNumericValueByOption(ProductOption.MinPrice.GetDescription()),
+                MaxPrice = UnitOfWork.StoredProcedures.GetProductNumericValueByOption(ProductOption.MaxPrice.GetDescription()),
+                Search = search
+            };
+            return View("Index", model);
         }
 
         [HttpGet]

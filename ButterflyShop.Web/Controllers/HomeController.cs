@@ -1,6 +1,7 @@
 ﻿using ButterflyShop.Web.Models.HomeModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 
 namespace ButterflyShop.Web.Controllers
 {
@@ -20,9 +21,15 @@ namespace ButterflyShop.Web.Controllers
         }
 
         [AllowAnonymous]
-        public IActionResult AboutUs()
+        public IActionResult About()
         {
-            return View();
+            var model = new AboutVM
+            {
+                Brands = UnitOfWork.Brands.Random(3),
+                Product = UnitOfWork.StoredProcedures.GetItemsInfo(1, saleItems: true).FirstOrDefault()
+            };
+
+            return View(model);
         }
 
         [AllowAnonymous]

@@ -54,7 +54,7 @@ namespace ButterflyShop.Web.Controllers
             var password = UnitOfWork.StoredProcedures.MD5HashPassword(model.Password);
             if (UnitOfWork.Users.FirstOrDefault(x => x.Password == password && x.Email == model.Username) is DAL.Models.User user)
             {
-                SetCookie(AuthCookie, user.Token.ToString());
+                SetAuth(AuthKey, user.Token.ToString());
                 return RedirectToAction("Index");
             }
             return View("Login", new LoginViewVM { LoginVM = model, Error = "Неверный логин или пароль!" });
@@ -84,7 +84,7 @@ namespace ButterflyShop.Web.Controllers
                         RoleId = UnitOfWork.StoredProcedures.GetUserRoleId(UserRole.User.GetDescription())
                     };
                     UnitOfWork.Users.Insert(newUser);
-                    SetCookie(AuthCookie, newUser.Token.ToString());
+                    SetAuth(AuthKey, newUser.Token.ToString());
                     return RedirectToAction("Index");
                 }
             }
@@ -137,7 +137,7 @@ namespace ButterflyShop.Web.Controllers
                 }
 
                 UnitOfWork.Users.Update(SystemUser);
-                SetCookie(AuthCookie, SystemUser.Token.ToString());
+                Login(SystemUser.Token.ToString());
 
                 return Index(updatedUserInfo: true);
             }

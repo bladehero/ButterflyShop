@@ -13,7 +13,7 @@ namespace ButterflyShop.Web.Controllers
 {
     public class BaseController : Controller
     {
-        public const string AuthCookie = "__auth__butterfly__";
+        public const string AuthKey = "__auth__butterfly__";
 
         protected User SystemUser { get; set; }
         protected bool Anonymous => !(SystemUser is User user && user.Id != 0 && user.Token != Guid.Empty);
@@ -26,7 +26,7 @@ namespace ButterflyShop.Web.Controllers
 
         public override void OnActionExecuting(ActionExecutingContext context)
         {
-            var authCookieValue = GetCookie(AuthCookie);
+            var authCookieValue = GetAuth(AuthKey);
             if (Guid.TryParse(authCookieValue, out Guid token))
             {
                 SystemUser = UnitOfWork.Users.FindByToken(token);
@@ -57,35 +57,28 @@ namespace ButterflyShop.Web.Controllers
         {
             if (!Anonymous)
             {
-                SetCookie(AuthCookie, SystemUser.Token.ToString());
+                SetAuth(AuthKey, SystemUser.Token.ToString());
             }
         }
         protected void Logout()
         {
             if (!Anonymous)
             {
-                RemoveCookie(AuthCookie);
+                RemoveAuth(AuthKey);
             }
         }
 
-        protected string GetCookie(string key)
+        protected string GetAuth(string key)
         {
-            return Request.Cookies[key];
+            return HttpContext.Session.GetString(key);
         }
-        protected void SetCookie(string key, string value)
+        protected void SetAuth(string key, string value)
         {
-            var options = new CookieOptions()
-            {
-                Path = "/",
-                HttpOnly = false,
-                IsEssential = true,
-                Expires = DateTime.Now.AddYears(100)
-            };
-            Response.Cookies.Append(key, value, options);
+            HttpContext.Session.SetString(key, value);
         }
-        protected void RemoveCookie(string key)
+        protected void RemoveAuth(string key)
         {
-            Response.Cookies.Delete(key);
+            HttpContext.Session.Remove(key);
         }
     }
 }
