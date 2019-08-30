@@ -74,7 +74,7 @@ namespace ButterflyShop.Web.Controllers
         {
             if (!Anonymous)
             {
-                SetAuth(AuthKey, SystemUser.Token.ToString());
+                SetAuth(AuthKey, token);
             }
         }
         protected void Logout()

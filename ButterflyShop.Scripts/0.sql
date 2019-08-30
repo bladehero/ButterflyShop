@@ -296,3 +296,19 @@ if not exists (select 1
     unique (UserId, ProductId)
   );
 go
+
+if not exists (select 1 
+               from sys.tables t 
+               where t.name='SupportMessages' 
+               and t.schema_id = schema_id('dbo'))
+  create table SupportMessages
+  (
+    Id int not null primary key identity,
+    Name nvarchar(200) not null,
+    Email nvarchar(100) not null,
+    Message nvarchar(1024) not null,
+    DateCreated datetime not null default(getdate()),
+    DateModified datetime not null default(getdate()),
+    IsDeleted bit not null default(0),
+  );
+go
