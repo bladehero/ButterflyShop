@@ -5,9 +5,11 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.AspNetCore.Mvc.Routing;
 using System;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Reflection;
 
 namespace ButterflyShop.Web.Controllers
 {
@@ -22,6 +24,21 @@ namespace ButterflyShop.Web.Controllers
         public BaseController()
         {
             UnitOfWork = new UnitOfWork(new SqlConnection(GlobalVariables.ConnectionString));
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        public IActionResult ShouldRedirectToRegister(string url, string method)
+        {
+            var keys = url.Substring(0, url.IndexOf('?') == -1 ? url.Length : url.IndexOf('?')).Trim('/').Split('/');
+            var asm = Assembly.GetExecutingAssembly();
+            var methods = asm.GetTypes()
+                             .Where(type => typeof(Controller).IsAssignableFrom(type) && keys.Contains(type.Name.Replace("Controller", "")))
+                             .SelectMany(type => type.GetMethods())
+                             .Where(m => m.IsPublic && keys.Contains(m.Name) && (m.IsDefined(typeof(AllowAnonymousAttribute)) || 
+                             m.CustomAttributes.Any(x => ((x as object as HttpMethodAttribute)?.HttpMethods
+                             .Any(h => h.ToUpper() == method.ToUpper())).GetValueOrDefault())));
+            return Json(new { should = !(methods?.Count() > 0) && Anonymous });
         }
 
         public override void OnActionExecuting(ActionExecutingContext context)

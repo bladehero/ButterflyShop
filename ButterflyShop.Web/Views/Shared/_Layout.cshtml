@@ -228,8 +228,8 @@
                                     @Html.Raw(GetCategoryTree(categoryHierarchy))
                                 </ul>
                             </li>
-                            <li><a href="@Url.Action("Index", "Shop")">Контакты</a></li>
-                            <li><a href="@Url.Action("Contact", "Home")">О нас</a></li>
+                            <li><a href="@Url.Action("Contact", "Home")">Контакты</a></li>
+                            <li><a href="@Url.Action("About", "Home")">О нас</a></li>
                         </ul>
                     </nav>
 
@@ -406,6 +406,33 @@
     <script>
         $('#search').keypress(function (e) { if (e.which == 13) $('#search-btn').click(); });
         $('#search-mob').keypress(function (e) { if (e.which == 13) $('#search-mob-btn').click(); });
+        
+        $.ajaxSetup({
+            beforeSend: function (jqXHR, obj) {
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST', '@Url.Action("ShouldRedirectToRegister", "Base")?url=' + obj.url + '&method=' + obj.method);
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState == 4 && xhr.status == 200) {
+                        if (JSON.parse(xhr.responseText).should) {
+                            jqXHR.abort();
+                            xhr.abort();
+                            Swal.fire({
+                                title: 'Перенаправление',
+                                type: 'info',
+                                html: 'Эта функция доступна только зарегистрированным пользователям!',                                
+                                showConfirmButton: false,
+                                timer: 2500
+                            });
+                            setTimeout(function () {
+                                window.location.replace('@Url.Action("Login", "Account")');
+                            }, 3000);
+                            return false;
+                        }
+                    }
+                }
+                xhr.send();
+            }
+        });
     </script>
     @RenderSection("Scripts", false)
 </body>

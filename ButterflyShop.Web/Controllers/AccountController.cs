@@ -90,18 +90,8 @@ namespace ButterflyShop.Web.Controllers
             }
             else
             {
-                var sb = new StringBuilder("<ul>");
-                foreach (var modelState in ViewData.ModelState.Values)
-                {
-                    foreach (var error in modelState.Errors)
-                    {
-                        sb.Append("<li>- ");
-                        sb.Append(error.ErrorMessage);
-                        sb.Append("</li>");
-                    }
-                }
-                sb.Append("</ul>");
-                return View("Login", new LoginViewVM { RegisterVM = model, Error = sb.ToString() });
+                var htmlError = ModelState.GetHtmlErrors();
+                return View("Login", new LoginViewVM { RegisterVM = model, Error = htmlError });
             }
         }
 
@@ -143,18 +133,8 @@ namespace ButterflyShop.Web.Controllers
             }
             else
             {
-                var sb = new StringBuilder("<ul>");
-                foreach (var modelState in ViewData.ModelState.Values)
-                {
-                    foreach (var error in modelState.Errors)
-                    {
-                        sb.Append("<li>- ");
-                        sb.Append(error.ErrorMessage);
-                        sb.Append("</li>");
-                    }
-                }
-                sb.Append("</ul>");
-                return Index(sb.ToString());
+                var htmlError = ModelState.GetHtmlErrors();
+                return Index(htmlError);
             }
         }
 

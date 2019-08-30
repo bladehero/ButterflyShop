@@ -26,6 +26,7 @@ namespace ButterflyShop.DAL
         public ProductDao Products { get; set; }
         public ProductImageDao ProductImages { get; set; }
         public RoleDao Roles { get; set; }
+        public SupportMessageDao SupportMessages { get; set; }
         public UserDao Users { get; set; }
 
         public UnitOfWork(IDbConnection connection)
@@ -50,6 +51,7 @@ namespace ButterflyShop.DAL
             Products = new ProductDao(connection);
             ProductImages = new ProductImageDao(connection);
             Roles = new RoleDao(connection);
+            SupportMessages = new SupportMessageDao(connection);
             Users = new UserDao(connection);
         }
 

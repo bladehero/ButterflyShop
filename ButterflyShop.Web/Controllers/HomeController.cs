@@ -1,6 +1,9 @@
-﻿using ButterflyShop.Web.Models.HomeModels;
+﻿using ButterflyShop.DAL.Models;
+using ButterflyShop.Web.Extensions;
+using ButterflyShop.Web.Models.HomeModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Linq;
 
 namespace ButterflyShop.Web.Controllers
@@ -36,6 +39,43 @@ namespace ButterflyShop.Web.Controllers
         public IActionResult Contact()
         {
             return View();
+        }
+
+        [AllowAnonymous]
+        [HttpPost]
+        public IActionResult SendMessage(SendMessageVM model)
+        {
+            bool success;
+            var message = string.Empty;
+            try
+            {
+                if (!model.IsNotRobot)
+                {
+                    message = "Подтвердите, что Вы не робот!";
+                    success = false;
+                }
+                else if (ModelState.IsValid)
+                {
+                    var supportMessage = new SupportMessage
+                    {
+                        Email = model.Email,
+                        Message = model.Message,
+                        Name = model.Name
+                    };
+                    success = UnitOfWork.SupportMessages.Merge(supportMessage);
+                }
+                else
+                {
+                    message = ModelState.GetHtmlErrors();
+                    success = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                success = false;
+                message = "При отправке произошла ошибка! Обратитесь в службу поддержки.";
+            }
+            return Json(new { success, message });
         }
     }
 }
