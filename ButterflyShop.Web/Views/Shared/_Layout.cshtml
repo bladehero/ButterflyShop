@@ -74,49 +74,7 @@
                                     @if (isAuthorized)
                                     {
                                         <li class="mini-cart">
-                                            <a href="#"><i class="flaticon-shopping-cart"></i><span class="mini-cart-total">$300.00(2)</span></a>
-                                            <!--Mini Cart Dropdown Start-->
-                                            <div class="header-cart">
-                                                <ul class="cart-items">
-                                                    <li class="single-cart-item">
-                                                        <div class="cart-img">
-                                                            <a href="@Url.Action("Product", "Shop")"><img src="~/assets/images/cart/cart1.jpg" alt=""></a>
-                                                        </div>
-                                                        <div class="cart-content">
-                                                            <h5 class="product-name"><a href="@Url.Action("Product", "Shop")">Dell Inspiron 24</a></h5>
-                                                            <span class="product-quantity">1 ×</span>
-                                                            <span class="product-price">$278.00</span>
-                                                        </div>
-                                                        <div class="cart-item-remove">
-                                                            <a title="Remove" href="#"><i class="fa fa-trash"></i></a>
-                                                        </div>
-                                                    </li>
-                                                    <li class="single-cart-item">
-                                                        <div class="cart-img">
-                                                            <a href="@Url.Action("Product", "Shop")"><img src="~/assets/images/cart/cart2.jpg" alt=""></a>
-                                                        </div>
-                                                        <div class="cart-content">
-                                                            <h5 class="product-name"><a href="@Url.Action("Product", "Shop")">Lenovo Ideacentre 300</a></h5>
-                                                            <span class="product-quantity">1 ×</span>
-                                                            <span class="product-price">$23.39</span>
-                                                        </div>
-                                                        <div class="cart-item-remove">
-                                                            <a title="Remove" href="#"><i class="fa fa-trash"></i></a>
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                                <div class="cart-total">
-                                                    <h5>Subtotal :<span class="float-right">$39.79</span></h5>
-                                                    <h5>Eco Tax (-2.00) :<span class="float-right">$7.00</span></h5>
-                                                    <h5>VAT (20%) : <span class="float-right">$0.00</span></h5>
-                                                    <h5>Total : <span class="float-right">$46.79</span></h5>
-                                                </div>
-                                                <div class="cart-btn">
-                                                    <a href="@Url.Action("Cart", "Account")">Корзина</a>
-                                                    <a href="@Url.Action("Checkout", "Account")">Оформить заказ</a>
-                                                </div>
-                                            </div>
-                                            <!--Mini Cart Dropdown End-->
+                                            <a href="@Url.Action("Cart", "Shop")"><i class="flaticon-shopping-cart"></i></a>
                                         </li>
                                     }
                                     <li><a class="header-search-toggle" href="#"><i class="flaticon-magnifying-glass"></i></a></li>
@@ -132,7 +90,7 @@
                                                     <ul>
                                                         <li><a href="@Url.Action("Checkout", "Account")">Оформить заказ</a></li>
                                                         <li><a href="@Url.Action("Index", "Account", new { tab = (int)AccountTab.Info })">Профиль</a></li>
-                                                        <li><a href="@Url.Action("Cart", "Account")">Корзина</a></li>
+                                                        <li><a href="@Url.Action("Cart", "Shop")">Корзина</a></li>
                                                         <li><a href="@Url.Action("Index", "Account", new { tab = (int)AccountTab.Favourite })">Избранное</a></li>
                                                         <li><a href="@Url.Action("Logout", "Account")">Выйти</a></li>
                                                     </ul>
@@ -176,7 +134,7 @@
                                                     {
                                                         <li>
                                                             <div class="header-cart-icon">
-                                                                <a href="@Url.Action("Cart", "Account")"><i class="flaticon-shopping-cart"></i></a>
+                                                                <a href="@Url.Action("Cart", "Shop")"><i class="flaticon-shopping-cart"></i></a>
                                                             </div>
                                                         </li>
                                                     }
@@ -243,7 +201,7 @@
                                         <ul class="submenu2">
                                             <li><a href="@Url.Action("Checkout", "Account")">Оформить заказ</a></li>
                                             <li><a href="@Url.Action("Index", "Account", new { tab = (int)AccountTab.Info })">Профиль</a></li>
-                                            <li><a href="@Url.Action("Cart", "Account")">Корзина</a></li>
+                                            <li><a href="@Url.Action("Cart", "Shop")">Корзина</a></li>
                                             <li><a href="@Url.Action("Index", "Account", new { tab = (int)AccountTab.Favourite })">Избранное</a></li>
                                             <li><a href="@Url.Action("Logout", "Account")">Выйти</a></li>
                                         </ul>
@@ -335,7 +293,7 @@
                                 <li><a href="@Url.Action("Index", "Shop")">Магазин</a></li>
                                 <li><a href="@Url.Action("Index", "Account")">Аккаунт</a></li>
                                 <li><a href="@Url.Action("Index", "Account", new { tab = (int)AccountTab.Favourite })">Избранное</a></li>
-                                <li><a href="@Url.Action("Cart", "Account")">Корзина</a></li>
+                                <li><a href="@Url.Action("Cart", "Shop")">Корзина</a></li>
                             </ul>
                         </div>
                         <!--Footer Widget end-->
@@ -404,9 +362,27 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
     <script src="~/assets/js/main.js" charset="utf-8"></script>
     <script>
+        @if (isAuthorized)
+        {
+            @:function updateCart() {
+            @:    $.ajax({
+            @:        url: '@Url.Action("_Cart", "Shop")',
+            @:        success: function (html) {
+            @:            $('.header-cart').remove();
+            @:            $('.mini-cart > a').append(html);
+            @:        }
+            @:    });
+            @:}
+        }
+        @if (isAuthorized)
+        {
+            @:updateCart();
+        }
+        $('.add-to-cart-btn').click(function () {
+            setTimeout(function () { updateCart(); }, 1000);
+        });
         $('#search').keypress(function (e) { if (e.which == 13) $('#search-btn').click(); });
         $('#search-mob').keypress(function (e) { if (e.which == 13) $('#search-mob-btn').click(); });
-        
         $.ajaxSetup({
             beforeSend: function (jqXHR, obj) {
                 var xhr = new XMLHttpRequest();
@@ -419,7 +395,7 @@
                             Swal.fire({
                                 title: 'Перенаправление',
                                 type: 'info',
-                                html: 'Эта функция доступна только зарегистрированным пользователям!',                                
+                                html: 'Эта функция доступна только зарегистрированным пользователям!',
                                 showConfirmButton: false,
                                 timer: 2500
                             });

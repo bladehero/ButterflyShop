@@ -19,7 +19,7 @@
         {
             <div class="product-action">
                 <ul>
-                    <li><a href="@Url.Action("Cart", "Account")"><i class="fa fa-cart-plus"></i></a></li>
+                    <li><a class="add-to-cart-btn" data-item-id="@Model.ItemId"><i class="fa fa-cart-plus"></i></a></li>
                     <li><a class="wishlist-btn@(Model.Favourite ? " active" : null)" data-product-id="@Model.ProductId"><i class="fa fa-heart-o"></i></a></li>
                 </ul>
             </div>

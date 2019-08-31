@@ -97,5 +97,24 @@ namespace ButterflyShop.DAL
             var result = Connection.ExecuteScalar<int>($"select dbo.GetProductNumericValueByOption('{option}')");
             return result;
         }
+        public void MergeItemToCart(int userId, int itemId, int? quantity = null, bool isDeleted = false)
+        {
+            var obj = new
+            {
+                @userId = userId,
+                @itemId = itemId,
+                @quantity = quantity,
+                @isDeleted = isDeleted
+            };
+            Connection.Execute("dbo.MergeItemToCart", obj, commandType: CommandType.StoredProcedure);
+        }
+        public IEnumerable<CartItemsInfo_Result> GetCartItemsInfo(int userId)
+        {
+            var obj = new
+            {
+                @userId = userId
+            };
+            return Connection.Query<CartItemsInfo_Result>("dbo.GetCartItemsInfo", obj, commandType: CommandType.StoredProcedure);
+        }
     }
 }

@@ -427,6 +427,59 @@
         });
     });
 
+    $('.add-to-cart-btn').click(function () {
+        var _this = $(this);
+        $.ajax({
+            url: '/Shop/AddToCart',
+            method: 'POST',
+            data: { itemId: _this.data('item-id') },
+            success: function (data) {
+                if (data.success) {
+                    Swal.fire({
+                        title: 'Успешно',
+                        type: 'success',
+                        html: data.message
+                    });
+                } else {
+                    Swal.fire({
+                        title: 'Ошибка',
+                        type: 'error',
+                        html: data.message
+                    });
+                }
+            }
+        });
+    });
+
+    $('.remove-from-cart').click(function () {
+        debugger;
+        var _this = $(this);
+        $.ajax({
+            url: '/Shop/RemoveFromCart',
+            method: 'POST',
+            data: { itemId: _this.data('item-id') },
+            success: function (data) {
+                if (data.success) {
+                    Swal.fire({
+                        title: 'Успешно',
+                        type: 'success',
+                        html: data.message,
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                } else {
+                    Swal.fire({
+                        title: 'Ошибка',
+                        type: 'error',
+                        html: data.message,
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
+            }
+        });
+    });
+
     /*--
         MailChimp
     -----------------------------------*/

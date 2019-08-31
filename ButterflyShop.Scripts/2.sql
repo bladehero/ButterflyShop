@@ -538,3 +538,89 @@ begin
   return @value;  
 end
 go
+
+if object_id(N'dbo.GetCartItemsInfo') is null
+  exec('create procedure dbo.GetCartItemsInfo as set nocount on;');
+go
+
+-- ============================================================================
+-- Example    : exec dbo.GetCartItemsInfo 1
+-- Author     : Nikita Dermenzhi
+-- Date       : 25/07/2019
+-- Description: —
+-- ============================================================================
+
+alter procedure dbo.GetCartItemsInfo 
+(  
+    @userId as int
+)  
+as  
+begin
+
+  select
+      p.Id as ProductId
+    , i.Id as ItemId
+    , p.Name
+    , round(i.Price, 2) as Price
+    , c.Quantity
+    , round(i.Price * c.Quantity, 2) as Total
+    , pimg.Image
+      from dbo.Cart c
+      join dbo.Items i on i.Id = c.ItemId
+      join dbo.Products p on p.Id = i.ProductId
+      outer apply
+      (
+        select top 1 * 
+          from dbo.ProductImages pim where pim.ProductId = p.Id
+                                       and pim.IsDeleted = 0
+      ) pimg
+      where c.UserId = @userId
+        and c.IsDeleted = 0
+        and p.IsDeleted = 0 
+        and i.IsDeleted = 0
+      order by c.DateModified
+
+end;
+go
+
+if object_id(N'dbo.MergeItemToCart') is null
+  exec('create procedure dbo.MergeItemToCart as set nocount on;');
+go
+
+-- ============================================================================
+-- Example    : exec dbo.MergeItemToCart 1, 7, 2
+-- Author     : Nikita Dermenzhi
+-- Date       : 25/07/2019
+-- Description: —
+-- ============================================================================
+
+alter procedure dbo.MergeItemToCart 
+(  
+    @userId as int
+  , @itemId as int
+  , @quantity as int = null
+  , @isDeleted as bit = 0
+)  
+as  
+begin
+
+  merge dbo.Cart as trg
+    using 
+    (
+      select @itemId
+           , @userId
+           , @quantity
+           , @isDeleted
+    ) as src (ItemId, UserId, Quantity, IsDeleted)
+    on (trg.ItemId = src.ItemId and trg.UserId = src.UserId)
+    when matched then
+      update set trg.Quantity = iif(trg.IsDeleted = 0, iif(src.Quantity is null, trg.Quantity + 1, src.Quantity), iif(src.Quantity is null, 1, src.Quantity)) 
+               , trg.IsDeleted = src.IsDeleted
+               , trg.DateModified = getdate()
+    when not matched then
+      insert (ItemId, UserId, Quantity)
+      values (src.ItemId, src.UserId, iif(src.Quantity is not null and src.Quantity > 0, src.Quantity, 1))
+    ;
+
+end;
+go

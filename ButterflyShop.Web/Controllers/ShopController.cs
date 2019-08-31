@@ -81,5 +81,71 @@ namespace ButterflyShop.Web.Controllers
             };
             return View(model);
         }
+
+        [HttpGet]
+        public IActionResult _Cart()
+        {
+            var model = new CartVM
+            {
+                CartItems = UnitOfWork.StoredProcedures.GetCartItemsInfo(SystemUser.Id)
+            };
+            return PartialView(model);
+        }
+
+        [HttpGet]
+        public IActionResult Cart()
+        {
+            var model = new CartVM
+            {
+                CartItems = UnitOfWork.StoredProcedures.GetCartItemsInfo(SystemUser.Id)
+            };
+            return View(model);
+        }
+
+        [HttpGet]
+        public IActionResult Checkout()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult AddToCart(int itemId)
+        {
+            bool success;
+            var message = string.Empty;
+            try
+            {
+                UnitOfWork.StoredProcedures.MergeItemToCart(SystemUser.Id, itemId);
+                success = true;
+                message = "Товар добавлен в корзину!";
+            }
+            catch (System.Exception)
+            {
+                success = false;
+                message = "При добавлении товара произошла ошибка! Обратитесь в службу поддержку.";
+            }
+
+            return Json(new { success, message });
+        }
+
+        [HttpPost]
+        public IActionResult RemoveFromCart(int itemId)
+        {
+            bool success;
+            var message = string.Empty;
+            try
+            {
+                UnitOfWork.StoredProcedures.MergeItemToCart(SystemUser.Id, itemId, isDeleted: true);
+                success = true;
+                message = "Товар удален из корзины!";
+            }
+            catch (System.Exception)
+            {
+                success = false;
+                message = "При добавлении товара произошла ошибка! Обратитесь в службу поддержку.";
+            }
+
+            return Json(new { success, message });
+        }
     }
 }

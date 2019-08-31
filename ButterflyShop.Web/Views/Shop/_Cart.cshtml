@@ -1,1 +1,36 @@
-﻿
+﻿@model ButterflyShop.Web.Models.ShopModels.CartVM
+@using static ButterflyShop.Web.Extensions.ImagePathExtension
+
+<!--Mini Cart Dropdown Start-->
+<div class="header-cart">
+    <ul class="cart-items">
+        @foreach (var item in Model.CartItems)
+        {
+            <li class="single-cart-item">
+                <div class="cart-img">
+                    <a href="@Url.Action("Product", "Shop", new { id = item.ProductId })"><img src="~/@ProductImage(item.Image)" alt="@item.Name"></a>
+                </div>
+                <div class="cart-content">
+                    <h5 class="product-name">
+                        <a href="@Url.Action("Product", "Shop", new { id = item.ProductId })">@item.Name</a>
+                    </h5>
+                    <span class="product-price">@item.Price₴</span>
+                    <span class="product-quantity">@item.Quantity ×</span>
+                    <span class="product-price font-weight-bold">@item.Total₴</span>
+                </div>
+                <div class="cart-item-remove">
+                    <span class="remove-from-cart" data-item-id="@item.ItemId" title="Remove"><i class="fa fa-trash"></i></span>
+                </div>
+            </li>
+        }
+    </ul>
+    <div class="cart-total">
+        <h5>Стоимость товаров: <span class="float-right">@Model.Sum₴</span></h5>
+        <h5>Итого: <span class="float-right">@Model.Sum₴</span></h5>
+    </div>
+    <div class="cart-btn">
+        <a href="@Url.Action("Cart", "Shop")">Корзина</a>
+        <a href="@Url.Action("Checkout", "Account")">Оформить заказ</a>
+    </div>
+</div>
+<!--Mini Cart Dropdown End-->

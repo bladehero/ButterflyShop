@@ -1,0 +1,105 @@
+﻿@model ButterflyShop.Web.Models.ShopModels.CartVM
+@using static ButterflyShop.Web.Extensions.ImagePathExtension
+
+<!-- Page Banner Section Start -->
+<div class="container-fluid bg-info py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="page-banner text-left">
+                    <h2>Корзина</h2>
+                    <ul class="page-breadcrumb">
+                        <li><a href="@Url.Action("Index", "Home")">Главная</a></li>
+                        <li>Корзина</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Page Banner Section End -->
+<!--Cart section start-->
+<div class="cart-section section pt-90 pt-lg-70 pt-md-60 pt-sm-50 pt-xs-45  pb-70 pb-lg-50 pb-md-40 pb-sm-30 pb-xs-20">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-12">
+                <!-- Cart Table -->
+                <div class="cart-table table-responsive mb-30">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th class="pro-thumbnail"></th>
+                                <th class="pro-title">Товар</th>
+                                <th class="pro-price">Цена(шт.)</th>
+                                <th class="pro-quantity">Кол-во</th>
+                                <th class="pro-subtotal">Итого</th>
+                                <th class="pro-remove"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.CartItems)
+                            {
+                                <tr>
+                                    <td class="pro-thumbnail">
+                                        <a href="@Url.Action("Product", "Shop", new { id = item.ProductId })">
+                                            <img src="~/@ProductImage(item.Image)" alt="@item.Name">
+                                        </a>
+                                    </td>
+                                    <td class="pro-title">
+                                        <a href="@Url.Action("Product", "Shop", new { id = item.ProductId })">@item.Name</a>
+                                    </td>
+                                    <td class="pro-price">
+                                        <span>@item.Price₴</span>
+                                    </td>
+                                    <td class="pro-quantity">
+                                        <div class="pro-qty">
+                                            <input type="number" value="@item.Quantity" min="1">
+                                        </div>
+                                    </td>
+                                    <td class="pro-subtotal">
+                                        <span>@item.Total₴</span>
+                                    </td>
+                                    <td class="pro-remove">
+                                        <a class="remove-from-cart" data-item-id="@item.ItemId">
+                                            <i class="fa fa-trash-o"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <div class="row justify-content-center justify-content-lg-end">
+                    <!-- Cart Summary -->
+                    <div class="col-lg-6 col-12 mb-30 d-flex">
+                        <div class="cart-summary">
+                            <div class="cart-summary-wrap">
+                                <h4>Корзина</h4>
+                                <p>Стоимость товаров: <span>@Model.Sum₴</span></p>
+                                <h2>Итого: <span>@Model.Sum₴</span></h2>
+                            </div>
+                            <div class="cart-summary-button">
+                                <button id="checkout-cart" class="btn">Оформить</button>
+                                <button id="reload-cart" class="btn">Обновить</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Cart Summary -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Cart section end-->
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('#reload-cart').click(function () {
+                window.location.reload(true);
+            });
+
+            $('.remove-from-cart').click(function () { setTimeout(function () { window.location.reload(true); }, 2000) });
+        });
+    </script>
+}

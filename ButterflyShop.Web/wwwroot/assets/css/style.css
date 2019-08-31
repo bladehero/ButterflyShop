@@ -1215,7 +1215,7 @@ ul.cart-items > li {
     width: 155px;
 }
 
-.cart-item-remove > a {
+.cart-item-remove > span {
     position: absolute;
     color: #222;
     right: 2px;
@@ -1223,9 +1223,10 @@ ul.cart-items > li {
     display: inline-block;
     left: auto;
     font-size: 20px;
+    z-index: 99999;
 }
 
-    .cart-item-remove > a:hover {
+    .cart-item-remove > span:hover {
         color: #151515;
     }
 
