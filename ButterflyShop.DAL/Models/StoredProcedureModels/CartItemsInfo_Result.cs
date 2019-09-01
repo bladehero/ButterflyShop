@@ -9,5 +9,6 @@
         public int Quantity { get; set; }
         public double Total { get; set; }
         public string Image { get; set; }
+        public double Sum { get; set; }
     }
 }

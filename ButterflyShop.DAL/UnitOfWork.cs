@@ -21,6 +21,7 @@ namespace ButterflyShop.DAL
         public OptionalParameterProductDao OptionalParameterProducts { get; set; }
         public OrderDao Orders { get; set; }
         public OrderDeliveryTypeDao OrderDeliveryTypes { get; set; }
+        public OrderPaymentTypeDao OrderPaymentTypes { get; set; }
         public OrderProductDao OrderProducts { get; set; }
         public OrderStatusDao OrderStatuses { get; set; }
         public ProductDao Products { get; set; }
@@ -46,6 +47,7 @@ namespace ButterflyShop.DAL
             OptionalParameterProducts = new OptionalParameterProductDao(connection);
             Orders = new OrderDao(connection);
             OrderDeliveryTypes = new OrderDeliveryTypeDao(connection);
+            OrderPaymentTypes = new OrderPaymentTypeDao(connection);
             OrderProducts = new OrderProductDao(connection);
             OrderStatuses = new OrderStatusDao(connection);
             Products = new ProductDao(connection);

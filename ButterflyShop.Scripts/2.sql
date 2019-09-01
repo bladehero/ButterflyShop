@@ -560,7 +560,7 @@ begin
   select
       p.Id as ProductId
     , i.Id as ItemId
-    , p.Name
+    , concat(p.Name, iif(datalength(chars.CharLine) > 0, concat(' | (', chars.CharLine, ')'), '')) as Name
     , round(i.Price, 2) as Price
     , c.Quantity
     , round(i.Price * c.Quantity, 2) as Total
@@ -574,11 +574,20 @@ begin
           from dbo.ProductImages pim where pim.ProductId = p.Id
                                        and pim.IsDeleted = 0
       ) pimg
+      outer apply 
+      (
+        select string_agg(concat(op.Name, ': ', opp.Value), ', ') as CharLine
+          from OptionalParameterProducts opp
+          join OptionalParameters op on op.Id = opp.OptionalParameterId
+          where opp.ItemId = i.Id
+            and op.IsDeleted = 0
+            and opp.IsDeleted = 0
+            and i.IsDeleted = 0
+      ) chars
       where c.UserId = @userId
         and c.IsDeleted = 0
         and p.IsDeleted = 0 
         and i.IsDeleted = 0
-      order by c.DateModified
 
 end;
 go
@@ -621,6 +630,139 @@ begin
       insert (ItemId, UserId, Quantity)
       values (src.ItemId, src.UserId, iif(src.Quantity is not null and src.Quantity > 0, src.Quantity, 1))
     ;
+
+    select top 1
+      p.Id as ProductId
+    , i.Id as ItemId
+    , concat(p.Name, iif(datalength(chars.CharLine) > 0, concat(' | (', chars.CharLine, ')'), '')) as Name
+    , round(i.Price, 2) as Price
+    , c.Quantity
+    , round(i.Price * c.Quantity, 2) as Total
+    , pimg.Image
+    , summary.Sum
+      from dbo.Cart c
+      join dbo.Items i on i.Id = c.ItemId
+      join dbo.Products p on p.Id = i.ProductId
+      outer apply
+      (
+        select top 1 * 
+          from dbo.ProductImages pim where pim.ProductId = p.Id
+                                       and pim.IsDeleted = 0
+      ) pimg
+      outer apply
+      (
+        select sum(c.Quantity * i.Price) as Sum
+          from dbo.Cart c
+          join dbo.Items i on i.Id = c.ItemId
+          where c.UserId = 1
+            and c.IsDeleted = 0
+            and i.IsDeleted = 0
+      ) summary
+      outer apply 
+      (
+        select string_agg(concat(ch.Name, ': ', chp.Value), ', ') as CharLine
+          from CharacteristicProducts chp
+          join Characteristics ch on ch.Id = chp.CharacteristicId
+          where chp.ProductId = p.Id
+            and ch.IsDeleted = 0
+            and chp.IsDeleted = 0
+      ) chars
+      where c.UserId = @userId
+        and c.ItemId = @itemId
+        and c.IsDeleted = 0
+        and p.IsDeleted = 0 
+        and i.IsDeleted = 0
+
+end;
+go
+
+if object_id(N'dbo.CreateOrder') is null
+  exec('create procedure dbo.CreateOrder as set nocount on;');
+go
+
+-- ============================================================================
+-- Example    : exec dbo.CreateOrder 1
+-- Author     : Nikita Dermenzhi
+-- Date       : 25/07/2019
+-- Description: —
+-- ============================================================================
+
+alter procedure dbo.CreateOrder 
+(  
+    @userId as int
+  , @deliveryTypeId as int
+  , @paymentTypeId as int
+  , @email nvarchar(100)
+  , @firstName nvarchar(200)
+  , @lastName nvarchar(200) 
+  , @phone char(13)
+  , @address nvarchar(200)
+  , @city nvarchar(100)
+  , @region nvarchar(150)
+)  
+as  
+begin
+
+  begin transaction;
+  begin try
+    
+    insert Orders
+    (
+        UserId
+      , OrderStatus
+      , OrderDeliveryType
+      , OrderPaymentType
+      , Email
+      , FirstName
+      , LastName
+      , Phone
+      , Address
+      , City
+      , Region
+    )
+    values
+    (
+        @userId
+      , (select top 1 os.Id from dbo.OrderStatuses os where Status = 'В обработке')
+      , @deliveryTypeId
+      , @paymentTypeId
+      , @email
+      , @firstName
+      , @lastName
+      , @phone
+      , @address
+      , @city
+      , @region
+    )
+
+    declare @orderId int = SCOPE_IDENTITY();
+
+    merge dbo.OrderProducts as trg
+      using 
+      (
+        select @orderId
+             , c.ItemId
+             , c.Quantity
+             , i.Price
+          from dbo.Cart c
+          join dbo.Items i on i.Id = c.ItemId
+          where c.UserId = @userId
+      ) as src (OrderId, ItemId, Quantity, Price)
+      on (trg.ItemId = src.ItemId and trg.OrderId = src.OrderId)
+      when not matched then
+        insert (OrderId, ItemId, Quantity, Price)
+        values (src.OrderId, src.ItemId, src.Quantity, src.Price)
+       ;
+    
+    delete dbo.Cart
+    where UserId = @userId
+
+    commit transaction;
+  end try
+  begin catch
+    rollback transaction;
+    throw;
+  end catch
 
 end;
 go

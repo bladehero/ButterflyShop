@@ -97,7 +97,7 @@ namespace ButterflyShop.DAL
             var result = Connection.ExecuteScalar<int>($"select dbo.GetProductNumericValueByOption('{option}')");
             return result;
         }
-        public void MergeItemToCart(int userId, int itemId, int? quantity = null, bool isDeleted = false)
+        public CartItemsInfo_Result MergeItemToCart(int userId, int itemId, int? quantity = null, bool isDeleted = false)
         {
             var obj = new
             {
@@ -106,7 +106,7 @@ namespace ButterflyShop.DAL
                 @quantity = quantity,
                 @isDeleted = isDeleted
             };
-            Connection.Execute("dbo.MergeItemToCart", obj, commandType: CommandType.StoredProcedure);
+            return Connection.QueryFirstOrDefault<CartItemsInfo_Result>("dbo.MergeItemToCart", obj, commandType: CommandType.StoredProcedure);
         }
         public IEnumerable<CartItemsInfo_Result> GetCartItemsInfo(int userId)
         {
@@ -115,6 +115,33 @@ namespace ButterflyShop.DAL
                 @userId = userId
             };
             return Connection.Query<CartItemsInfo_Result>("dbo.GetCartItemsInfo", obj, commandType: CommandType.StoredProcedure);
+        }
+        public bool CreateOrder(int userId, int deliveryTypeId, int paymentTypeId, string email, string firstName, string lastName, string phone, string address, string city, string region)
+        {
+            bool success;
+            try
+            {
+                var obj = new
+                {
+                    @userId = userId,
+                    @deliveryTypeId = deliveryTypeId,
+                    @paymentTypeId = paymentTypeId,
+                    @email = email,
+                    @firstName = firstName,
+                    @lastName = lastName,
+                    @phone = phone,
+                    @address = address,
+                    @city = city,
+                    @region = region
+                };
+                Connection.Execute("dbo.CreateOrder", obj, commandType: CommandType.StoredProcedure);
+                success = true;
+            }
+            catch (System.Exception)
+            {
+                success = false;
+            }
+            return success;
         }
     }
 }

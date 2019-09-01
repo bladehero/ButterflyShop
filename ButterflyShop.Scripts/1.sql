@@ -103,3 +103,19 @@ insert OptionalParameterProducts(ItemId, OptionalParameterId, Value) values
 insert Roles(Name) values
   (N'Пользователь')
 , (N'Администратор')
+
+insert OrderDeliveryTypes(Type) values
+  (N'Новая Почта')
+, (N'Justin')
+, (N'Доставка по Одессе')
+
+insert OrderPaymentTypes(Type) values
+  (N'Наложный')
+, (N'На карту')
+
+insert OrderStatuses(Status) values
+  (N'В обработке')
+, (N'Комплектуется')
+, (N'Отправлен')
+, (N'Выполнен')
+, (N'Отменен')

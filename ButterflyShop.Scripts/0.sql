@@ -60,7 +60,7 @@ if not exists (select 1
                from sys.tables t 
                where t.name='ProductImages' 
                and t.schema_id = schema_id('dbo'))
-  create table ProductImages--
+  create table ProductImages
   (
     Id int not null primary key identity,
     ProductId int not null foreign key references Products(Id),
@@ -248,6 +248,20 @@ go
 
 if not exists (select 1 
                from sys.tables t 
+               where t.name='OrderPaymentTypes' 
+               and t.schema_id = schema_id('dbo'))
+  create table OrderPaymentTypes
+  (
+    Id int not null primary key identity,
+    Type nvarchar(100) not null unique,
+    DateCreated datetime not null default(getdate()),
+    DateModified datetime not null default(getdate()),
+    IsDeleted bit not null default(0),
+  );
+go
+
+if not exists (select 1 
+               from sys.tables t 
                where t.name='Orders' 
                and t.schema_id = schema_id('dbo'))
   create table Orders
@@ -256,6 +270,14 @@ if not exists (select 1
     UserId int not null foreign key references Users(Id),
     OrderStatus int not null foreign key references OrderStatuses(Id),
     OrderDeliveryType int not null foreign key references OrderDeliveryTypes(Id),
+    OrderPaymentType int not null foreign key references OrderPaymentTypes(Id),
+    Email nvarchar(100) not null,
+    FirstName nvarchar(200) not null,
+    LastName nvarchar(200) null,
+    Phone char(13) null,
+    Address nvarchar(200) not null,
+    City nvarchar(100) not null,
+    Region nvarchar(150) not null,
     DateCreated datetime not null default(getdate()),
     DateModified datetime not null default(getdate()),
     IsDeleted bit not null default(0),
@@ -272,6 +294,7 @@ if not exists (select 1
     OrderId int not null foreign key references Orders(Id),
     ItemId int not null foreign key references Items(Id),
     Quantity int not null check (Quantity > 0),
+    Price float not null,
     DateCreated datetime not null default(getdate()),
     DateModified datetime not null default(getdate()),
     IsDeleted bit not null default(0),

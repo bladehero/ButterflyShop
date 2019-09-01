@@ -1215,18 +1215,18 @@ ul.cart-items > li {
     width: 155px;
 }
 
-.cart-item-remove > span {
+.cart-item-remove > a {
     position: absolute;
     color: #222;
     right: 2px;
-    top: 18px;
+    top: 22px;
     display: inline-block;
     left: auto;
     font-size: 20px;
     z-index: 99999;
 }
 
-    .cart-item-remove > span:hover {
+    .cart-item-remove > a:hover {
         color: #151515;
     }
 
@@ -7793,3 +7793,15 @@ a.popup-img {
 .map-title {
     margin-bottom: 10px !important;
 }
+
+#checkout-btn {
+    background-color: #fff;
+    border: 1px solid black;
+    color: #343a40 !important;
+    transition: background-color 0.3s ease;
+}
+    #checkout-btn:hover {
+        background-color: black;
+        border: 1px solid #fff;
+        color: #fff !important;
+    }

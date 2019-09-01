@@ -1,4 +1,5 @@
-﻿using ButterflyShop.Web.Extensions;
+﻿using ButterflyShop.DAL.Models.StoredProcedureModels;
+using ButterflyShop.Web.Extensions;
 using ButterflyShop.Web.Models.ShopModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -105,17 +106,60 @@ namespace ButterflyShop.Web.Controllers
         [HttpGet]
         public IActionResult Checkout()
         {
-            return View();
+            var model = new CheckoutVM
+            {
+                CartItems = UnitOfWork.StoredProcedures.GetCartItemsInfo(SystemUser.Id),
+                OrderDeliveryTypes = UnitOfWork.OrderDeliveryTypes.FindAll(),
+                OrderPaymentTypes = UnitOfWork.OrderPaymentTypes.FindAll()
+            };
+            return View(model);
         }
 
         [HttpPost]
-        public IActionResult AddToCart(int itemId)
+        public IActionResult Order(OrderVM model)
         {
             bool success;
             var message = string.Empty;
             try
             {
-                UnitOfWork.StoredProcedures.MergeItemToCart(SystemUser.Id, itemId);
+                if (ModelState.IsValid)
+                {
+                    success = UnitOfWork.StoredProcedures.CreateOrder(SystemUser.Id, model.DeliveryTypeId.Value, model.PaymentTypeId.Value,
+                        model.Email, model.FirstName, model.LastName, model.Phone, model.Address, model.City, model.Region);
+                }
+                else
+                {
+                    success = false;
+                    message = ModelState.GetHtmlErrors();
+                    return Json(new { success, message });
+                }
+            }
+            catch (System.Exception)
+            {
+                success = false;
+            }
+            if (success)
+            {
+                message = "Ваш заказ был создан. Наш менеджер скоро свяжется с вами!";
+            }
+            else
+            {
+                message = "При создании заказа произошла ошибка! Обратитесь в службу поддержку.";
+            }
+
+            return Json(new { success, message });
+        }
+
+        [HttpPost]
+        public IActionResult AddToCart(int itemId, int? quantity = null)
+        {
+            bool success;
+            var message = string.Empty;
+            var item = (CartItemsInfo_Result)null;
+            try
+            {
+                var isZero = quantity.HasValue && quantity.Value == 0;
+                item = UnitOfWork.StoredProcedures.MergeItemToCart(SystemUser.Id, itemId, isZero ? null : quantity, isZero);
                 success = true;
                 message = "Товар добавлен в корзину!";
             }
@@ -125,7 +169,7 @@ namespace ButterflyShop.Web.Controllers
                 message = "При добавлении товара произошла ошибка! Обратитесь в службу поддержку.";
             }
 
-            return Json(new { success, message });
+            return Json(new { success, message, item });
         }
 
         [HttpPost]

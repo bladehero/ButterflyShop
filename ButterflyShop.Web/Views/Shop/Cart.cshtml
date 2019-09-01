@@ -2,7 +2,7 @@
 @using static ButterflyShop.Web.Extensions.ImagePathExtension
 
 <!-- Page Banner Section Start -->
-<div class="container-fluid bg-info py-5">
+<div class="container-fluid bg-secondary py-5 mt-4">
     <div class="container">
         <div class="row">
             <div class="col">
@@ -40,7 +40,7 @@
                         <tbody>
                             @foreach (var item in Model.CartItems)
                             {
-                                <tr>
+                                <tr data-item-id="@item.ItemId">
                                     <td class="pro-thumbnail">
                                         <a href="@Url.Action("Product", "Shop", new { id = item.ProductId })">
                                             <img src="~/@ProductImage(item.Image)" alt="@item.Name">
@@ -54,11 +54,11 @@
                                     </td>
                                     <td class="pro-quantity">
                                         <div class="pro-qty">
-                                            <input type="number" value="@item.Quantity" min="1">
+                                            <input class="item-quantity" type="number" value="@item.Quantity" min="1" />
                                         </div>
                                     </td>
                                     <td class="pro-subtotal">
-                                        <span>@item.Total₴</span>
+                                        <span class="item-total">@item.Total₴</span>
                                     </td>
                                     <td class="pro-remove">
                                         <a class="remove-from-cart" data-item-id="@item.ItemId">
@@ -76,8 +76,8 @@
                         <div class="cart-summary">
                             <div class="cart-summary-wrap">
                                 <h4>Корзина</h4>
-                                <p>Стоимость товаров: <span>@Model.Sum₴</span></p>
-                                <h2>Итого: <span>@Model.Sum₴</span></h2>
+                                <p>Стоимость товаров: <span class="cart-items-sum">@Model.Sum₴</span></p>
+                                <h2>Итого: <span class="cart-sum">@Model.Sum₴</span></h2>
                             </div>
                             <div class="cart-summary-button">
                                 <button id="checkout-cart" class="btn">Оформить</button>
@@ -98,8 +98,43 @@
             $('#reload-cart').click(function () {
                 window.location.reload(true);
             });
+            $('#checkout-cart').click(function () {
+                window.location.replace('@Url.Action("Checkout", "Shop")');
+            });
 
             $('.remove-from-cart').click(function () { setTimeout(function () { window.location.reload(true); }, 2000) });
+            $('.item-quantity, .dec.qtybtn, .inc.qtybtn').bind('keyup mouseup', function () {
+                var _this = $(this);
+                setTimeout(function () {
+                    var parent = _this.parents('tr');
+                    var itemId = parent.data('item-id');
+                    var quantity = parent.find('.item-quantity').val();
+                    $.ajax({
+                        url: '@Url.Action("AddToCart", "Shop")',
+                        method: 'POST',
+                        data: { itemId: itemId, quantity: quantity },
+                        success: function (data) {
+                            if (!data.success) {
+                                Swal.fire({
+                                    title: 'Ошибка',
+                                    type: 'error',
+                                    html: data.message
+                                }).then(function () {
+                                    window.location.reload(true);
+                                });
+                                return;
+                            }
+                            if (data.item) {
+                                debugger;
+                                parent.find('.item-total').text(data.item.total + '₴');
+                                $('.cart-items-sum, .cart-sum').text(data.item.sum + '₴');
+                            } else {
+                                parent.remove();
+                            }
+                        }
+                    });
+                }, 200);
+            });
         });
     </script>
 }

@@ -30,6 +30,7 @@
                             <a href="#favourite" class="@(Model.Tab == AccountTab.Favourite ? "active" : null)" data-toggle="tab"><i class="fa fa-star"></i>Избранное</a>
                             <a href="#orders" class="@(Model.Tab == AccountTab.Orders ? "active" : null)" data-toggle="tab"><i class="fa fa-cart-arrow-down"></i>Мои заказы</a>
                             <a href="#account-info" class="@(Model.Tab == AccountTab.Info ? "active" : null)" data-toggle="tab"><i class="fa fa-user"></i>Мои данные</a>
+                            <a href="@Url.Action("Cart", "Shop")"><i class="fa fa-shopping-cart"></i>Корзина</a>
                             <a href="@Url.Action("Logout", "Account")"><i class="fa fa-sign-out"></i>Выйти</a>
                         </div>
                     </div>
@@ -202,9 +203,9 @@
 </div>
 <!--My Account section end-->
 
-@if (Model.HasError)
-{
-    @section Scripts{
+@section Scripts{
+    @if (Model.HasError)
+    {
         <script>
             Swal.fire({
                 title: 'Ошибка',
@@ -213,10 +214,8 @@
             });
         </script>
     }
-}
-else if (Model.UpdatedUserInfo)
-{
-    @section Scripts{
+    else if (Model.UpdatedUserInfo)
+    {
         <script>
             Swal.fire({
                 title: 'Обновлено',
@@ -225,8 +224,6 @@ else if (Model.UpdatedUserInfo)
             });
         </script>
     }
-}
-@section Scripts{
     <script>
         $(document).ready(function () {
             $('.delete-favourite').click(function () {

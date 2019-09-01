@@ -88,7 +88,7 @@
                                                 <li>
                                                     <a href="@Url.Action("Index", "Account")">Личный кабинет</a>
                                                     <ul>
-                                                        <li><a href="@Url.Action("Checkout", "Account")">Оформить заказ</a></li>
+                                                        <li><a href="@Url.Action("Checkout", "Shop")">Оформить заказ</a></li>
                                                         <li><a href="@Url.Action("Index", "Account", new { tab = (int)AccountTab.Info })">Профиль</a></li>
                                                         <li><a href="@Url.Action("Cart", "Shop")">Корзина</a></li>
                                                         <li><a href="@Url.Action("Index", "Account", new { tab = (int)AccountTab.Favourite })">Избранное</a></li>
@@ -199,7 +199,7 @@
                                     {
                                         <a href="@Url.Action("Index", "Account")">Личный кабинет</a>
                                         <ul class="submenu2">
-                                            <li><a href="@Url.Action("Checkout", "Account")">Оформить заказ</a></li>
+                                            <li><a href="@Url.Action("Checkout", "Shop")">Оформить заказ</a></li>
                                             <li><a href="@Url.Action("Index", "Account", new { tab = (int)AccountTab.Info })">Профиль</a></li>
                                             <li><a href="@Url.Action("Cart", "Shop")">Корзина</a></li>
                                             <li><a href="@Url.Action("Index", "Account", new { tab = (int)AccountTab.Favourite })">Избранное</a></li>

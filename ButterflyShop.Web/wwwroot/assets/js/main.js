@@ -452,7 +452,6 @@
     });
 
     $('.remove-from-cart').click(function () {
-        debugger;
         var _this = $(this);
         $.ajax({
             url: '/Shop/RemoveFromCart',
