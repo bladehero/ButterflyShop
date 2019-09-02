@@ -103,7 +103,7 @@
             });
 
             $('.remove-from-cart').click(function () { setTimeout(function () { window.location.reload(true); }, 2000) });
-            $('.item-quantity, .dec.qtybtn, .inc.qtybtn').bind('keyup mouseup', function () {
+            $('.item-quantity, .dec.qtybtn, .inc.qtybtn').bind('change', function () {
                 var _this = $(this);
                 setTimeout(function () {
                     var parent = _this.parents('tr');

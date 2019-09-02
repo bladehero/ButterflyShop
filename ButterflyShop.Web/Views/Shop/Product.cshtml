@@ -104,14 +104,14 @@
                                     <p>@Model.Product.Description.Cut(100)...</p>
                                 </div>
                                 <div class="single-product-quantity">
-                                    <form class="add-quantity" action="#">
+                                    <div class="add-quantity">
                                         <div class="product-quantity">
                                             <input value="1" type="number" min="1">
                                         </div>
                                         <div class="add-to-link">
                                             <button class="btn add-to-cart-quantity-btn"><i class="fa fa-shopping-bag"></i>в корзину</button>
                                         </div>
-                                    </form>
+                                    </div>
                                 </div>
                                 <div class="wishlist-compare-btn">
                                     <a href="#" class="wishlist-btn@(Model.Favourite ? " active" : null)" data-product-id="@Model.Product.Id">В Избранное</a>

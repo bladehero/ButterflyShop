@@ -300,8 +300,12 @@ begin
     select *
       , 0 as Level
       , cast(row_number() over(partition by ParentId order by Name) as varchar(max)) as Path 
-      , 1 as IsParent
-      from Categories
+      , case
+          when exists (select * from Categories where ParentId = par.Id)
+          then 1
+          else 0
+        end as IsParent
+      from Categories par
       where ParentId is null
     union all
     select c.*

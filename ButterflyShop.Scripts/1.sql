@@ -2,9 +2,12 @@
 go
 
 insert Brands(Name, Country, Logo, BackgroundImage) values
-  (N'TianDe', N'Неизвестно', N'tiande-logo.png', N'tiande-bg.png')
-, (N'Amrita', N'Неизвестно', N'amrita-logo.png', N'amrita-bg.png')
-, (N'Unice', N'Неизвестно', N'unice-logo.png', N'unice-bg.png')
+  (N'TianDe', N'Россия', N'tiande-logo.png', N'tiande-bg.png')
+, (N'Amrita', N'Индия', N'amrita-logo.png', N'amrita-bg.png')
+, (N'Unice', N'Украина', N'unice-logo.png', N'unice-bg.png')
+, (N'Flomar', N'Турция', N'flomar-logo.png', N'flomar-bg.png')
+, (N'Біоліка', N'Украина', N'biolika-logo.png', N'biolika-bg.png')
+, (N'Thalia', N'Турция', N'thalia-logo.png', N'thalia-bg.png')
 
 insert Products(Name, BrandId, Description) values
   (N'Тушь для ресниц "Супердлина. Акцент"', 1, N'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry''s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.')
@@ -19,7 +22,6 @@ insert Products(Name, BrandId, Description) values
 
 insert into ProductImages(ProductId, Image) values
   (1,'Tush_1.jpg')
-, (1,'Tush_2.jpg')
 
 insert into Items(ProductId, Price, OldPrice) values
   (1,80, null)
@@ -34,13 +36,44 @@ insert into Items(ProductId, Price, OldPrice) values
 , (9,600, null)
 
 insert Categories(Name, ParentId) values
-  (N'Женская косметика', null) -- 1
-, (N'Мужская косметика', null) -- 2
-, (N'Глаза', 1)                -- 3
-, (N'Лицо', 1)                 -- 4
-, (N'Парфюмы', 1)              -- 5
-, (N'Помады', 4)               -- 6
-, (N'Парфюмы', 2)              -- 7
+  (N'Для лица', null) -- 1
+, (N'Проблемная кожа', 1) -- 2
+, (N'Для молодой кожи', 1) -- 3
+, (N'Для зрелой кожи', 1) -- 4
+, (N'Для тела', null) -- 5
+, (N'Антицелюлитные средства', 5) -- 6
+, (N'Уход за телом', 5) -- 7
+, (N'Для полости рта', null) -- 8
+, (N'Для волос', null) -- 9
+, (N'Для детей', null) -- 10
+, (N'Здоровье', null) -- 11
+, (N'Женское здоровье', 11) -- 12
+, (N'Мужское здоровье', 13) -- 13
+, (N'Питание', null) -- 14
+, (N'Масла', 14) -- 15
+, (N'Шроты', 14) -- 16
+, (N'Коктейли', 14) -- 17
+, (N'Кунжутики и батончики', 14) -- 18
+, (N'Декоративная косметика', null) -- 19
+, (N'Парфюмерия', null) -- 20
+, (N'Фиточаи', null) -- 21
+, (N'Фитопродукты', null) -- 22
+, (N'Детокс организма', 23) -- 23
+, (N'Антиаразитарные фитопрепараты', 23) -- 24
+, (N'Витамины и минералы', 23) -- 25
+, (N'Поддержка иммунитета', 23) -- 26
+, (N'Здоровая кожа', 23) -- 27
+, (N'Дыхательная система', 23) -- 28
+, (N'Сердечно-сосудистая система', 23) -- 29
+, (N'Опорно-двигательная система', 23) -- 30
+, (N'Нервная система', 23) -- 31
+, (N'Пищеварительная система', 23) -- 32
+, (N'Почки и мочеполовая система', 23) -- 33
+, (N'Эндокринная система', 23) -- 34
+, (N'Здоровье глаз', 23) -- 35
+, (N'Для дома', null) -- 36
+, (N'Процедуры', null) -- 37
+, (N'Cертификаты', null) -- 38
 
 insert CategoryProducts(ProductId, CategoryId) values
   (1,3)

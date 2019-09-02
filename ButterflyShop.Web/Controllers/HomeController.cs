@@ -28,7 +28,7 @@ namespace ButterflyShop.Web.Controllers
         {
             var model = new AboutVM
             {
-                Brands = UnitOfWork.Brands.Random(3),
+                Brands = UnitOfWork.Brands.Random(),
                 Product = UnitOfWork.StoredProcedures.GetItemsInfo(1, saleItems: true).FirstOrDefault()
             };
 

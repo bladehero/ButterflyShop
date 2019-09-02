@@ -219,18 +219,33 @@
                         <div class="off-canvas-contact-widget">
                             <div class="header-contact-info">
                                 <ul class="header-contact-info-list">
-                                    <li><i class="ion-android-phone-portrait"></i> <a href="tel://+380730477367">+380730477367</a></li>
-                                    <li><i class="ion-android-mail"></i> <a href="mailto:freezxog@gmail.com">freezxog@gmail.com</a></li>
+                                    <li>
+                                        <i class="ion-android-phone-portrait"></i>
+                                        <a href="tel://+380679923962">+38(067)9923962</a>
+                                    </li>
+                                    <li>
+                                        <i class="ion-android-phone-portrait"></i>
+                                        <a href="tel://+380635808068">+38(063)5808068</a>
+                                    </li>
+                                    <li>
+                                        <i class="ion-android-phone-portrait"></i>
+                                        <a href="tel://+380988401021">+38(098)8401021</a>
+                                    </li>
+                                    <li>
+                                        <i class="ion-android-phone-portrait"></i>
+                                        <a href="tel://+380937613189">+38(093)7613189</a>
+                                    </li>
+                                    <li>
+                                        <i class="ion-android-mail"></i>
+                                        <a href="mailto:abfly@ukr.net">Почта: <b>abfly@ukr.net</b></a>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
                         <!--Off Canvas Widget Social Start-->
                         <div class="off-canvas-widget-social">
-                            <a href="#" title="Facebook"><i class="fa fa-facebook"></i></a>
-                            <a href="#" title="Twitter"><i class="fa fa-twitter"></i></a>
-                            <a href="#" title="LinkedIn"><i class="fa fa-linkedin"></i></a>
-                            <a href="#" title="Youtube"><i class="fa fa-youtube-play"></i></a>
-                            <a href="#" title="Vimeo"><i class="fa fa-vimeo-square"></i></a>
+                            <a href="https://www.instagram.com/tiande_mir/" title="tiande_mir"><i class="fa fa-instagram text-primary"></i></a>
+                            <a href="https://www.instagram.com/amrita.odessa/" title="amrita.odessa"><i class="fa fa-instagram text-warning"></i></a>
                         </div>
                         <!--Off Canvas Widget Social End-->
                     </div>
@@ -309,7 +324,6 @@
                         <!--Footer Widget end-->
                         <!--Footer Widget start-->
                         <div class="footer-widget text-lg-right text-left col-xl-3 col-lg-3 col-md-6 col-sm-6 col-12 mb-40 mb-xs-35">
-
                             <a href="mailto:abfly@ukr.net" class="contact-text">Почта: <b>abfly@ukr.net</b></a>
                             <br />
                             <p class="font-weight-bold mt-4">ул. Ивана и Юрия Лип, 24, г. Одесса</p>
@@ -378,7 +392,7 @@
         {
             @:updateCart();
         }
-        $('.add-to-cart-btn').click(function () {
+        $('.add-to-cart-btn, .add-to-cart-quantity-btn').click(function () {
             setTimeout(function () { updateCart(); }, 1000);
         });
         $('#search').keypress(function (e) { if (e.which == 13) $('#search-btn').click(); });

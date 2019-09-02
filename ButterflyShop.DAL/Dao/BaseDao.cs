@@ -33,6 +33,10 @@ namespace ButterflyShop.DAL.Dao
             return Connection.Query<T>($"{SelectFromString}{(withDeleted ? string.Empty : " where IsDeleted = 0")} order by Id desc offset ({skip}) rows fetch next ({count}) rows only");
         }
 
+        public virtual IEnumerable<T> Random(bool withDeleted = false)
+        {
+            return Connection.Query<T>($"select * from {TableName}{(withDeleted ? string.Empty : " where IsDeleted = 0")} order by newid()");
+        }
         public virtual IEnumerable<T> Random(int count, bool withDeleted = false)
         {
             return Connection.Query<T>($"select top {count} * from {TableName}{(withDeleted ? string.Empty : " where IsDeleted = 0")} order by newid()");
