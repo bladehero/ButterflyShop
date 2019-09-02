@@ -8,6 +8,7 @@ namespace ButterflyShop.Web.Models.AccountModels
     {
         public User User { get; set; }
         public IEnumerable<ProductItemInfo_Result> Products { get; set; }
+        public IEnumerable<OrderDetails_Result> OrderDetails { get; set; }
         public AccountTab Tab { get; set; }
 
         public string Error { get; set; }
@@ -17,6 +18,7 @@ namespace ButterflyShop.Web.Models.AccountModels
         public IndexVM()
         {
             Products = new List<ProductItemInfo_Result>();
+            OrderDetails = new List<OrderDetails_Result>();
         }
     }
 }

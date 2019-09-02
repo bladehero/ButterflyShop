@@ -22,7 +22,8 @@ namespace ButterflyShop.Web.Controllers
                 Error = error,
                 UpdatedUserInfo = updatedUserInfo,
                 Tab = tab,
-                Products = UnitOfWork.StoredProcedures.GetFavouriteProductInfo(SystemUser.Id)
+                Products = UnitOfWork.StoredProcedures.GetFavouriteProductInfo(SystemUser.Id),
+                OrderDetails = UnitOfWork.StoredProcedures.GetOrderDetails(SystemUser.Id)
             };
 
             return View("Index", model);

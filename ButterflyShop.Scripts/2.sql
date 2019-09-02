@@ -766,3 +766,90 @@ begin
 
 end;
 go
+
+if object_id(N'dbo.GetOrderDetails') is null
+  exec('create procedure dbo.GetOrderDetails as set nocount on;');
+go
+
+-- ============================================================================
+-- Example    : exec dbo.GetOrderDetails 1
+-- Author     : Nikita Dermenzhi
+-- Date       : 25/07/2019
+-- Description: —
+-- ============================================================================
+
+alter procedure dbo.GetOrderDetails 
+(  
+    @userId as int
+)  
+as  
+begin
+
+  select o.Id as OrderId
+       , concat(u.FirstName, ' ', u.LastName) as Name
+       , o.DateCreated as Date
+       , os.Status as Status
+       , odt.Type as DeliveryType
+       , opt.Type as PaymentType
+       , (select top 1 sum(Quantity * Price) from OrderProducts where OrderId = o.Id) as Total
+    from dbo.Orders o
+    join dbo.Users u on u.Id = o.UserId
+    join dbo.OrderDeliveryTypes odt on odt.Id = o.OrderDeliveryType
+    join dbo.OrderPaymentTypes opt on opt.Id = o.OrderPaymentType
+    join dbo.OrderStatuses os on os.Id = o.OrderStatus
+    where u.Id = @userId
+
+end;
+go
+
+if object_id(N'dbo.GetOrderProductsInfo') is null
+  exec('create procedure dbo.GetOrderProductsInfo as set nocount on;');
+go
+
+-- ============================================================================
+-- Example    : exec dbo.GetOrderProductsInfo 1, 1
+-- Author     : Nikita Dermenzhi
+-- Date       : 25/07/2019
+-- Description: —
+-- ============================================================================
+
+alter procedure dbo.GetOrderProductsInfo 
+(  
+    @userId as int
+  , @orderId as int
+)  
+as  
+begin
+
+  select i.Id as ItemId
+       , p.Id as ProductId
+       , pi.Image as Image
+       , concat(p.Name, iif(datalength(chars.CharLine) > 0, concat(' | (', chars.CharLine, ')'), '')) as Name
+       , op.Price as Price
+       , op.Quantity as Quantity
+       , op.Price * op.Quantity as Total
+    from dbo.Orders o
+    join dbo.Users u on u.Id = o.UserId
+    join dbo.OrderProducts op on op.OrderId = o.Id
+    join dbo.Items i on i.Id = op.ItemId
+    join dbo.Products p on p.Id = i.ProductId
+    left join dbo.ProductImages pi on pi.ProductId = p.Id
+    outer apply 
+    (
+      select string_agg(concat(ch.Name, ': ', chp.Value), ', ') as CharLine
+        from CharacteristicProducts chp
+        join Characteristics ch on ch.Id = chp.CharacteristicId
+        where chp.ProductId = p.Id
+          and ch.IsDeleted = 0
+          and chp.IsDeleted = 0
+    ) chars
+    where o.Id = @orderId
+      and o.UserId = @userId
+      and o.IsDeleted = 0
+      and u.IsDeleted = 0
+      and op.IsDeleted = 0
+      and i.IsDeleted = 0
+      and p.IsDeleted = 0
+
+end;
+go

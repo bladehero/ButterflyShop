@@ -143,5 +143,22 @@ namespace ButterflyShop.DAL
             }
             return success;
         }
+        public IEnumerable<OrderDetails_Result> GetOrderDetails(int userId)
+        {
+            var obj = new
+            {
+                @userId = userId
+            };
+            return Connection.Query<OrderDetails_Result>("dbo.GetOrderDetails", obj, commandType: CommandType.StoredProcedure);
+        }
+        public IEnumerable<OrderProductsInfo_Result> GetOrderProductsInfo(int userId, int orderId)
+        {
+            var obj = new
+            {
+                @userId = userId,
+                @orderId = orderId
+            };
+            return Connection.Query<OrderProductsInfo_Result>("dbo.GetOrderProductsInfo", obj, commandType: CommandType.StoredProcedure);
+        }
     }
 }

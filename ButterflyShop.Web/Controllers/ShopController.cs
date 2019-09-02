@@ -21,6 +21,10 @@ namespace ButterflyShop.Web.Controllers
                 MinPrice = UnitOfWork.StoredProcedures.GetProductNumericValueByOption(ProductOption.MinPrice.GetDescription()),
                 MaxPrice = UnitOfWork.StoredProcedures.GetProductNumericValueByOption(ProductOption.MaxPrice.GetDescription())
             };
+            if (categoryId.HasValue)
+            {
+                model.Categories = new int[] { categoryId.Value };
+            }
             return View(model);
         }
 
@@ -90,6 +94,13 @@ namespace ButterflyShop.Web.Controllers
             {
                 CartItems = UnitOfWork.StoredProcedures.GetCartItemsInfo(SystemUser.Id)
             };
+            return PartialView(model);
+        }
+
+        [HttpGet]
+        public IActionResult _OrderProductInfo(int orderId)
+        {
+            var model = UnitOfWork.StoredProcedures.GetOrderProductsInfo(SystemUser.Id, orderId);
             return PartialView(model);
         }
 
