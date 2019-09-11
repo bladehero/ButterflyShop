@@ -30,7 +30,7 @@ if not exists (select 1
   (
     Id int not null primary key identity,
     Name nvarchar(100) not null,
-    Description nvarchar(2000) null,
+    Description nvarchar(max) null,
     BrandId int null foreign key references Brands(Id),
     DateCreated datetime not null default(getdate()),
     DateModified datetime not null default(getdate()),
