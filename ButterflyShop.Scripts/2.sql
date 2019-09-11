@@ -389,7 +389,7 @@ if (object_ID('dbo.GetCategoryForProducts') is not null)
 go
 
 -- ============================================================================
--- Example    : select * from dbo.GetCategoryForProducts(5)
+-- Example    : select * from dbo.GetCategoryForProducts(1)
 -- Author     : Nikita Dermenzhi
 -- Date       : 25/07/2019
 -- Description: —
@@ -429,6 +429,7 @@ begin
     select *
       from CategoryParents
       order by Id
+      option (maxrecursion 0)
 
   return
 end
