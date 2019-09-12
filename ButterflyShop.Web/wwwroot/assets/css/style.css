@@ -3892,13 +3892,13 @@ ul.cart-items > li {
                 border: 1px solid transparent;
             }
 
-.product-details-nav .slick-active.slick-current > img {
-    border-color: #151515;
-}
+    .product-details-nav .slick-active.slick-current > img {
+        border-color: #151515;
+    }
 
-.product-details-nav .sm-image {
-    cursor: pointer;
-}
+    .product-details-nav .sm-image {
+        cursor: pointer;
+    }
 
 .product-large-thumb {
     position: relative;
@@ -4199,10 +4199,10 @@ a.popup-img {
     color: #fff;
 }
 
-    .wishlist-compare-btn a:hover:before {
-        -webkit-animation: crFlipX 2s ease-in-out infinite both;
-        animation: crFlipX 2s ease-in-out infinite both;
-    }
+.wishlist-compare-btn a:hover:before {
+    -webkit-animation: crFlipX 2s ease-in-out infinite both;
+    animation: crFlipX 2s ease-in-out infinite both;
+}
 
 .product-meta {
     border-bottom: 1px solid #ededed;
@@ -6640,6 +6640,11 @@ a.popup-img {
         }
 
 /*-- Sidebar List --*/
+.sidebar-list {
+    max-height: 500px;
+    overflow-y: scroll;
+}
+
 .sidebar-list li {
     margin-bottom: -5px;
 }
@@ -7748,6 +7753,7 @@ a.popup-img {
     -moz-transition: border-color 0.5s ease; /* Firefox */
     -webkit-transition: border-color 0.5s ease; /*safari and chrome */
 }
+
     .shop-info:hover {
         border-color: #e5e5e5;
     }
@@ -7767,6 +7773,7 @@ a.popup-img {
     color: #343a40 !important;
     transition: background-color 0.3s ease;
 }
+
     #checkout-btn:hover {
         background-color: black;
         border: 1px solid #fff;
