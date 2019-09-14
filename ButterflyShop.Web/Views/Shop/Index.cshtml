@@ -175,7 +175,7 @@
                 }
             	categories += $(b).val();
             });
-            window.location.href = '@Url.Action("Search", "Shop")?categoriesStr=' + categories + '&minPrice=' + min + '&maxPrice=' + max;
+            window.location.href = '@Url.Action("Index", "Shop")?categoriesStr=' + categories + '&minPrice=' + min + '&maxPrice=' + max;
         });
         $('#clear-filter-btn').click(function () {
             window.location.href = '@Url.Action("Index", "Shop")';

@@ -11,63 +11,36 @@ namespace ButterflyShop.Web.Controllers
     {
         [HttpGet]
         [AllowAnonymous]
-        public IActionResult Index(int? categoryId = null, int? brandId = null)
+        public IActionResult Index(int? categoryId = null, int? brandId = null, string search = null, string categoriesStr = null, int? minPrice = null, int? maxPrice = null)
         {
-            var products = UnitOfWork.StoredProcedures.SearchItemInfo(SystemUser?.Id, categoryId, brandId);
+            var categories = categoriesStr?.Split(',').Select(int.Parse).AsEnumerable();
+
+            var products = UnitOfWork.StoredProcedures.SearchItemInfo(SystemUser?.Id, brandId: brandId, categoryId: categoryId, minPrice: minPrice, maxPrice: maxPrice, search: search);
+            var hasProducts = products.Count() == 0;
+            var _minPrice = minPrice.HasValue ? minPrice.Value : hasProducts ? 0 : products.Min(x => x.Price);
+            var _maxPrice = maxPrice.HasValue ? maxPrice.Value : hasProducts ? 0 : products.Max(x => x.Price);
+
+            if (categories?.Count() > 0)
+            {
+                products = products.Where(x => UnitOfWork.StoredProcedures.CategoriesForProduct(x.ProductId).Any(y => categories.Contains(y.Id)));
+            }
+
             var model = new IndexVM
             {
                 Products = products.ChunkBy(6),
                 CategoryHierarchy = UnitOfWork.StoredProcedures.GetCategoryHierarchy(),
                 MinPrice = UnitOfWork.StoredProcedures.GetProductNumericValueByOption(ProductOption.MinPrice.GetDescription()),
-                MaxPrice = UnitOfWork.StoredProcedures.GetProductNumericValueByOption(ProductOption.MaxPrice.GetDescription())
+                MaxPrice = UnitOfWork.StoredProcedures.GetProductNumericValueByOption(ProductOption.MaxPrice.GetDescription()),
+                Search = search,
+                SelectedMinPrice = minPrice,
+                SelectedMaxPrice = maxPrice,
+                Categories = categories
             };
             if (categoryId.HasValue)
             {
                 model.Categories = new int[] { categoryId.Value };
             }
             return View(model);
-        }
-
-        [HttpGet]
-        [AllowAnonymous]
-        public IActionResult FuzzyMatch(string search)
-        {
-            var products = UnitOfWork.StoredProcedures.SearchItemInfo(SystemUser?.Id, search: search);
-            var model = new IndexVM
-            {
-                Products = products.ChunkBy(6),
-                CategoryHierarchy = UnitOfWork.StoredProcedures.GetCategoryHierarchy(),
-                MinPrice = UnitOfWork.StoredProcedures.GetProductNumericValueByOption(ProductOption.MinPrice.GetDescription()),
-                MaxPrice = UnitOfWork.StoredProcedures.GetProductNumericValueByOption(ProductOption.MaxPrice.GetDescription()),
-                Search = search
-            };
-            return View("Index", model);
-        }
-
-        [HttpGet]
-        [AllowAnonymous]
-        public IActionResult Search(string categoriesStr, int minPrice, int maxPrice)
-        {
-            var categories = categoriesStr?.Split(',').Select(int.Parse).AsEnumerable();
-            var products = UnitOfWork.StoredProcedures.SearchItemInfo(SystemUser?.Id, minPrice: minPrice, maxPrice: maxPrice);
-            var hasProducts = products.Count() == 0;
-            var _minPrice = hasProducts ? 0 : products.Min(x => x.Price);
-            var _maxPrice = hasProducts ? 0 : products.Max(x => x.Price);
-            if (categories?.Count() > 0)
-            {
-                products = products.Where(x => UnitOfWork.StoredProcedures.CategoriesForProduct(x.ProductId).Any(y => categories.Contains(y.Id)));
-            }
-            var model = new IndexVM
-            {
-                Products = products.ChunkBy(6),
-                CategoryHierarchy = UnitOfWork.StoredProcedures.GetCategoryHierarchy(),
-                MinPrice = UnitOfWork.StoredProcedures.GetProductNumericValueByOption(ProductOption.MinPrice.GetDescription()),
-                MaxPrice = UnitOfWork.StoredProcedures.GetProductNumericValueByOption(ProductOption.MaxPrice.GetDescription()),
-                SelectedMinPrice = minPrice,
-                SelectedMaxPrice = maxPrice,
-                Categories = categories
-            };
-            return View("Index", model);
         }
 
         [HttpGet]
