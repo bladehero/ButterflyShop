@@ -42,7 +42,7 @@ namespace ButterflyShop.Web.Controllers
             }
             else
             {
-                context.Result = RedirectToAction("Login", "Account");
+                context.Result = RedirectToAction("Login", "Home");
             }
         }
 

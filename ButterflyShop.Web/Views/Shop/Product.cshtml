@@ -69,7 +69,7 @@
                                     </div>
                                 </div>
                             </div>
-                            @if (parameters?.Count() > 1)
+                            @if (parameters?.Count() > 0 && parameters.Any(x => !string.IsNullOrWhiteSpace(x.Parameters)))
                             {
                                 <div class="row pt-30 pt-lg-20 pt-md-20 pt-sm-10 pt-xs-15">
                                     <div class="col">
@@ -78,11 +78,14 @@
                                             <ul class="sidebar-tag" id="itemParameters">
                                                 @foreach (var parameter in parameters)
                                                 {
-                                                    <li>
-                                                        <span class="@(parameter == currentParameter ? "active" : "")" data-item="@parameter.ItemId" data-price="@parameter.Price" data-old-price="@(parameter.OldPrice.HasValue ? parameter.OldPrice.Value.ToString() : "null")">
-                                                            @parameter.Parameters
-                                                        </span>
-                                                    </li>
+                                                    if (!string.IsNullOrWhiteSpace(parameter.Parameters))
+                                                    {
+                                                        <li>
+                                                            <span class="@(parameter == currentParameter ? "active" : "")" data-item="@parameter.ItemId" data-price="@parameter.Price" data-old-price="@(parameter.OldPrice.HasValue ? parameter.OldPrice.Value.ToString() : "null")">
+                                                                @parameter.Parameters
+                                                            </span>
+                                                        </li>
+                                                    }
                                                 }
                                             </ul>
                                         </div>

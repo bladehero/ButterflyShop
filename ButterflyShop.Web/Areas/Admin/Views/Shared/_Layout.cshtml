@@ -9,39 +9,37 @@
     <link rel="shortcut icon" href="~/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
-    <link rel="stylesheet" href="~/css/admin-site.css" />
+    <link rel="stylesheet" href="~/assets/css/admin-style.css" />
     <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
 </head>
-<body>
+<body class="bg-white">
     <!-- Begin fixed navbar -->
     <header>
         <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-            <a class="navbar-brand" href="@Url.Action("Index", "News")">BSCo</a>
+            <a class="navbar-brand" href="@Url.Action("Index", "Products")">ButterflyShop</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarCollapse">
-                <ul class="navbar-nav m-auto">
-                    <li class="nav-item"><a id="news-link" class="nav-link" href="@Url.Action("Index", "News", new { area = "Admin" })">News</a></li>
-                    <li class="nav-item"><a id="services-link" class="nav-link" href="@Url.Action("Index", "Services", new { area = "Admin" })">Services</a></li>
-                    <li class="nav-item"><a id="works-link" class="nav-link" href="@Url.Action("Index", "Works", new { area = "Admin" })">Works</a></li>
-                    <li class="nav-item"><a id="messages-link" class="nav-link" href="@Url.Action("Index", "Messages", new { area = "Admin" })">Messages</a></li>
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item"><a id="news-link" class="nav-link" href="@Url.Action("Index", "Products", new { area = "Admin" })">Товары</a></li>
+                    <li class="nav-item"><a id="services-link" class="nav-link" href="@Url.Action("Index", "Orders", new { area = "Admin" })">Заказы</a></li>
                 </ul>
             </div>
         </nav>
     </header>
     <!-- End fixed navbar -->
     <!-- Begin page content -->
-    <main role="main" class="container">
+    <main role="main" class="container bg-light">
         @RenderBody()
     </main>
     <!-- End page content -->
     <!-- Begin footer -->
-    <footer class="footer">
+    <footer class="bg-secondary">
         <div class="container text-center">
-            <span class="text-muted text-white-50">
+            <span class="text-muted text-black-50">
                 &copy;ButterflyShop 2019@(DateTime.Now.Year > 2019 ? $" - {DateTime.Now.Year}" : "").
-                Created by <a class="font-weight-lighter stretched-link text-white" href="mailto:nikita.dermenzhi@gmail.com">Nikita Dermenzhi</a>.
+                Created by <a class="font-weight-bold stretched-link text-white" href="mailto:nikita.dermenzhi@gmail.com">Nikita Dermenzhi</a>.
             </span>
         </div>
     </footer>

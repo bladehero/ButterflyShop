@@ -59,23 +59,25 @@
         $(document).ready(function () {
             $('#login').click(function () {
                 $.ajax({
-                    url: '@Url.Action("Login", "Main")',
+                    url: '@Url.Action("Login", "Home")',
                     method: 'POST',
                     data: { login: $('#inputLogin').val(), password: $('#inputPassword').val() },
                     success: function (data) {
-                        if (data.result) {
+                        if (data.success) {
+                            debugger;
                             Swal.fire({
                                 type: 'success',
-                                title: 'You are log in!',
+                                title: 'Вы вошли в систему!',
                                 showConfirmButton: false,
-                                timer: 1000
+                                timer: 2000
                             }).then(function () {
-                                window.location.replace("@Url.Action("Index", "News")");
+                                window.location.replace("@Url.Action("Index", "Products", new { area = "Admin" })");
                             });
                         } else {
                             Swal.fire({
                                 type: 'error',
-                                title: 'Incorrect login or password!',
+                                title: 'Ошибка',
+                                html: data.message,
                                 showConfirmButton: false,
                                 timer: 2000
                             });

@@ -25,7 +25,7 @@
                 <!--About Us Image Start-->
                 <div class="about-us-img-wrapper mb-30 mb-xs-15">
                     <div class="about-us-image img-full">
-                        <a href="#"><img src="~/assets/images/blog/blog-6.jpg" alt=""></a>
+                        <a href="#"><img src="~/assets/images/about/about-1.png" alt=""></a>
                     </div>
                 </div>
                 <!--About Us Image End-->
@@ -35,8 +35,7 @@
                 <div class="about-us-content pl-30 pl-md-0 pl-sm-0 pl-xs-0">
                     <span>ButterflyShop</span>
                     <h2>Предоставляем лучшую косметику нашим клиентам</h2>
-                    <p>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam ?</p>
-                    <p>consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam</p>
+                    <p>Сколько бы человеку не было лет, его кожа нуждается в уходе. Чистота и гладкость кожи являются показателями здорового лица, поэтому очень важно ухаживать за собой. Самый важный пункт — это правильное питание, однако косметика поможет сохранить молодость и здоровье.</p>
                 </div>
                 <!--About Us Content End-->
             </div>
@@ -58,7 +57,7 @@
                     <div class="single-banner-item pt-100 pt-md-80 pt-sm-70 pt-xs-50 pb-120 pb-md-100 pb-sm-90 pb-xs-50 mb-30">
                         <div class="sp-banner-content pl-3">
                             <span class="normat-text">Цена снижена на <b class="text-danger">@Model.Product.Discount%</b></span>
-                            <h2 class="title">@Model.Product.Name</h2>
+                            <h2 class="title" style="overflow-wrap:break-word;">@Model.Product.Name</h2>
                             <span class="normat-text">Спешите - акция ограничена!</span>
                             <a href="@Url.Action("Product", "Shop", new { id = Model.Product.ProductId })">КУПИТЬ</a>
                         </div>
