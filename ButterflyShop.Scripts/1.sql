@@ -5,7 +5,7 @@ insert Brands(Name, Country, Logo, BackgroundImage) values
   (N'TianDe', N'Россия', N'tiande-logo.png', N'tiande-bg.png')      -- 1
 , (N'Amrita', N'Индия', N'amrita-logo.png', N'amrita-bg.png')       -- 2
 , (N'Unice', N'Украина', N'unice-logo.png', N'unice-bg.png')        -- 3
-, (N'Flomar', N'Турция', N'flomar-logo.png', N'flomar-bg.png')      -- 4
+, (N'Flormar', N'Турция', N'flomar-logo.png', N'flomar-bg.png')      -- 4
 , (N'Біоліка', N'Украина', N'biolika-logo.png', N'biolika-bg.png')  -- 5
 , (N'Thalia', N'Турция', N'thalia-logo.png', N'thalia-bg.png')      -- 6
 
@@ -90,6 +90,7 @@ insert Categories(Name, ParentId) values
 , (N'Сердечно-сосудистая система', 23) -- 29
 , (N'Опорно-двигательная система', 23) -- 30
 , (N'Нервная система', 23) -- 31
+
 , (N'Пищеварительная система', 23) -- 32
 , (N'Почки и мочеполовая система', 23) -- 33
 , (N'Эндокринная система', 23) -- 34
@@ -124,15 +125,10 @@ insert CategoryProducts(ProductId, CategoryId) values
 , (13,9)
 , (14,5)
 
---insert Characteristics(Name) values
---  (N'Пол')              -- 1
---, (N'Классификация')    -- 2
---, (N'Возраст')          -- 3
---, (N'Объем')            -- 4
---, (N'Время применения') -- 5
---, (N'Назначение')       -- 6
---, (N'Тип кожи')         -- 7
---, (N'Тип аромата')      -- 8
+insert Characteristics(Name) values
+  (N'Объем')            -- 1
+, (N'Тип кожи')         -- 2
+, (N'Цвет')             -- 3
 
 --insert CharacteristicProducts(ProductId, CharacteristicId, Value) values
 --  (1, 1, N'для женщин')

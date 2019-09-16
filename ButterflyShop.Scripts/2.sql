@@ -129,7 +129,7 @@ if object_id(N'dbo.CategoriesForProduct') is null
 go
  
  -- ============================================================================
- -- Example    : exec dbo.CategoriesForProduct 5
+ -- Example    : exec dbo.CategoriesForProduct 8
  -- Author     : Nikita Dermenzhi
  -- Date       : 25/07/2019
  -- Description: —
@@ -161,7 +161,7 @@ begin
     from Categories c
     inner join CategoryParents cp on cp.ParentId = c.Id
 )
-select *
+select distinct *
   from CategoryParents
   order by Id
  
@@ -440,7 +440,7 @@ if object_id(N'dbo.SearchItemInfo') is null
 go
  
  -- ============================================================================
- -- Example    : exec dbo.SearchItemInfo 5, 4, 1, N'Помада', 150, 200; exec dbo.SearchItemInfo null, null, null, N'Мужская'
+ -- Example    : exec dbo.SearchItemInfo 1, 4, 2, N'Тоник', 140, 200; exec dbo.SearchItemInfo null, null, null, N'Молочко'
  -- Author     : Nikita Dermenzhi
  -- Date       : 25/07/2019
  -- Description: —
@@ -855,6 +855,49 @@ begin
       and op.IsDeleted = 0
       and i.IsDeleted = 0
       and p.IsDeleted = 0
+
+end;
+go
+
+if object_id(N'dbo.GetProductsInfo_Admin') is null
+  exec('create procedure dbo.GetProductsInfo_Admin as set nocount on;');
+go
+
+-- ============================================================================
+-- Example    : exec dbo.GetProductsInfo_Admin
+-- Author     : Nikita Dermenzhi
+-- Date       : 25/07/2019
+-- Description: —
+-- ============================================================================
+
+alter procedure dbo.GetProductsInfo_Admin 
+(  
+    @search as nvarchar(100) = null
+)  
+as  
+begin
+
+  declare @trimLength int = 30;
+  
+  select p.Id
+       , p.Name
+       , b.Name
+       , iif(
+                len(cat.CategoriesString) > @trimLength - 3
+              , concat(rtrim(substring(cat.CategoriesString, 0, @trimLength)), '...')
+              , cat.CategoriesString
+            ) as Categories
+    from Products p
+    join Brands b on b.Id = p.BrandId
+    outer apply 
+    (
+      select string_agg(c.Name, ', ') as CategoriesString
+        from Categories c
+        join CategoryProducts cp on cp.CategoryId = c.Id
+        where cp.ProductId = p.Id
+          and cp.IsDeleted = 0
+          and c.IsDeleted = 0
+    ) cat
 
 end;
 go

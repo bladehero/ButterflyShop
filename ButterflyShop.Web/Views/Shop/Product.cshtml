@@ -81,7 +81,7 @@
                                                     if (!string.IsNullOrWhiteSpace(parameter.Parameters))
                                                     {
                                                         <li>
-                                                            <span class="@(parameter == currentParameter ? "active" : "")" data-item="@parameter.ItemId" data-price="@parameter.Price" data-old-price="@(parameter.OldPrice.HasValue ? parameter.OldPrice.Value.ToString() : "null")">
+                                                            <span class="@(parameter == currentParameter ? "active" : "")" data-item="@parameter.ItemId" data-price="@parameter.Price" data-old-price="@parameter.OldPrice?.ToString()">
                                                                 @parameter.Parameters
                                                             </span>
                                                         </li>
@@ -213,7 +213,11 @@
                 var oldPrice = $(this).data('old-price');
                 selectedItemInput.val(id);
                 itemPriceLabel.text(price + '₴');
-                itemOldPriceLabel.text(oldPrice + '₴');
+                if (oldPrice) {
+                    itemOldPriceLabel.text(oldPrice + '₴');
+                } else {
+                    itemOldPriceLabel.text('');
+                }
             });
 
             $('.product-details-images').slick({
