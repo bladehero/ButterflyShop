@@ -864,7 +864,7 @@ if object_id(N'dbo.GetProductsInfo_Admin') is null
 go
 
 -- ============================================================================
--- Example    : exec dbo.GetProductsInfo_Admin
+-- Example    : exec dbo.GetProductsInfo_Admin N'Крем'
 -- Author     : Nikita Dermenzhi
 -- Date       : 25/07/2019
 -- Description: —
@@ -879,9 +879,9 @@ begin
 
   declare @trimLength int = 30;
   
-  select p.Id
-       , p.Name
-       , b.Name
+  select p.Id as ProductId
+       , p.Name as ProductName
+       , b.Name as BrandName
        , iif(
                 len(cat.CategoriesString) > @trimLength - 3
               , concat(rtrim(substring(cat.CategoriesString, 0, @trimLength)), '...')
@@ -898,6 +898,26 @@ begin
           and cp.IsDeleted = 0
           and c.IsDeleted = 0
     ) cat
-
+    where 1=1
+          and (@search is null 
+               or exists(
+                          select *
+                            from string_split(@search, ' ') s
+                            outer apply
+                            (
+                              select cpp.* 
+                                from dbo.GetCategoryForProducts(p.Id) as cpp
+                            ) cfp
+                            where p.Id = try_cast(s.value as int)
+                                  or (
+                                        try_cast('4,2' as int) is null
+                                    and p.Name like concat('%', s.value, '%')
+                                     or b.Name like concat('%', s.value, '%')
+                                     or cfp.Name like concat('%', s.value, '%')
+                                     )
+                        )
+              )
+    order by p.Id desc
+      
 end;
 go

@@ -160,5 +160,14 @@ namespace ButterflyShop.DAL
             };
             return Connection.Query<OrderProductsInfo_Result>("dbo.GetOrderProductsInfo", obj, commandType: CommandType.StoredProcedure);
         }
+        public IEnumerable<ProductsInfo_Admin_Result> GetProductsInfo_Admin(string search = null)
+        {
+            var obj = new
+            {
+                @search = search
+            };
+            return Connection.Query<ProductsInfo_Admin_Result>("dbo.GetProductsInfo_Admin", obj, commandType: CommandType.StoredProcedure);
+        }
+        
     }
 }

@@ -8,5 +8,9 @@ footer {
 }
 
 main {
-    margin-top: 57px;
+    margin-top: 56px;
+}
+
+.pointer {
+    cursor: pointer;
 }
