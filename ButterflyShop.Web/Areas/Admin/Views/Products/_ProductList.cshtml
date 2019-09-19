@@ -15,12 +15,12 @@
         {
             @foreach (var product in Model)
             {
-                <tr class="product-row pointer" data-product-id="@product.ProductId">
+                <tr class="product-row pointer" data-product-id="@product.ProductId" data-product-name="@product.ProductName" data-is-deleted="@product.IsDeleted">
                     <th scope="row">@product.ProductId</th>
                     <td>@product.ProductName</td>
                     <td>@product.BrandName</td>
                     <td>@product.Categories</td>
-                    <td><i class="pointer fa fa-trash-alt text-danger"></i></td>
+                    <td class="product-delete-restore"><i class="pointer fa @(product.IsDeleted ? "fa-trash-restore-alt text-success" : "fa-trash-alt text-danger")"></i></td>
                 </tr>
             }
         }

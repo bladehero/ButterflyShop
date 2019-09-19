@@ -168,6 +168,22 @@ namespace ButterflyShop.DAL
             };
             return Connection.Query<ProductsInfo_Admin_Result>("dbo.GetProductsInfo_Admin", obj, commandType: CommandType.StoredProcedure);
         }
+        public IEnumerable<OptionalParameter> GetOptionalParametersForProduct_Admin(int? productId)
+        {
+            var obj = new
+            {
+                @productId = productId
+            };
+            return Connection.Query<OptionalParameter>("dbo.GetOptionalParametersForProduct_Admin", obj, commandType: CommandType.StoredProcedure);
+        }
+        public IEnumerable<GetOptionalParametersForItem_Admin_Result> GetOptionalParametersForItem_Admin(int? itemId)
+        {
+            var obj = new
+            {
+                @itemId = itemId
+            };
+            return Connection.Query<GetOptionalParametersForItem_Admin_Result>("dbo.GetOptionalParametersForItem_Admin", obj, commandType: CommandType.StoredProcedure);
+        }
         
     }
 }

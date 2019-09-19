@@ -173,7 +173,7 @@ if object_id(N'dbo.GetProductImages') is null
 go
 
 -- ============================================================================
--- Example    : exec dbo.GetProductImages 1
+-- Example    : exec dbo.GetProductImages 3
 -- Author     : Nikita Dermenzhi
 -- Date       : 25/07/2019
 -- Description: —
@@ -887,6 +887,7 @@ begin
               , concat(rtrim(substring(cat.CategoriesString, 0, @trimLength)), '...')
               , cat.CategoriesString
             ) as Categories
+       , p.IsDeleted as IsDeleted
     from Products p
     join Brands b on b.Id = p.BrandId
     outer apply 
@@ -921,3 +922,65 @@ begin
       
 end;
 go
+
+if object_id(N'dbo.GetOptionalParametersForProduct_Admin') is null
+  exec('create procedure dbo.GetOptionalParametersForProduct_Admin as set nocount on;');
+go
+  
+-- ============================================================================  
+-- Example    : exec dbo.GetOptionalParametersForProduct_Admin 3  
+-- Author     : Nikita Dermenzhi  
+-- Date       : 25/07/2019  
+-- Description: —  
+-- ============================================================================  
+  
+alter procedure dbo.GetOptionalParametersForProduct_Admin   
+(    
+    @productId as int = null  
+)    
+as    
+begin  
+    
+  select distinct op.*   
+    from Items i  
+    join OptionalParameterProducts opp on i.Id = opp.ItemId  
+    join OptionalParameters op on opp.OptionalParameterId = op.Id  
+    where 1=iif(@productId is null, 0, 1)  
+      and i.ProductId = @productId
+      and op.IsDeleted = 0
+      and opp.IsDeleted = 0
+        
+end;  
+
+if object_id(N'dbo.GetOptionalParametersForItem_Admin') is null
+  exec('create procedure dbo.GetOptionalParametersForItem_Admin as set nocount on;');
+go
+  
+-- ============================================================================  
+-- Example    : exec dbo.GetOptionalParametersForItem_Admin 3  
+-- Author     : Nikita Dermenzhi  
+-- Date       : 25/07/2019  
+-- Description: —  
+-- ============================================================================  
+  
+alter procedure dbo.GetOptionalParametersForItem_Admin   
+(    
+    @itemId as int = null  
+)    
+as    
+begin  
+    
+  select @itemId as ItemId
+       , op.Id as OptionalParameterId
+       , opp.Id as OptionalParameterProductId
+       , op.Name as OptionalParameterName
+       , opp.Value as OptionalParameterValue
+       , op.IsDeleted as IsDeletedOptionalParameter
+       , opp.IsDeleted as IsDeletedOptionalParameterProduct
+    from Items i  
+    join OptionalParameterProducts opp on i.Id = opp.ItemId  
+    join OptionalParameters op on opp.OptionalParameterId = op.Id  
+    where 1=iif(@itemId is null, 0, 1)  
+      and i.Id = @itemId
+        
+end; 

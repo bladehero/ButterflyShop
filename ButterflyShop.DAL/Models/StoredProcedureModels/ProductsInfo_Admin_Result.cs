@@ -6,5 +6,6 @@
         public string ProductName { get; set; }
         public string BrandName { get; set; }
         public string Categories { get; set; }
+        public bool IsDeleted { get; set; }
     }
 }

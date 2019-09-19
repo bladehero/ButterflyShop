@@ -24,7 +24,7 @@ namespace ButterflyShop.DAL.Dao
 
         public int Count(bool withDeleted = false) => Connection.QueryFirstOrDefault<int>($"select count(Id) from {TableName}{(withDeleted ? string.Empty : " where IsDeleted = 0")}");
 
-        public T FindById(int id) => Connection.QueryFirstOrDefault<T>($"select top 1 * from {TableName} where Id = {id}");
+        public T FindById(int? id) => id.HasValue ? Connection.QueryFirstOrDefault<T>($"select top 1 * from {TableName} where Id = {id.Value}") : default(T);
         public virtual IEnumerable<T> FindAll(bool withDeleted = false) => Connection.Query<T>($"{SelectFromString}{(withDeleted ? string.Empty : " where IsDeleted = 0")}");
         public virtual IEnumerable<T> Find(Func<T, bool> predicate, bool withDeleted = false) => Connection.Query<T>($"{SelectFromString}{(withDeleted ? string.Empty : " where IsDeleted = 0")}").Where(predicate);
         public virtual T FirstOrDefault(Func<T, bool> predicate, bool withDeleted = false) => Connection.Query<T>($"{SelectFromString}{(withDeleted ? string.Empty : " where IsDeleted = 0")}").FirstOrDefault(predicate);
