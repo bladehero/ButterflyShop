@@ -10,6 +10,7 @@ namespace ButterflyShop.Web.Areas.Admin.Controllers
     [Area("Admin")]
     public class HomeController : AdminController
     {
+        [HttpGet]
         [AllowAnonymous]
         public IActionResult Login()
         {
@@ -46,6 +47,14 @@ namespace ButterflyShop.Web.Areas.Admin.Controllers
                 message = "Возникла непредвиденная ошибка!";
             }
             return Json(new { success, message });
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public new IActionResult Logout()
+        {
+            base.Logout();
+            return RedirectToAction("Login", "Home", new { area = "Admin" });
         }
     }
 }

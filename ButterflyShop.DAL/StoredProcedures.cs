@@ -23,7 +23,7 @@ namespace ButterflyShop.DAL
             var result = Connection.Query<ProductItemInfo_Result>("dbo.GetItemsInfo", obj, commandType: CommandType.StoredProcedure);
             return result;
         }
-        public IEnumerable<Category> CategoriesForProduct(int productId)
+        public IEnumerable<Category> CategoriesForProduct(int? productId = null)
         {
             var obj = new
             {
@@ -32,7 +32,7 @@ namespace ButterflyShop.DAL
             var result = Connection.Query<Category>("dbo.CategoriesForProduct", obj, commandType: CommandType.StoredProcedure);
             return result;
         }
-        public IEnumerable<ProductImage> GetProductImages(int productId)
+        public IEnumerable<ProductImage> GetProductImages(int? productId = null)
         {
             var obj = new
             {

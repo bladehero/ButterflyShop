@@ -137,7 +137,7 @@ go
  
 alter procedure dbo.CategoriesForProduct
 (  
-    @productId as int
+    @productId as int = null
 )  
 as  
 begin
@@ -181,7 +181,7 @@ go
 
 alter procedure dbo.GetProductImages
 (  
-    @productId as int
+    @productId as int = null
 )  
 as  
 begin  

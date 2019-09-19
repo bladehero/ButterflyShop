@@ -1,9 +1,76 @@
-﻿
-<div class="form-row">
-    <div class="col">
-        <input type="text" class="form-control" placeholder="First name">
+﻿@model ButterflyShop.Web.Areas.Admin.Models.ProductsModel.ProductVM
+@{ 
+    int id;
+}
+<div class="row">
+    <!-- Name  -->
+    <div class="form-group">
+        <label for="product-name">Имя товара*:</label>
+        <input type="text" class="form-control" id="product-name" placeholder="Имя товара...">
     </div>
-    <div class="col">
-        <input type="text" class="form-control" placeholder="Last name">
+    <!-- Name -->
+    <!-- Description -->
+    <div class="form-group">
+        <label for="product-description">Описание*:</label>
+        <textarea class="form-control" id="product-description" rows="3"></textarea>
     </div>
+    <!-- Description End -->
+    <!-- Brand -->
+    <div class="form-group">
+        <label for="product-brand">Бренд:</label>
+        <select class="form-control" id="product-brand">
+            @foreach (var brand in Model.Brands)
+            {
+                <option value="@brand.Id" @(brand.Id == Model.BrandId ? " selected" : null)>@brand.Name</option>
+            }
+        </select>
+    </div>
+    <!-- Brand End -->
+    <!-- Categories -->
+    <div class="form-group">
+        @{
+            id = 0;
+            @foreach (var category in Model.Categories)
+            {
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" value="@category.Id" id="category_@(id++)"@(Model.SelectedCategories.Any(x=>x == category.Id) ? " checked" : null)>
+                    <label class="form-check-label" for="category_@(id++)">@category.Name</label>
+                </div>
+            }
+        }
+    </div>
+    <!-- Categories End -->
+    <!-- Product Images -->
+    <div class="form-group">
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Изображения</span>
+            </div>
+            <div class="custom-file">
+                <input type="file" class="custom-file-input" id="product-images">
+                <label class="custom-file-label" for="product-images">Выбрать</label>
+            </div>
+        </div>
+    </div>
+    <!-- Product Images End -->
+    <!-- Optional Parameters -->
+    <div class="form-group">
+        <label>Specifications</label>
+        @{
+            id = 0;
+            @foreach (var parameter in Model.OptionalParameters)
+            {
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" value="@parameter.Id" id="parameter_@(id++)"@(Model.SelectedOptionalParameters.Any(x=>x == parameter.Id) ? " checked" : null)>
+                    <label class="form-check-label" for="parameter_@(id++)">@parameter.Name</label>
+                </div>
+            }
+        }
+    </div>
+    <!-- Optional Parameters End -->
+    <!-- Items -->
+    <div id="product-items-section">
+
+    </div>
+    <!-- Items End -->
 </div>

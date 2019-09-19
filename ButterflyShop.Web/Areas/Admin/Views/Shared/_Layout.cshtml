@@ -25,13 +25,14 @@
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item"><a id="news-link" class="nav-link" href="@Url.Action("Index", "Products", new { area = "Admin" })">Товары</a></li>
                     <li class="nav-item"><a id="services-link" class="nav-link" href="@Url.Action("Index", "Orders", new { area = "Admin" })">Заказы</a></li>
+                    <li class="nav-item"><a id="services-link" class="nav-link" href="@Url.Action("Logout", "Home", new { area = "Admin" })">Выйти</a></li>
                 </ul>
             </div>
         </nav>
     </header>
     <!-- End fixed navbar -->
     <!-- Begin page content -->
-    <main role="main" class="container bg-white">
+    <main role="main" class="container bg-white pt-3">
         @RenderBody()
     </main>
     <!-- End page content -->
