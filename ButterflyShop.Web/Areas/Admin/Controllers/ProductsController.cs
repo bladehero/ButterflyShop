@@ -1,30 +1,30 @@
 ﻿using ButterflyShop.DAL.Models;
 using ButterflyShop.Web.Areas.Admin.Models.ProductsModel;
-using ButterflyShop.Web.Controllers;
-using ButterflyShop.Web.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Net.Http.Headers;
-using System.Threading.Tasks;
 
 namespace ButterflyShop.Web.Areas.Admin.Controllers
 {
     [Area("Admin")]
     public class ProductsController : AdminController
     {
+        [HttpGet]
         public IActionResult Index()
         {
             return View();
         }
 
+        [HttpGet]
         public IActionResult _ProductList(string search)
         {
             var products = UnitOfWork.StoredProcedures.GetProductsInfo_Admin(search);
             return PartialView(products);
         }
 
+        [HttpGet]
         public IActionResult _Product(int? id)
         {
             var model = new ProductVM()
@@ -49,6 +49,21 @@ namespace ButterflyShop.Web.Areas.Admin.Controllers
             model.SelectedCategories = UnitOfWork.CategoryProducts.Find(x => x.ProductId == id).Select(x => x.CategoryId);
             model.SelectedCharacteristics = UnitOfWork.CharacteristicProducts.Find(x => x.ProductId == id).Select(x => x.CharacteristicId);
             model.SelectedOptionalParameters = UnitOfWork.StoredProcedures.GetOptionalParametersForProduct_Admin(id).Select(x => x.Id);
+
+            var items = UnitOfWork.Items.Find(x => x.ProductId == id);
+            var list = new List<ItemVM>();
+            foreach (var item in items)
+            {
+                var itemVM = new ItemVM
+                {
+                    ItemId = item.Id,
+                    OldPrice = item.OldPrice,
+                    Price = item.Price,
+                    OptionalParametersForItems = UnitOfWork.StoredProcedures.GetOptionalParametersForItem_Admin(item.Id)
+                };
+                list.Add(itemVM);
+            }
+            model.Items = list;
 
             return PartialView(model);
         }
@@ -96,7 +111,6 @@ namespace ButterflyShop.Web.Areas.Admin.Controllers
                 #endregion
 
                 #region Product Images
-
                 foreach (var file in Request.Form.Files)
                 {
                     try
@@ -109,6 +123,12 @@ namespace ButterflyShop.Web.Areas.Admin.Controllers
                             {
                                 file.CopyToAsync(fs);
                             }
+                            var productImage = new ProductImage
+                            {
+                                Image = filename,
+                                ProductId = product.Id
+                            };
+                            UnitOfWork.ProductImages.Insert(productImage);
                         }
                     }
                     catch (Exception ex)
@@ -128,6 +148,25 @@ namespace ButterflyShop.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        public IActionResult DeleteOrRestoreProduct(int id)
+        {
+            bool success;
+            bool? isDeleted = null;
+            try
+            {
+                var product = UnitOfWork.Products.FindById(id);
+                success = UnitOfWork.Products.DeleteOrRestore(product);
+                isDeleted = product.IsDeleted;
+            }
+            catch (Exception)
+            {
+                success = false;
+            }
+
+            return Json(new { success, isDeleted });
+        }
+
+        [HttpPost]
         public IActionResult RemoveProductImage(int id)
         {
             bool success;
@@ -142,6 +181,8 @@ namespace ButterflyShop.Web.Areas.Admin.Controllers
 
             return Json(new { success });
         }
+
+
 
         private string EnsureCorrectFilename(string filename)
         {

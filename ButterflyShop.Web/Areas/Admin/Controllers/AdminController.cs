@@ -10,7 +10,7 @@ using System;
 using System.Data.SqlClient;
 using System.Linq;
 
-namespace ButterflyShop.Web.Controllers
+namespace ButterflyShop.Web.Areas.Admin.Controllers
 {
     public class AdminController : Controller
     {

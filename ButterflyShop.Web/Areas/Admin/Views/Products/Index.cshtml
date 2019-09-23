@@ -92,6 +92,36 @@
             });
         });
 
+        $('#product-list').on('click', '.product-delete-restore', function () {
+            var _this = $(this);
+            var id = _this.parent().data('product-id');
+            $.ajax({
+                url: '@Url.Action("DeleteOrRestoreProduct", "Products", new { area = "Admin" })',
+                method: 'POST',
+                data: { id: id },
+                success: function (data) {
+                    if (data.success) {
+                        Swal.fire({
+                            type: 'success',
+                            title: 'Успешно',
+                            text: data.isDeleted ? 'Товар был успешно удален!' : 'Товар был успешно восстановлен!',
+                            showConfirmButton: false,
+                            timer: 2000
+                        });
+                        _this.find('i').removeClass('fa-trash-restore-alt text-success fa-trash-alt text-danger').addClass(data.isDeleted ? 'fa-trash-restore-alt text-success' : 'fa-trash-alt text-danger');                    
+                    } else {
+                        Swal.fire({
+                            type: 'error',
+                            title: 'Ошибка',
+                            text: 'При удалении/восстановлении произошла ошибка!',
+                            showConfirmButton: false,
+                            timer: 2000
+                        });
+                    }
+                }
+            })
+        });
+
         function addImage() {
 
         }

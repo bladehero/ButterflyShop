@@ -105,7 +105,9 @@
             @foreach (var parameter in Model.OptionalParameters)
             {
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" value="@parameter.Id" id="parameter_@(id)" @(Model.SelectedOptionalParameters.Any(x => x == parameter.Id) ? " checked" : null)>
+                    <input class="form-check-input specification" data-id="@parameter.Id" data-name="@parameter.Name"
+                           type="checkbox" value="@parameter.Id" id="parameter_@(id)" 
+                           @(Model.SelectedOptionalParameters.Any(x => x == parameter.Id) ? " checked" : null)>
                     <label class="form-check-label" for="parameter_@(id++)">@parameter.Name</label>
                 </div>
             }

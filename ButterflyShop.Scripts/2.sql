@@ -911,10 +911,12 @@ begin
                             ) cfp
                             where p.Id = try_cast(s.value as int)
                                   or (
-                                        try_cast('4,2' as int) is null
-                                    and p.Name like concat('%', s.value, '%')
-                                     or b.Name like concat('%', s.value, '%')
-                                     or cfp.Name like concat('%', s.value, '%')
+                                        s.value is null
+                                    and (
+                                             p.Name like concat('%', s.value, '%')
+                                          or b.Name like concat('%', s.value, '%')
+                                          or cfp.Name like concat('%', s.value, '%')
+                                        )
                                      )
                         )
               )
@@ -957,7 +959,7 @@ if object_id(N'dbo.GetOptionalParametersForItem_Admin') is null
 go
   
 -- ============================================================================  
--- Example    : exec dbo.GetOptionalParametersForItem_Admin 3  
+-- Example    : exec dbo.GetOptionalParametersForItem_Admin 2  
 -- Author     : Nikita Dermenzhi  
 -- Date       : 25/07/2019  
 -- Description: —  
@@ -984,3 +986,70 @@ begin
       and i.Id = @itemId
         
 end; 
+
+
+
+if object_id(N'dbo.GetOrdersInfo_Admin') is null
+  exec('create procedure dbo.GetOrdersInfo_Admin as set nocount on;');
+go
+
+-- ============================================================================
+-- Example    : exec dbo.GetOrdersInfo_Admin N'Александр'
+-- Author     : Nikita Dermenzhi
+-- Date       : 25/07/2019
+-- Description: —
+-- ============================================================================
+
+alter procedure dbo.GetOrdersInfo_Admin 
+(  
+    @search as nvarchar(100) = null
+)  
+as  
+begin
+
+  declare @trimLength int = 30;
+  
+  select o.Id as OrderId
+       , ltrim(rtrim(concat(o.FirstName, ' ', o.LastName))) as Customer
+       , (
+            select count(op.Quantity) 
+              from OrderProducts op 
+              where op.IsDeleted = 0 
+                and op.OrderId = o.Id
+          ) as ItemsCount
+       , o.City as OrderCity
+       , os.Status as Status
+       , odt.Type as OrderDeliveryType
+       , opt.Type as OrderPaymentType
+       , o.DateCreated as DateCreated
+       , o.DateModified as DateModified
+       , o.IsDeleted as IsDeleted
+    from Orders o
+    join OrderStatuses os on o.OrderStatus = os.Id
+    join OrderDeliveryTypes odt on o.OrderDeliveryType = odt.Id
+    join OrderPaymentTypes opt on o.OrderPaymentType = opt.Id
+    where 1=1
+          and (@search is null 
+               or exists(
+                          select *
+                            from string_split(@search, ' ') s
+                            where o.Id = try_cast(s.value as int)
+                                  or (
+                                        try_cast(s.value as int) is null
+                                    and (
+                                             o.FirstName like concat('%', s.value, '%')
+                                          or o.LastName like concat('%', s.value, '%')
+                                          or o.City like concat('%', s.value, '%')
+                                          or o.Region like concat('%', s.value, '%')
+                                          or o.Address like concat('%', s.value, '%')
+                                          or o.Email like concat('%', s.value, '%')
+                                          or o.Phone like concat('%', s.value, '%')
+                                          or o.Phone like concat('%', s.value, '%')
+                                        )
+                                     )
+                        )
+              )
+    order by p.Id desc
+      
+end;
+go
