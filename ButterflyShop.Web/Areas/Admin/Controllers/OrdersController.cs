@@ -2,7 +2,7 @@
 
 namespace ButterflyShop.Web.Areas.Admin.Controllers
 {
-    public class OrderController : AdminController
+    public class OrdersController : AdminController
     {
         public IActionResult Index()
         {
