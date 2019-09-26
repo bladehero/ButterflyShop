@@ -728,7 +728,7 @@ begin
     values
     (
         @userId
-      , (select top 1 os.Id from dbo.OrderStatuses os where Status = 'В обработке')
+      , (select top 1 os.Id from dbo.OrderStatuses os where Status = N'В обработке')
       , @deliveryTypeId
       , @paymentTypeId
       , @email
@@ -965,7 +965,7 @@ go
 -- Description: —  
 -- ============================================================================  
   
-alter procedure dbo.GetOptionalParametersForItem_Admin   
+alter procedure dbo.GetOptionalParametersForItem_Admin
 (    
     @itemId as int = null  
 )    
@@ -1017,6 +1017,12 @@ begin
               where op.IsDeleted = 0 
                 and op.OrderId = o.Id
           ) as ItemsCount
+       , (
+            select round(sum(op.Quantity * op.Price), 2) 
+              from OrderProducts op 
+              where op.IsDeleted = 0 
+                and op.OrderId = o.Id
+          ) as TotalSum
        , o.City as OrderCity
        , os.Status as Status
        , odt.Type as OrderDeliveryType
@@ -1044,12 +1050,57 @@ begin
                                           or o.Address like concat('%', s.value, '%')
                                           or o.Email like concat('%', s.value, '%')
                                           or o.Phone like concat('%', s.value, '%')
-                                          or o.Phone like concat('%', s.value, '%')
+                                          or odt.Type like concat('%', s.value, '%')
+                                          or opt.Type like concat('%', s.value, '%')
+                                          or os.Status like concat('%', s.value, '%')
                                         )
                                      )
                         )
               )
-    order by p.Id desc
+    order by o.Id desc
       
 end;
+go
+
+if (object_ID('dbo.GetCartSum') is not null)
+   drop function dbo.GetCartSum
+go
+-- ============================================================================
+-- Example    : select dbo.GetCartSum(1)
+-- Author     : Nikita Dermenzhi
+-- Date       : 25/07/2019
+-- Description: —
+-- ============================================================================
+
+create function dbo.GetCartSum(@userId int null)
+returns float
+as 
+begin 
+  return (
+            select top 1 isnull(sum(c.Quantity * i.Price), 0)
+              from Cart c
+              join Items i on c.ItemId = i.Id
+              where c.UserId = @userId 
+                and c.IsDeleted = 0
+                and i.IsDeleted = 0
+         )
+end
+go
+
+if (object_ID('dbo.GetOrderSum') is not null)
+   drop function dbo.GetOrderSum
+go
+-- ============================================================================
+-- Example    : select dbo.GetOrderSum(1)
+-- Author     : Nikita Dermenzhi
+-- Date       : 25/07/2019
+-- Description: —
+-- ============================================================================
+
+create function dbo.GetOrderSum(@orderId int null)
+returns float
+as 
+begin 
+  return (select top 1 isnull(sum(Quantity * Price), 0) from OrderProducts where OrderId = @orderId and IsDeleted = 0)
+end
 go

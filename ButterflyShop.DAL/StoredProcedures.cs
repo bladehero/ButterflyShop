@@ -137,7 +137,7 @@ namespace ButterflyShop.DAL
                 Connection.Execute("dbo.CreateOrder", obj, commandType: CommandType.StoredProcedure);
                 success = true;
             }
-            catch (System.Exception)
+            catch (System.Exception ex)
             {
                 success = false;
             }
@@ -184,6 +184,26 @@ namespace ButterflyShop.DAL
             };
             return Connection.Query<GetOptionalParametersForItem_Admin_Result>("dbo.GetOptionalParametersForItem_Admin", obj, commandType: CommandType.StoredProcedure);
         }
-        
+        public IEnumerable<GetOrdersInfo_Admin_Result> GetOrdersInfo_Admin(string search)
+        {
+            var obj = new
+            {
+                @search = search
+            };
+            return Connection.Query<GetOrdersInfo_Admin_Result>("dbo.GetOrdersInfo_Admin", obj, commandType: CommandType.StoredProcedure);
+        }
+        public double GetCartSum(int userId)
+        {
+            return Connection.ExecuteScalar<double>($"select dbo.GetCartSum({userId})");
+        }
+        public double GetOrderSum(int orderId)
+        {
+            var obj = new
+            {
+                @orderId = orderId
+            };
+            return Connection.ExecuteScalar<double>("dbo.GetOrderSum", obj, commandType: CommandType.StoredProcedure);
+        }
+
     }
 }

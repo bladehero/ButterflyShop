@@ -139,11 +139,13 @@ namespace ButterflyShop.Web.Controllers
         {
             bool success;
             var message = string.Empty;
+            double cartTotal = 0;
             var item = (CartItemsInfo_Result)null;
             try
             {
                 var isZero = quantity.HasValue && quantity.Value == 0;
                 item = UnitOfWork.StoredProcedures.MergeItemToCart(SystemUser.Id, itemId, isZero ? null : quantity, isZero);
+                cartTotal = UnitOfWork.StoredProcedures.GetCartSum(SystemUser.Id);
                 success = true;
                 message = "Товар добавлен в корзину!";
             }
@@ -153,7 +155,7 @@ namespace ButterflyShop.Web.Controllers
                 message = "При добавлении товара произошла ошибка! Обратитесь в службу поддержку.";
             }
 
-            return Json(new { success, message, item });
+            return Json(new { success, message, item, cartTotal });
         }
 
         [HttpPost]

@@ -103,8 +103,16 @@
             });
 
             $('.remove-from-cart').click(function () { setTimeout(function () { window.location.reload(true); }, 2000) });
-            $('.item-quantity, .dec.qtybtn, .inc.qtybtn').bind('change', function () {
+            $('.item-quantity').bind('change', function () {
                 var _this = $(this);
+                changePrice(_this);
+            });
+            $('.dec.qtybtn, .inc.qtybtn').on('click', function () {
+                var _this = $(this);
+                changePrice(_this);
+            });
+
+            function changePrice(_this) {
                 setTimeout(function () {
                     var parent = _this.parents('tr');
                     var itemId = parent.data('item-id');
@@ -125,16 +133,15 @@
                                 return;
                             }
                             if (data.item) {
-                                debugger;
                                 parent.find('.item-total').text(data.item.total + '₴');
-                                $('.cart-items-sum, .cart-sum').text(data.item.sum + '₴');
                             } else {
                                 parent.remove();
                             }
+                            $('.cart-items-sum, .cart-sum').text(data.cartTotal + '₴');
                         }
                     });
                 }, 200);
-            });
+            }
         });
     </script>
 }

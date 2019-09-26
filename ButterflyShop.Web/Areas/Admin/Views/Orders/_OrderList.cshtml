@@ -1,0 +1,40 @@
+﻿@model IEnumerable<ButterflyShop.DAL.Models.StoredProcedureModels.GetOrdersInfo_Admin_Result>
+
+<table class="table table-sm table-hover">
+    <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Покупатель</th>
+            <th scope="col">Кол-во</th>
+            <th scope="col">Сумма</th>
+            <th scope="col">Город</th>
+            <th scope="col">Статус</th>
+            <th scope="col">Доставка</th>
+            <th scope="col">Оплата</th>
+            <th scope="col">Создан</th>
+            <th scope="col">Изменен</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model?.Count() > 0)
+        {
+            @foreach (var order in Model)
+            {
+                <tr class="order-row pointer" data-order-id="@order.OrderId" data-is-deleted="@order.IsDeleted">
+                    <th scope="row">@order.OrderId</th>
+                    <td>@order.Customer</td>
+                    <td>@order.ItemsCount</td>
+                    <td>@order.TotalSum</td>
+                    <td>@order.OrderCity</td>
+                    <td>@order.Status</td>
+                    <td>@order.OrderDeliveryType</td>
+                    <td>@order.OrderPaymentType</td>
+                    <td>@order.DateCreated.ToShortDateString()</td>
+                    <td>@order.DateModified.ToShortDateString()</td>
+                    <td class="order-delete-restore"><i class="pointer fa @(order.IsDeleted ? "fa-trash-restore-alt text-success" : "fa-trash-alt text-danger")"></i></td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

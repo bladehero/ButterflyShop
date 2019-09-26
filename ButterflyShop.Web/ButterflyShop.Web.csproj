@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="Areas\Admin\Models\OrderModels\" />
     <Folder Include="wwwroot\assets\images\about\" />
     <Folder Include="wwwroot\assets\images\products\" />
   </ItemGroup>
@@ -21,6 +22,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Update="Areas\Admin\Views\Orders\Index.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Areas\Admin\Views\Orders\_Order.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Areas\Admin\Views\Orders\_OrderList.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
     <Content Update="Areas\Admin\Views\Products\_ProductList.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
