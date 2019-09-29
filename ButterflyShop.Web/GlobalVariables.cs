@@ -52,7 +52,7 @@ namespace ButterflyShop.Web
         MaxPrice
     }
 
-    public enum OrderDeliveryType
+    public enum OrderDeliveryTypes
     {
         [Description("Новая Почта")]
         NovaPoshta,
@@ -62,7 +62,7 @@ namespace ButterflyShop.Web
         ByOdessa
     }
 
-    public enum OrderPaymentType
+    public enum OrderPaymentTypes
     {
         [Description("Наложенный")]
         CashOnDelivery,

@@ -14,3 +14,8 @@ main {
 .pointer {
     cursor: pointer;
 }
+
+.table-centered td, th{
+    vertical-align: middle;
+    text-align: center;
+}

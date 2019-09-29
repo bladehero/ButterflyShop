@@ -202,7 +202,7 @@ namespace ButterflyShop.DAL
             {
                 @orderId = orderId
             };
-            return Connection.ExecuteScalar<double>("dbo.GetOrderSum", obj, commandType: CommandType.StoredProcedure);
+            return Connection.ExecuteScalar<double>($"select dbo.GetOrderSum({orderId})");
         }
 
     }

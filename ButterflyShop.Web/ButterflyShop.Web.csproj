@@ -12,7 +12,6 @@
 
   <ItemGroup>
     <Folder Include="Areas\Admin\Data\" />
-    <Folder Include="Areas\Admin\Models\OrderModels\" />
     <Folder Include="wwwroot\assets\images\about\" />
     <Folder Include="wwwroot\assets\images\products\" />
   </ItemGroup>
