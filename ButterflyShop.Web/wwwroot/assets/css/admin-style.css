@@ -15,7 +15,13 @@ main {
     cursor: pointer;
 }
 
-.table-centered td, th{
-    vertical-align: middle;
-    text-align: center;
+.table-centered td, th {
+    vertical-align: middle !important;
+    text-align: center !important;
+}
+
+@media (min-width: 576px) {
+    .modal-dialog {
+        min-width: 80% !important;
+    }
 }

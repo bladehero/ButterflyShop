@@ -796,7 +796,7 @@ begin
        , os.Status as Status
        , odt.Type as DeliveryType
        , opt.Type as PaymentType
-       , (select top 1 sum(Quantity * Price) from OrderProducts where OrderId = o.Id) as Total
+       , (select top 1 sum(Quantity * Price) from OrderProducts op where OrderId = o.Id and op.IsDeleted = 0) as Total
     from dbo.Orders o
     join dbo.Users u on u.Id = o.UserId
     join dbo.OrderDeliveryTypes odt on odt.Id = o.OrderDeliveryType

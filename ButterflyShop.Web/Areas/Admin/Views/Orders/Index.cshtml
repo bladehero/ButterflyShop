@@ -22,19 +22,18 @@
 
 @section Scripts {
 <script>
+    function search(value) {
+        $.ajax({
+            method: 'GET',
+            url: '@Url.Action("_OrderList", "Orders", new { area = "Admin" })',
+            data: { search: value },
+            success: function (html) {
+                $('#order-list').html(html);
+            }
+        });
+    }
     $(document).ready(function () {
         var searchTimer;
-
-        function search(value) {
-            $.ajax({
-                method: 'GET',
-                url: '@Url.Action("_OrderList", "Orders", new { area = "Admin" })',
-                data: { search: value },
-                success: function (html) {
-                    $('#order-list').html(html);
-                }
-            });
-        }
         search();
 
         $('.order-row').click(function () {

@@ -10,7 +10,7 @@
 
     label {
         margin: 0px;
-        font-weight:600;
+        font-weight: 600;
     }
 
     .custom-file-label::after {
@@ -106,7 +106,7 @@
             {
                 <div class="form-check form-check-inline">
                     <input class="form-check-input specification" data-id="@parameter.Id" data-name="@parameter.Name"
-                           type="checkbox" value="@parameter.Id" id="parameter_@(id)" 
+                           type="checkbox" value="@parameter.Id" id="parameter_@(id)"
                            @(Model.SelectedOptionalParameters.Any(x => x == parameter.Id) ? " checked" : null)>
                     <label class="form-check-label" for="parameter_@(id++)">@parameter.Name</label>
                 </div>
@@ -116,13 +116,63 @@
     </div>
     <!-- Optional Parameters End -->
     <!-- Items -->
-    <div id="product-items-section">
-
+    <div class="row" id="product-items-section">
+        @foreach (var item in Model.Items)
+        {
+            <div class="col-lg-4 col-md-6 col-12" data-item-id="@item.ItemId">
+                <div class="card shadow-sm">
+                    <div class="card-header">
+                        <button type="button" class="close">
+                            <span class="text-danger">&times;</span>
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-row" id="price-section" data-price="@item.Price">
+                            @foreach (var parameter in item.OptionalParametersForItems)
+                            {
+                                <div class="col-12 mb-2">
+                                    <div class="input-group" data-parameter-id="@parameter.OptionalParameterId">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">@parameter.OptionalParameterName</span>
+                                        </div>
+                                        <input type="text" class="form-control" placeholder="@parameter.OptionalParameterName..." value="@parameter.OptionalParameterValue">
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                        <div class="form-row" id="price-section" data-price="@item.Price">
+                            <div class="сol-lg-6 col-md-12 mb-2">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Новая цена</span>
+                                    </div>
+                                    <input type="number" step="0.1" min="0" class="form-control item-price" placeholder="Цена..." value="@item.Price">
+                                </div>
+                            </div>
+                            <div class="сol-lg-6 col-md-12 mb-2">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Старая цена</span>
+                                    </div>
+                                    <input type="number" step="0.1" readonly class="form-control old-item-price" placeholder="Цена..." value="@item.OldPrice">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
     </div>
     <!-- Items End -->
     <div class="row mt-3">
         <div class="col text-right">
-            <button class="btn text-right btn-success">Сохранить</button>
+            <button class="btn text-right btn-success" id="product-save">Сохранить</button>
         </div>
     </div>
 </div>
+
+<script>
+    $('#product-save').click(function () {
+
+    });
+</script>
