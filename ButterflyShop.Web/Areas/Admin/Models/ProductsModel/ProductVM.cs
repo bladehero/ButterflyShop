@@ -24,7 +24,6 @@ namespace ButterflyShop.Web.Areas.Admin.Models.ProductsModel
         public IEnumerable<ProductImage> ProductImages { get; set; }
 
         public IEnumerable<ItemVM> Items { get; set; }
-        public IEnumerable<IFormFile> Images { get; set; }
 
         public ProductVM()
         {

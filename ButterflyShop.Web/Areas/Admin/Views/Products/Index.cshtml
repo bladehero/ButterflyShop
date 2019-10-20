@@ -3,6 +3,7 @@
         <span class="input-group-text" id="basic-addon">Поиск</span>
     </div>
     <input id="product-search" type="text" class="form-control" placeholder="Начните вводить для поиска..." aria-describedby="basic-addon">
+    <button class="ml-1 btn btn-success" id="add-new-product">Добавить</button>
 </div>
 <div id="product-list" class="table-responsive"></div>
 
@@ -22,21 +23,30 @@
 
 @section Scripts {
     <script>
+    function search(value) {
+        $.ajax({
+            method: 'GET',
+            url: '@Url.Action("_ProductList", "Products", new { area = "Admin" })',
+            data: { search: value },
+            success: function (html) {
+                $('#product-list').html(html);
+            }
+        });
+    }
     $(document).ready(function () {
         var searchTimer;
-
-        function search(value) {
-            $.ajax({
-                method: 'GET',
-                url: '@Url.Action("_ProductList", "Products", new { area = "Admin" })',
-                data: { search: value },
-                success: function (html) {
-                    $('#product-list').html(html);
-                }
-            });
-        }
         search();
 
+        $('#add-new-product').click(function () {
+            $.ajax({
+                method: 'GET',
+                url: '@Url.Action("_Product", "Products", new { area = "Admin" })',
+                success: function (html) {
+                    $('#modal-large .modal-body').html(html);                    
+                    $('#modal-large').modal('show');
+                }
+            });
+        });
         $('.product-row').click(function () {
             var id = $(this).data('product-id');
             window.location.replace('@Url.Action("Index", "Products", new { area = "Admin" })?id=' + id);
@@ -60,7 +70,6 @@
                     $('#modal-large .modal-header .modal-title').html(product);
                     $('#modal-large .modal-body').html(html);
                     $('#images-section .product-image .product-image-overlay .product-image-delete').off('click').click(function () {
-                        debugger;
                         var productImage = $(this).parents('.product-image');
                         var id = productImage.data('image-id');
                         if (!!id) {

@@ -66,7 +66,8 @@ begin
               from dbo.Items i1
               join (select min(Id) as Id
                          , min(Price) as Price 
-                         from dbo.Items 
+                         from dbo.Items
+                         where IsDeleted = 0
                          group by ProductId) i2 
               on i1.Id = i2.Id) i 
             on i.ProductId = p.Id
@@ -104,6 +105,7 @@ begin
               join (select min(Id) as Id
                          , min(Price) as Price 
                          from dbo.Items 
+                         where IsDeleted = 0
                          group by ProductId) i2 
               on i1.Id = i2.Id) i 
             on i.ProductId = p.Id
@@ -476,7 +478,8 @@ begin
               from dbo.Items i1
               join (select min(Id) as Id
                          , min(Price) as Price 
-                         from dbo.Items 
+                         from dbo.Items
+                         where IsDeleted = 0
                          group by ProductId) i2 
               on i1.Id = i2.Id) i 
             on i.ProductId = p.Id
@@ -828,7 +831,7 @@ begin
 
   select i.Id as ItemId
        , p.Id as ProductId
-       , pi.Image as Image
+       , pimg.Image as Image
        , concat(p.Name, iif(datalength(chars.CharLine) > 0, concat(' | (', chars.CharLine, ')'), '')) as Name
        , op.Price as Price
        , op.Quantity as Quantity
@@ -838,7 +841,13 @@ begin
     join dbo.OrderProducts op on op.OrderId = o.Id
     join dbo.Items i on i.Id = op.ItemId
     join dbo.Products p on p.Id = i.ProductId
-    left join dbo.ProductImages pi on pi.ProductId = p.Id
+    outer apply 
+    (
+      select top 1 *
+        from dbo.ProductImages pi
+        where pi.ProductId = p.Id
+          and pi.IsDeleted = 0
+    ) pimg
     outer apply 
     (
       select string_agg(concat(ch.Name, ': ', chp.Value), ', ') as CharLine
@@ -952,7 +961,8 @@ begin
       and op.IsDeleted = 0
       and opp.IsDeleted = 0
         
-end;  
+end;
+go
 
 if object_id(N'dbo.GetOptionalParametersForItem_Admin') is null
   exec('create procedure dbo.GetOptionalParametersForItem_Admin as set nocount on;');
@@ -984,9 +994,12 @@ begin
     join OptionalParameters op on opp.OptionalParameterId = op.Id  
     where 1=iif(@itemId is null, 0, 1)  
       and i.Id = @itemId
+      and i.IsDeleted = 0
+      and opp.IsDeleted = 0
+      and op.IsDeleted = 0
         
 end; 
-
+go
 
 
 if object_id(N'dbo.GetOrdersInfo_Admin') is null

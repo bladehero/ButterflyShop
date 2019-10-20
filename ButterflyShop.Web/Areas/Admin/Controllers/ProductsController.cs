@@ -1,10 +1,12 @@
 ﻿using ButterflyShop.DAL.Models;
 using ButterflyShop.Web.Areas.Admin.Models.ProductsModel;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace ButterflyShop.Web.Areas.Admin.Controllers
 {
@@ -72,6 +74,7 @@ namespace ButterflyShop.Web.Areas.Admin.Controllers
         public IActionResult SaveProduct(ProductVM productVM)
         {
             bool success;
+            int productId = 0;
             try
             {
                 #region Product
@@ -79,18 +82,23 @@ namespace ButterflyShop.Web.Areas.Admin.Controllers
                 {
                     BrandId = productVM.BrandId,
                     Description = productVM.Description,
-                    Name = productVM.Name
+                    Name = productVM.Name,
+                    Id = productVM.ProductId
                 };
                 UnitOfWork.Products.Merge(product);
+                productId = product.Id;
                 #endregion
 
                 #region Categories
-                var productCategories = UnitOfWork.CategoryProducts.Find(x => x.ProductId == product.Id);
+                var productCategories = UnitOfWork.CategoryProducts.Find(x => x.ProductId == product.Id, true);
                 foreach (var categoryId in productVM.SelectedCategories)
                 {
                     if (productCategories.FirstOrDefault(x => x.CategoryId == categoryId) is CategoryProduct categoryProduct)
                     {
-                        categoryProduct.IsDeleted = false;
+                        if (categoryProduct.IsDeleted)
+                        {
+                            UnitOfWork.CategoryProducts.Restore(categoryProduct);
+                        }
                         productCategories = productCategories.Where(x => x.CategoryId != categoryId);
                     }
                     else
@@ -105,45 +113,151 @@ namespace ButterflyShop.Web.Areas.Admin.Controllers
                 }
                 foreach (var categoryProduct in productCategories)
                 {
-                    categoryProduct.IsDeleted = false;
-                    UnitOfWork.CategoryProducts.Merge(categoryProduct);
+                    UnitOfWork.CategoryProducts.Delete(categoryProduct);
                 }
                 #endregion
 
-                #region Product Images
-                foreach (var file in Request.Form.Files)
+                #region Items
+                if (productVM.Items?.Count() > 0)
                 {
-                    try
+                    foreach (var item in productVM.Items)
                     {
-                        if (file.Length > 0)
+                        var oldItem = UnitOfWork.Items.FindById(item.ItemId);
+                        oldItem.OldPrice = oldItem.Price > item.Price ? (double?)oldItem.Price : null;
+                        oldItem.Price = item.Price;
+                        UnitOfWork.Items.Update(oldItem);
+
+                        foreach (var optionalParameter in item.OptionalParametersForItems)
                         {
-                            var filename = $"{product.Name}_{DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalMilliseconds}.{Path.GetExtension(file.Name)}";
-                            var path = Path.Combine(GlobalVariables.ResourceDirectory, ImageFolderNames.ImagesPath, filename);
-                            using (var fs = new FileStream(path, FileMode.Create))
-                            {
-                                file.CopyToAsync(fs);
-                            }
-                            var productImage = new ProductImage
-                            {
-                                Image = filename,
-                                ProductId = product.Id
-                            };
-                            UnitOfWork.ProductImages.Insert(productImage);
+                            var oldOptionalParameter = UnitOfWork.OptionalParameterProducts.FirstOrDefault(x => x.OptionalParameterId == optionalParameter.OptionalParameterId && x.ItemId == oldItem.Id);
+                            oldOptionalParameter.Value = optionalParameter.OptionalParameterValue;
+                            UnitOfWork.OptionalParameterProducts.Update(oldOptionalParameter);
                         }
-                    }
-                    catch (Exception ex)
-                    {
                     }
                 }
                 #endregion
 
                 success = true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 success = false;
             }
 
+            return Json(new { success, productId });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UploadProductImages(IEnumerable<IFormFile> files, [FromQuery] int id, [FromQuery] string name)
+        {
+            bool success;
+            try
+            {
+                #region Product Images
+                foreach (var file in files)
+                {
+                    if (file.Length > 0)
+                    {
+                        var filename = $"{name}_{DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).Ticks}{Path.GetExtension(file.FileName)}";
+                        var path = Path.Combine(GlobalVariables.ResourceDirectory, ImageFolderNames.ProductsPath, filename);
+                        using (var fs = new FileStream(path, FileMode.Create))
+                        {
+                            await file.CopyToAsync(fs);
+                        }
+                        var productImage = new ProductImage
+                        {
+                            Image = filename,
+                            ProductId = id
+                        };
+                        UnitOfWork.ProductImages.Insert(productImage);
+                    }
+                }
+                success = true;
+            }
+            catch (Exception ex)
+            {
+                success = false;
+            }
+            #endregion
+            return Json(new { success });
+        }
+
+        [HttpPost]
+        public IActionResult UpdateSpecifications(int productId, int optionalParameterId, bool toDelete = false)
+        {
+            bool success;
+            try
+            {
+                var items = UnitOfWork.Items.Find(x => x.ProductId == productId);
+                foreach (var item in items)
+                {
+                    if (UnitOfWork.OptionalParameterProducts.FirstOrDefault(x => x.ItemId == item.Id && x.OptionalParameterId == optionalParameterId, true) is OptionalParameterProduct optionalParameterProduct)
+                    {
+                        if (toDelete)
+                        {
+                            UnitOfWork.OptionalParameterProducts.Delete(optionalParameterProduct);
+                        }
+                        else
+                        {
+                            UnitOfWork.OptionalParameterProducts.Restore(optionalParameterProduct);
+                        }
+                    }
+                    else
+                    {
+                        if (!toDelete)
+                        {
+                            optionalParameterProduct = new OptionalParameterProduct
+                            {
+                                ItemId = item.Id,
+                                OptionalParameterId = optionalParameterId,
+                                Value = string.Empty
+                            };
+                            UnitOfWork.OptionalParameterProducts.Insert(optionalParameterProduct);
+                        }
+                    }
+                }
+
+                success = true;
+            }
+            catch (Exception ex)
+            {
+                success = false;
+            }
+            return Json(new { success });
+        }
+
+        [HttpPost]
+        public IActionResult AddNewItem(int productId)
+        {
+            bool success;
+            try
+            {
+                var item = new Item
+                {
+                    ProductId = productId
+                };
+                UnitOfWork.Items.Insert(item);
+                success = true;
+            }
+            catch (Exception ex)
+            {
+                success = false;
+            }
+            return Json(new { success });
+        }
+
+        [HttpPost]
+        public IActionResult DeleteItem(int itemId)
+        {
+            bool success;
+            try
+            {
+                success = UnitOfWork.Items.Delete(itemId);
+            }
+            catch (Exception ex)
+            {
+                success = false;
+            }
             return Json(new { success });
         }
 
