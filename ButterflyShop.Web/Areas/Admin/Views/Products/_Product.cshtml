@@ -317,11 +317,6 @@
                     item.optionalParametersForItems.push(parameter);
                 });
             });
-            var files = $('#product-images')[0].files;
-            var formData = new FormData();
-            for (var i = 0; i != files.length; i++) {
-                formData.append("files", files[i]);
-            }
             $.ajax({
                 method: 'POST',
                 url: '@Url.Action("SaveProduct", "Products")',
@@ -352,32 +347,45 @@
                     }
                 }
             });
-            $.ajax({
-                method: 'POST',
-                url: '@Url.Action("UploadProductImages", "Products")?id=@Model.ProductId&name=' + data.name,
-                contentType: false,
-                processData: false,
-                data: formData,
-                success: function (data) {
-                    if (data.success) {
-                        Swal.fire({
-                            type: 'success',
-                            title: 'Добавлено',
-                            html: "Изображения успешно добавлены",
-                            showConfirmButton: false,
-                            timer: 2000
-                        });
-                    } else {
-                        Swal.fire({
-                            type: 'error',
-                            title: 'Ошибка',
-                            html: data.message || "Произошла непредвиденная ошибка!",
-                            showConfirmButton: false,
-                            timer: 2000
-                        });
-                    }
-                }
-            });
+                        
+            @if (Model.ProductId > 0)
+            {
+                @:var files = $('#product-images')[0].files;
+                @:var formData = new FormData();
+                @:for (var i = 0; i != files.length; i++)
+                @:{
+                @:    formData.append("files", files[i]);
+                @:}
+                @:$.ajax({
+                @:method: 'POST',
+                @:url: '@Url.Action("UploadProductImages", "Products")?id=@Model.ProductId&name=' + data.name,
+                @:contentType: false,
+                @:processData: false,
+                @:data: formData,
+                @:success: function(data) {
+                @:        if (data.success)
+                @:        {
+                @:            Swal.fire({
+                @:            type: 'success',
+                @:            title: 'Добавлено',
+                @:            html: "Изображения успешно добавлены",
+                @:            showConfirmButton: false,
+                @:            timer: 2000
+                @:            });
+                @:        }
+                @:        else
+                @:        {
+                @:            Swal.fire({
+                @:            type: 'error',
+                @:            title: 'Ошибка',
+                @:            html: data.message || "Произошла непредвиденная ошибка!",
+                @:            showConfirmButton: false,
+                @:            timer: 2000
+                @:            });
+                @:        }
+                @:    }
+                @:});
+            }            
         });
     });
 
