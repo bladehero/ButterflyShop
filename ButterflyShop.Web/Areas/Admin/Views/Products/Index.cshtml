@@ -42,6 +42,7 @@
                 method: 'GET',
                 url: '@Url.Action("_Product", "Products", new { area = "Admin" })',
                 success: function (html) {
+                    $('#modal-large .modal-header .modal-title').html('Добавление товара');
                     $('#modal-large .modal-body').html(html);                    
                     $('#modal-large').modal('show');
                 }
@@ -130,10 +131,6 @@
                 }
             })
         });
-
-        function addImage() {
-
-        }
     });
     </script>
 }

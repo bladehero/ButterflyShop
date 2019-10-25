@@ -188,7 +188,7 @@ namespace ButterflyShop.Web.Areas.Admin.Controllers
             bool success;
             try
             {
-                var items = UnitOfWork.Items.Find(x => x.ProductId == productId);
+                var items = UnitOfWork.Items.Find(x => x.ProductId == productId, true);
                 foreach (var item in items)
                 {
                     if (UnitOfWork.OptionalParameterProducts.FirstOrDefault(x => x.ItemId == item.Id && x.OptionalParameterId == optionalParameterId, true) is OptionalParameterProduct optionalParameterProduct)
@@ -227,7 +227,7 @@ namespace ButterflyShop.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddNewItem(int productId)
+        public IActionResult AddNewItem(int productId, IEnumerable<int> optionalParameters)
         {
             bool success;
             try
@@ -237,6 +237,19 @@ namespace ButterflyShop.Web.Areas.Admin.Controllers
                     ProductId = productId
                 };
                 UnitOfWork.Items.Insert(item);
+                foreach (var parameter in optionalParameters)
+                {
+                    if (UnitOfWork.OptionalParameters.FindById(parameter) is OptionalParameter optionalParameter)
+                    {
+                        var optionalParameterProduct = new OptionalParameterProduct
+                        {
+                            ItemId = item.Id,
+                            OptionalParameterId = optionalParameter.Id,
+                            Value = string.Empty
+                        };
+                        UnitOfWork.OptionalParameterProducts.Insert(optionalParameterProduct);
+                    }
+                }
                 success = true;
             }
             catch (Exception ex)

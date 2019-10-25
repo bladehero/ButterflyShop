@@ -190,10 +190,16 @@
         }
 
         $('#add-new-item').click(function () {
+            var optionalParameters = [];
+            $('.form-check-input.specification:checked').each(function (i, el) {
+                _el = $(el);
+                optionalParameters.push(_el.data('id'));
+            });
+            debugger;
             $.ajax({
                 method: 'POST',
                 url: '@Url.Action("AddNewItem", "Products")',
-                data: { productId: productId },
+                data: { productId: productId, optionalParameters: optionalParameters },
                 success: function (data) {
                     if (data.success) {
                         Swal.fire({

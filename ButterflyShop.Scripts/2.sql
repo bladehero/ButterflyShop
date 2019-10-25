@@ -920,7 +920,7 @@ begin
                             ) cfp
                             where p.Id = try_cast(s.value as int)
                                   or (
-                                        s.value is null
+                                        s.value is not null
                                     and (
                                              p.Name like concat('%', s.value, '%')
                                           or b.Name like concat('%', s.value, '%')
