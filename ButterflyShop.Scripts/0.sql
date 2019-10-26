@@ -335,3 +335,20 @@ if not exists (select 1
     IsDeleted bit not null default(0),
   );
 go
+
+if not exists (select 1 
+               from sys.tables t 
+               where t.name='ContactInfo' 
+               and t.schema_id = schema_id('dbo'))
+  create table ContactInfo
+  (
+    Id int not null primary key identity,
+    Address nvarchar(100) not null,
+    Phones nvarchar(100) not null,
+    TimeTable nvarchar(1024) not null,
+    GoogleUrl nvarchar(1024) not null,
+    DateCreated datetime not null default(getdate()),
+    DateModified datetime not null default(getdate()),
+    IsDeleted bit not null default(0),
+  );
+go

@@ -1,0 +1,124 @@
+﻿@model IEnumerable<ButterflyShop.DAL.Models.ContactInfo>
+<style>
+    .shortable {
+    }
+</style>
+<div class="row">
+    <div class="col">
+        <button class="btn btn-secondary mr-1" id="reload-contact-info">Обновить</button>
+        <button class="btn btn-success" id="add-contact-info">Добавить</button>
+    </div>
+</div>
+<div id="contact-list" class="table-responsive">
+    <table class="table table-sm table-hover table-centered">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Адрес</th>
+                <th scope="col">Телефон</th>
+                <th scope="col">Рабочее время</th>
+                <th scope="col">Дата создания</th>
+                <th scope="col">Дата модификации</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model?.Count() > 0)
+            {
+                @foreach (var contactInfo in Model)
+                {
+                    <tr class="contact-row pointer" data-contact-id="@contactInfo.Id" data-is-deleted="@contactInfo.IsDeleted">
+                        <th scope="row">@contactInfo.Id</th>
+                        <td class="shortable">@contactInfo.Address</td>
+                        <td class="shortable">@contactInfo.Phones</td>
+                        <td class="shortable">@contactInfo.TimeTable</td>
+                        <td>@contactInfo.DateCreated.ToShortDateString()</td>
+                        <td>@contactInfo.DateModified.ToShortDateString()</td>
+                        <td class="contact-delete-restore"><i class="pointer fa @(contactInfo.IsDeleted ? "fa-trash-restore-alt text-success" : "fa-trash-alt text-danger")"></i></td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+
+<div id="modal-large" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body"></div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    <script>
+    $(document).ready(function () {
+
+        $('#add-contact-info').click(function () {
+            $.ajax({
+                method: 'GET',
+                url: @Url.Action("_ContactInfo", "ContactInfo"),
+                success: function (html) {
+                    $('#modal-large .modal-body').html(html);
+                }
+            });
+        });
+
+        $('#reload-contact-info').click(function () {
+            window.location.reload(true);
+        });
+
+        $('#contact-list').on('click', '.contact-row td:not(.contact-delete-restore)', function () {
+            var _this = $(this).parent();
+            var id = _this.data('contact-id');
+            $.ajax({
+                method: 'GET',
+                url: '@Url.Action("_Contact", "ContactInfo", new { area = "Admin" })',
+                data: { id: id },
+                success: function (html) {
+                    $('#modal-large .modal-header .modal-title').html('Заказ №' + id);
+                    $('#modal-large .modal-body').html(html);
+                    $('#modal-large').modal('show');
+                }
+            });
+        });
+
+        $('#contact-list').on('click', '.contact-delete-restore', function () {
+            var _this = $(this);
+            var id = _this.parent().data('contact-id');
+            $.ajax({
+                url: '@Url.Action("DeleteOrRestoreContact", "ContactInfo", new { area = "Admin" })',
+                method: 'POST',
+                data: { id: id },
+                success: function (data) {
+                    if (data.success) {
+                        Swal.fire({
+                            type: 'success',
+                            title: 'Успешно',
+                            text: data.isDeleted ? 'Товар был успешно удален!' : 'Товар был успешно восстановлен!',
+                            showConfirmButton: false,
+                            timer: 2000
+                        });
+                        _this.find('i').removeClass('fa-trash-restore-alt text-success fa-trash-alt text-danger').addClass(data.isDeleted ? 'fa-trash-restore-alt text-success' : 'fa-trash-alt text-danger');
+                    } else {
+                        Swal.fire({
+                            type: 'error',
+                            title: 'Ошибка',
+                            text: 'При удалении/восстановлении произошла ошибка!',
+                            showConfirmButton: false,
+                            timer: 2000
+                        });
+                    }
+                }
+            });
+        });
+    });
+    </script>
+}
