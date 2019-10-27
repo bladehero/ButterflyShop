@@ -186,3 +186,8 @@ insert OrderStatuses(Status) values
 , (N'Отправлен')
 , (N'Выполнен')
 , (N'Отменен')
+
+insert ContactInfo(City, Address, Phones, TimeTable, GoogleUrl) values
+  (N'г. Одесса', N'ул. Ивана и Юрия Лип, 24', N'+38(067)9923962', N'<b>Пн - Сб:</b> 10:00 – 19:00;<b>Вс:</b> 10:00 - 17:00', N'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2749.7639242662053!2d30.704529215354842!3d46.43355857912436!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40c633a977c111bd%3A0x913832fa5868fc6e!2sIvana%20ta%20Yuriia%20Lyp%20St%2C%2024%2C%20Odesa%2C%20Odes&#39;ka%20oblast%2C%2065000!5e0!3m2!1sen!2sua!4v1567118023643!5m2!1sen!2sua')
+, (N'г. Одесса', N'ул. Сегедская, 13', N'+38(063)5808068', N'<b>Пн - Сб:</b> 10:00 – 18:30;<b>Вс:</b> выходной', N'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2749.021764797926!2d30.74128001535538!3d46.44826577912486!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40c633c3bc1bbf4f%3A0x6aae11999f595f36!2sSeheds&#39;ka%20St%2C%2013%2C%20Odesa%2C%20Odes&#39;ka%20oblast%2C%2065000!5e0!3m2!1sen!2sua!4v1567120490029!5m2!1sen!2sua')
+, (N'г. Одесса', N'Фонтанская дорога, 12-а', N'+38(098)8401021;+38(093)7613189', N'<b>Пн - Сб:</b> 11:00 – 22:00;<b>Вс:</b> выходной', N'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2749.575353643036!2d30.741247815354953!3d46.43729577912448!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40c6339415613723%3A0x538dfdf4af8e715a!2s12A%2C%20Fontans&#39;ka%20Road%2C%2012%D0%90%2C%20Odesa%2C%20Odes&#39;ka%20oblast%2C%2065000!5e0!3m2!1sen!2sua!4v1572177618943!5m2!1sen!2sua')

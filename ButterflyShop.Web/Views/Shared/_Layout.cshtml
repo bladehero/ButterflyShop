@@ -1,6 +1,7 @@
 ﻿@using ButterflyShop.DAL.Models.StoredProcedureModels
 @using static ButterflyShop.Web.Extensions.CustomExtensions
 @{
+    IEnumerable<ButterflyShop.DAL.Models.ContactInfo> contacts = ViewBag.ContactInfo;
     bool isAuthorized = !(ViewBag.Anonymous ?? true);
     IEnumerable<GetCategoryHierarchy_Result> categoryHierarchy = ViewBag.CategoryHierarchy ?? new List<GetCategoryHierarchy_Result>();
 }
@@ -219,26 +220,19 @@
                         <div class="off-canvas-contact-widget">
                             <div class="header-contact-info">
                                 <ul class="header-contact-info-list">
-                                    <li>
-                                        <i class="ion-android-phone-portrait"></i>
-                                        <a href="tel://+380679923962">+38(067)9923962</a>
-                                    </li>
-                                    <li>
-                                        <i class="ion-android-phone-portrait"></i>
-                                        <a href="tel://+380635808068">+38(063)5808068</a>
-                                    </li>
-                                    <li>
-                                        <i class="ion-android-phone-portrait"></i>
-                                        <a href="tel://+380988401021">+38(098)8401021</a>
-                                    </li>
-                                    <li>
-                                        <i class="ion-android-phone-portrait"></i>
-                                        <a href="tel://+380937613189">+38(093)7613189</a>
-                                    </li>
-                                    <li>
-                                        <i class="ion-android-mail"></i>
-                                        <a href="mailto:abfly@ukr.net">Почта: <b>abfly@ukr.net</b></a>
-                                    </li>
+                                    @foreach (var contact in contacts)
+                                    {
+                                        if (!string.IsNullOrWhiteSpace(contact.Phones))
+                                        {
+                                            @foreach (var phone in contact.Phones.Split(';'))
+                                            {
+                                                <li>
+                                                    <i class="ion-android-phone-portrait"></i>
+                                                    <a href="tel://@phone.Replace("(", "").Replace(")", "")">@phone</a>
+                                                </li>
+                                            }
+                                        }
+                                    }
                                 </ul>
                             </div>
                         </div>
@@ -281,24 +275,19 @@
                         <!--Footer Widget start-->
                         <div class="footer-widget col-xl-3 col-lg-3 col-md-6 col-sm-6 col-12 mb-40 mb-xs-35">
                             <h4 class="title"><span class="text">Время работы:</span></h4>
-
-                            <div class="shop-info pt-2 pl-3 mt-2">
-                                <p class="mb-15 font-weight-bold">ул. Ивана и Юрия Лип, 24, г. Одесса</p>
-                                <p class="mb-15">Пн - Сб: 10:00 – 19:00</p>
-                                <p class="mb-15">Вс: 10:00 - 17:00</p>
-                            </div>
-
-                            <div class="shop-info pt-2 pl-3 mt-2">
-                                <p class="mb-15 font-weight-bold">ул. Сегедская, 13, г. Одесса</p>
-                                <p class="mb-15">Пн - Пт: 10:00 – 18:30</p>
-                                <p class="mb-15">Вс: выходной</p>
-                            </div>
-
-                            <div class="shop-info pt-2 pl-3 mt-2">
-                                <p class="mb-15 font-weight-bold">Фонтанская дорога, 12-а, г. Одесса</p>
-                                <p class="mb-15">Пн - Сб: 11:00 – 22:00</p>
-                                <p class="mb-15">Вс: выходной</p>
-                            </div>
+                            @foreach (var contact in contacts)
+                            {
+                                <div class="shop-info pt-2 pl-3 mt-2">
+                                    <p class="mb-15 font-weight-bold">@contact.Address, @contact.City</p>
+                                    @if (!string.IsNullOrWhiteSpace(contact.TimeTable))
+                                    {
+                                        @foreach (var time in contact.TimeTable.Split(';'))
+                                        {
+                                            <p class="mb-15">@Html.Raw(time)</p>
+                                        }
+                                    }
+                                </div>
+                            }
                         </div>
                         <!--Footer Widget end-->
                         <!--Footer Widget start-->
@@ -326,15 +315,18 @@
                         <div class="footer-widget text-lg-right text-left col-xl-3 col-lg-3 col-md-6 col-sm-6 col-12 mb-40 mb-xs-35">
                             <a href="mailto:abfly@ukr.net" class="contact-text">Почта: <b>abfly@ukr.net</b></a>
                             <br />
-                            <p class="font-weight-bold mt-4">ул. Ивана и Юрия Лип, 24, г. Одесса</p>
-                            <a href="tel://+380679923962" class="contact-text">+38(067)9923962</a>
-                            <p class="font-weight-bold mt-2">ул. Сегедская, 13, г. Одесса</p>
-                            <a href="tel://+380635808068" class="contact-text">+38(063)5808068</a>
-                            <p class="font-weight-bold mt-2">Фонтанская дорога, 12-а, г. Одесса</p>
-                            <a href="tel://+380988401021" class="contact-text">+38(098)8401021</a>
-                            <br />
-                            <a href="tel://+380937613189" class="contact-text">+38(093)7613189</a>
-                            <br />
+                            @foreach (var contact in contacts)
+                            {
+                                <p class="font-weight-bold mt-4">@contact.Address, @contact.City</p>
+                                if (!string.IsNullOrWhiteSpace(contact.Phones))
+                                {
+                                    @foreach (var phone in contact.Phones.Split(';'))
+                                    {
+                                        <a href="tel://@phone.Replace("(", "").Replace(")", "")" class="contact-text">@phone</a>
+                                        <br />
+                                    }
+                                }
+                            }
                         </div>
                         <!--Footer Widget end-->
                     </div>

@@ -52,6 +52,7 @@ namespace ButterflyShop.Web.Controllers
             ViewBag.CategoryHierarchy = UnitOfWork.StoredProcedures.GetCategoryHierarchy();
             ViewBag.SystemUser = SystemUser;
             ViewBag.Anonymous = Anonymous;
+            ViewBag.ContactInfo = UnitOfWork.ContactInfo.FindAll();
 
             var allowAnonymous = ((context.ActionDescriptor as ControllerActionDescriptor)?.MethodInfo.CustomAttributes.Any(x => x.AttributeType == typeof(AllowAnonymousAttribute))).GetValueOrDefault();
             if (allowAnonymous || !ViewBag.Anonymous)

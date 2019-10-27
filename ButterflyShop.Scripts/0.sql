@@ -343,10 +343,11 @@ if not exists (select 1
   create table ContactInfo
   (
     Id int not null primary key identity,
+    City nvarchar(50) not null,
     Address nvarchar(100) not null,
-    Phones nvarchar(100) not null,
-    TimeTable nvarchar(1024) not null,
-    GoogleUrl nvarchar(1024) not null,
+    Phones nvarchar(100) null,
+    TimeTable nvarchar(1024) null,
+    GoogleUrl nvarchar(1024) null,
     DateCreated datetime not null default(getdate()),
     DateModified datetime not null default(getdate()),
     IsDeleted bit not null default(0),

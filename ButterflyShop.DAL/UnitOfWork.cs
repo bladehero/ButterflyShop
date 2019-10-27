@@ -13,6 +13,7 @@ namespace ButterflyShop.DAL
         public CartDao Carts { get; set; }
         public CategoryDao Categories { get; set; }
         public CategoryProductDao CategoryProducts { get; set; }
+        public ContactInfoDao ContactInfo { get; set; }
         public CharacteristicDao Characteristics { get; set; }
         public CharacteristicProductDao CharacteristicProducts { get; set; }
         public FavouriteProductDao FavouriteProducts { get; set; }
@@ -39,6 +40,7 @@ namespace ButterflyShop.DAL
             Carts = new CartDao(connection);
             Categories = new CategoryDao(connection);
             CategoryProducts = new CategoryProductDao(connection);
+            ContactInfo = new ContactInfoDao(connection);
             Characteristics = new CharacteristicDao(connection);
             CharacteristicProducts = new CharacteristicProductDao(connection);
             FavouriteProducts = new FavouriteProductDao(connection);

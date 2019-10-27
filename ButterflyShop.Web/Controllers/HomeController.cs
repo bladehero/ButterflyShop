@@ -38,7 +38,8 @@ namespace ButterflyShop.Web.Controllers
         [AllowAnonymous]
         public IActionResult Contact()
         {
-            return View();
+            var contactInfo = UnitOfWork.ContactInfo.FindAll();
+            return View(contactInfo);
         }
 
         [AllowAnonymous]
