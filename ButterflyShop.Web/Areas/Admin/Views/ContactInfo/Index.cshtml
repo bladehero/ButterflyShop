@@ -1,16 +1,12 @@
 ﻿@model IEnumerable<ButterflyShop.DAL.Models.ContactInfo>
-<style>
-    .shortable {
-    }
-</style>
-<div class="row">
-    <div class="col">
+<div class="row mb-2">
+    <div class="col text-right">
         <button class="btn btn-secondary mr-1" id="reload-contact-info">Обновить</button>
         <button class="btn btn-success" id="add-contact-info">Добавить</button>
     </div>
 </div>
 <div id="contact-list" class="table-responsive">
-    <table class="table table-sm table-hover table-centered">
+    <table class="table table-sm table-hover table-centered for-data-table">
         <thead>
             <tr>
                 <th scope="col">ID</th>
@@ -32,8 +28,8 @@
                         <td class="shortable">@contactInfo.Address</td>
                         <td class="shortable">@contactInfo.Phones</td>
                         <td class="shortable">@contactInfo.TimeTable</td>
-                        <td>@contactInfo.DateCreated.ToShortDateString()</td>
-                        <td>@contactInfo.DateModified.ToShortDateString()</td>
+                        <td>@contactInfo.DateCreated.ToShortDateString() @contactInfo.DateCreated.ToShortTimeString()</td>
+                        <td>@contactInfo.DateModified.ToShortDateString() @contactInfo.DateModified.ToShortTimeString()</td>
                         <td class="contact-delete-restore"><i class="pointer fa @(contactInfo.IsDeleted ? "fa-trash-restore-alt text-success" : "fa-trash-alt text-danger")"></i></td>
                     </tr>
                 }
@@ -51,7 +47,44 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body"></div>
+            <div class="modal-body">
+                <input type="hidden" id="contact-id" />
+                <!-- City  -->
+                <div class="form-group">
+                    <label for="city">Город<span class="text-danger">*</span>:</label>
+                    <input type="text" class="form-control" id="city" placeholder="Город...">
+                </div>
+                <!-- City -->
+                <!-- Address  -->
+                <div class="form-group">
+                    <label for="address">Адрес<span class="text-danger">*</span>:</label>
+                    <input type="text" class="form-control" id="address" placeholder="Адрес...">
+                </div>
+                <!-- Address -->
+                <!-- Google Url  -->
+                <div class="form-group">
+                    <label for="google-url">Google карта:</label>
+                    <input type="text" class="form-control" id="google-url" placeholder="Ссылка на карту...">
+                </div>
+                <!-- Google Url -->
+                <!-- Phones -->
+                <div class="form-group">
+                    <label for="phones">Телефоны:</label>
+                    <textarea class="form-control" id="phones" rows="3" placeholder="Можно указать несколько через ;"></textarea>
+                </div>
+                <!-- Phones -->
+                <!-- TimeTable -->
+                <div class="form-group">
+                    <label for="time-table">Время работы:</label>
+                    <textarea class="form-control" id="time-table" rows="3" placeholder="Можно указать несколько через ;"></textarea>
+                </div>
+                <!-- TimeTable -->
+                <div class="row mt-3">
+                    <div class="col text-right">
+                        <button class="btn text-right btn-success" id="contact-save">Сохранить</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -60,19 +93,62 @@
 @section Scripts {
     <script>
     $(document).ready(function () {
+        activeLink('contacts-link');
+
+        $('.for-data-table').DataTable();
 
         $('#add-contact-info').click(function () {
-            $.ajax({
-                method: 'GET',
-                url: @Url.Action("_ContactInfo", "ContactInfo"),
-                success: function (html) {
-                    $('#modal-large .modal-body').html(html);
-                }
-            });
+            $('#city').val(null);
+            $('#address').val(null);
+            $('#google-url').val(null);
+            $('#phones').val(null);
+            $('#time-table').val(null);
+            $('#modal-large').modal('show');
         });
 
+        function updateContactList() {
+            setTimeout(function () { window.location.reload(true);}, 2000);
+        }
+
         $('#reload-contact-info').click(function () {
-            window.location.reload(true);
+            updateContactList();
+        });
+
+        $('#contact-save').click(function () {
+            var _this = $(this).parent();
+            var id = $('#contact-id').val();
+            var contact = {};
+            contact.id = id;
+            contact.city = $('#city').val();
+            contact.address = $('#address').val();
+            contact.googleUrl = $('#google-url').val();
+            contact.phones = $('#phones').val();
+            contact.timeTable = $('#time-table').val();
+            $.ajax({
+                method: 'POST',
+                url: '@Url.Action("UpdateContactInfo", "ContactInfo", new { area = "Admin" })',
+                data: contact,
+                success: function (data) {
+                    if (data.success) {
+                        Swal.fire({
+                            type: 'success',
+                            title: 'Успешно',
+                            text: 'Контакт успешно обновлен!',
+                            showConfirmButton: false,
+                            timer: 2000
+                        });
+                        updateContactList();
+                    } else {
+                        Swal.fire({
+                            type: 'error',
+                            title: 'Ошибка',
+                            text: 'Произошла ошибка!',
+                            showConfirmButton: false,
+                            timer: 2000
+                        });
+                    }
+                }
+            });
         });
 
         $('#contact-list').on('click', '.contact-row td:not(.contact-delete-restore)', function () {
@@ -80,11 +156,15 @@
             var id = _this.data('contact-id');
             $.ajax({
                 method: 'GET',
-                url: '@Url.Action("_Contact", "ContactInfo", new { area = "Admin" })',
-                data: { id: id },
-                success: function (html) {
-                    $('#modal-large .modal-header .modal-title').html('Заказ №' + id);
-                    $('#modal-large .modal-body').html(html);
+                url: '@Url.Action("GetContactInfo", "ContactInfo", new { area = "Admin" })',
+                data: { contactId: id },
+                success: function (data) {
+                    $('#contact-id').val(id);
+                    $('#city').val(data.city);
+                    $('#address').val(data.address);
+                    $('#google-url').val(data.googleUrl);
+                    $('#phones').val(data.phones);
+                    $('#time-table').val(data.timeTable);
                     $('#modal-large').modal('show');
                 }
             });

@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<ButterflyShop.DAL.Models.StoredProcedureModels.ProductsInfo_Admin_Result>
 
-<table class="table table-sm table-hover table-centered">
+<table class="table table-sm table-hover table-centered for-data-table">
     <thead>
         <tr>
             <th scope="col">ID</th>
@@ -26,3 +26,5 @@
         }
     </tbody>
 </table>
+
+<script>$('.for-data-table').DataTable();</script>

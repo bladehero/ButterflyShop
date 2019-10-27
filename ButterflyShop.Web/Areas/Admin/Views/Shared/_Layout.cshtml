@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
     <link rel="stylesheet" href="~/assets/css/admin-style.css" />
     <link rel="stylesheet" href="~/assets/css/fontawesome/css/all.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
     <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
 </head>
 <body class="bg-light">
@@ -23,9 +24,10 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item"><a id="news-link" class="nav-link" href="@Url.Action("Index", "Products", new { area = "Admin" })">Товары</a></li>
-                    <li class="nav-item"><a id="services-link" class="nav-link" href="@Url.Action("Index", "Orders", new { area = "Admin" })">Заказы</a></li>
-                    <li class="nav-item"><a id="services-link" class="nav-link" href="@Url.Action("Logout", "Home", new { area = "Admin" })">Выйти</a></li>
+                    <li class="nav-item"><a id="products-link" class="nav-link" href="@Url.Action("Index", "Products", new { area = "Admin" })">Товары</a></li>
+                    <li class="nav-item"><a id="orders-link" class="nav-link" href="@Url.Action("Index", "Orders", new { area = "Admin" })">Заказы</a></li>
+                    <li class="nav-item"><a id="contacts-link" class="nav-link" href="@Url.Action("Index", "ContactInfo", new { area = "Admin" })">Контакты</a></li>
+                    <li class="nav-item"><a class="nav-link" href="@Url.Action("Logout", "Home", new { area = "Admin" })">Выйти</a></li>
                 </ul>
             </div>
         </nav>
@@ -53,14 +55,21 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
-    <script>
-        function activeLink(id) {
-            $('#' + id).addClass('active');
-        }
-    </script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
     <!--Scripts section end-->
     <!--Additional scripts-->
     @RenderSection("Scripts", false)
     <!--Additional scripts end-->
+    <script>
+        function activeLink(id) {
+            $('#' + id).addClass('active');
+        }
+
+        $.extend(true, $.fn.dataTable.defaults, {
+            language: {
+                url: "//cdn.datatables.net/plug-ins/1.10.13/i18n/Russian.json"
+            }
+        });
+    </script>
 </body>
 </html>
