@@ -83,7 +83,8 @@ begin
           or (@saleItems = 1 
           and i.OldPrice is not null))
       order by
-        case when isnull(@newItems, 0) = 1 then p.DateCreated end desc
+        case when exists (select 1 from Brands b where b.Id = p.BrandId and b.Name = 'TianDe') then 1 end desc
+      , case when isnull(@newItems, 0) = 1 then p.DateCreated end desc
       , newid()
   else
     select
@@ -121,7 +122,8 @@ begin
           or (@saleItems = 1 
           and i.OldPrice is not null))
       order by
-        case when isnull(@newItems, 0) = 1 then p.DateCreated end desc
+        case when exists (select 1 from Brands b where b.Id = p.BrandId and b.Name = 'TianDe') then 1 end desc
+      , case when isnull(@newItems, 0) = 1 then p.DateCreated end desc
 end;
 go
 
@@ -518,7 +520,8 @@ begin
         and (@minPrice is null or i.Price >= @minPrice)
         and (@maxPrice is null or i.Price <= @maxPrice)
       order by
-        p.DateCreated
+        case when exists (select 1 from Brands b where b.Id = p.BrandId and b.Name = 'TianDe') then 1 end desc
+      , p.DateCreated
  
 end;
 go
