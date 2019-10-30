@@ -430,7 +430,7 @@ begin
       inner join CategoryParents cp on cp.ParentId = c.Id
   )
   insert into @categories
-    select *
+    select distinct *
       from CategoryParents
       order by Id
       option (maxrecursion 0)
