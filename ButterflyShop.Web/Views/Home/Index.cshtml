@@ -18,8 +18,8 @@
                         <div class="col-12">
                             <!--Hero Content start-->
                             <div class="hero-content-2 right">
-                                <h2 style="color:green !important;">Молодость и красота</h2>
-                                <a style="background-color:green !important;" href="@Url.Action("Index", "Shop")" class="btn">НАЙТИ</a>
+                                <h2 class="text-white">Современный стиль</h2>
+                                <a href="@Url.Action("Index", "Shop")" class="btn">НАЙТИ</a>
                             </div>
                             <!--Hero Content end-->
                         </div>
@@ -35,9 +35,9 @@
                     <div class="col-12">
                         <div class="col-12">
                             <!--Hero Content start-->
-                            <div class="hero-content-2 center">
-                                <h2>Экологически чистая <br> косметика</h2>
-                                <a href="@Url.Action("Index", "Shop")" class="btn">НАЙТИ</a>
+                            <div class="hero-content-2 left">
+                                <h2>Надежная<br />фурнитура</h2>
+                                <a style="color:black !important;background-color:white !important;" href="@Url.Action("Index", "Shop")" class="btn">НАЙТИ</a>
                             </div>
                             <!--Hero Content end-->
                         </div>
@@ -52,8 +52,8 @@
                 <div class="row">
                     <div class="col-12">
                         <!--Hero Content start-->
-                        <div class="hero-content-2 right">
-                            <h2 class="text-white">Разнообразие брендов <br> в твоих руках</h2>
+                        <div class="hero-content-2 left">
+                            <h2 style="color:gray !important;">Известный <br/><span style="color:black !important;">производитель</span></h2>
                             <a href="@Url.Action("Index", "Shop")" class="btn">НАЙТИ</a>
                         </div>
                         <!--Hero Content end-->
@@ -65,31 +65,6 @@
     </div>
 </div>
 <!--Slider Section end-->
-<!-- Banner section start -->
-@*<div class="banner-section section pt-30">
-        <div class="container">
-            <div class="row justify-content-center">
-                @foreach (var brand in randomBrands)
-                {
-                    <!-- Single Banner Start -->
-                    <div class="col-lg-6 col-md-6 col-sm-12">
-                        <div class="single-banner-item mb-30">
-                            <div class="banner-image">
-                                <a href="@Url.Action("Index", "Shop", new { brandId = brand.Id })">
-                                    <img src="~/@BrandBackgroundImage(brand.BackgroundImage)" alt="@brand.Name">
-                                </a>
-                            </div>
-                            <div class="banner-content">
-                                <a class="btn" href="@Url.Action("Index", "Shop", new { brandId = brand.Id })">ПРОСМОТР</a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Single Banner End -->
-                }
-            </div>
-        </div>
-    </div>*@
-<!-- Banner section End -->
 <!--Product section start-->
 <div class="product-section section pt-100 pt-lg-80 pt-md-70 pt-sm-60 pt-xs-50 pb-55 pb-lg-35 pb-md-25 pb-sm-15 pb-xs-5">
     <div class="container">
@@ -129,53 +104,6 @@
         </div>
     </div>
 </div>
-<!--Product section end-->
-<!--Product section start-->
-@*<div class="product-section section pt-70 pt-lg-50 pt-md-40 pt-sm-30 pt-xs-20 pb-55 pb-lg-35 pb-md-25 pb-sm-15 pb-xs-5">
-    <div class="container">
-        <div class="row">
-            <div class="col">
-                <div class="section-title text-center mb-15">
-                    <h2>Новинки</h2>
-                </div>
-                <div class="product-tab mb-50 mb-sm-30 mb-xs-20">
-                    <ul class="nav">
-                        <li><a class="active show" data-toggle="tab" href="#new-items">Новинки</a></li>
-                        <li><a data-toggle="tab" href="#with-sale-items">Распродажа</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="tab-content">
-            <!-- New Items Tab Start -->
-            <div id="new-items" class="tab-pane fade active show">
-                <div class="row">
-                    @foreach (var item in newItems)
-                    {
-                        <div class="col-lg-3 col-md-4 col-sm-6">
-                            @await Html.PartialAsync("~/Views/Shared/_ProductCard.cshtml", item)
-                        </div>
-                    }
-                </div>
-            </div>
-            <!-- New Items Tab End -->
-            <!-- With Sale Items Tab Start -->
-            <div id="with-sale-items" class="tab-pane">
-                <!--  Single Grid product Start -->
-                <div class="row">
-                    @foreach (var item in saleItems)
-                    {
-                        <div class="col-lg-3 col-md-4 col-sm-6">
-                            @await Html.PartialAsync("~/Views/Shared/_ProductCard.cshtml", item)
-                        </div>
-                    }
-                </div>
-                <!--  Single Grid product End -->
-            </div>
-            <!-- With Sale Items Tab End -->
-        </div>
-    </div>
-</div>*@
 <!--Product section end-->
 <!--Features section start-->
 <div class="features-section section pt-30 pt-lg-15 pt-md-0 pt-sm-0 pt-xs-15">

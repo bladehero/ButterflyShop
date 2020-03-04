@@ -23,7 +23,7 @@
 -- end;
 -- go
 
-use ButterflyShopDatabase
+use FurnitureDatabase
 go
 
 if object_id(N'dbo.GetItemsInfo') is null
