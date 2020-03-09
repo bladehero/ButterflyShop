@@ -1,8 +1,8 @@
-﻿using ButterflyShop.DAL.Dao;
+﻿using FurnitureShop.DAL.Dao;
 using System;
 using System.Data;
 
-namespace ButterflyShop.DAL
+namespace FurnitureShop.DAL
 {
     public class UnitOfWork : IDisposable
     {

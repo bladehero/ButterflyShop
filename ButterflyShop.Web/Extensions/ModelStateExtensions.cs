@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System.Text;
 
-namespace ButterflyShop.Web.Extensions
+namespace FurnitureShop.Web.Extensions
 {
     public static class ModelStateExtensions
     {

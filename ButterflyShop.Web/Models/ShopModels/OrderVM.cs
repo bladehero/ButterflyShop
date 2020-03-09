@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace ButterflyShop.Web.Models.ShopModels
+namespace FurnitureShop.Web.Models.ShopModels
 {
     public class OrderVM
     {

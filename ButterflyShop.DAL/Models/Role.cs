@@ -1,4 +1,4 @@
-﻿namespace ButterflyShop.DAL.Models
+﻿namespace FurnitureShop.DAL.Models
 {
     public class Role : BaseEntity
     {

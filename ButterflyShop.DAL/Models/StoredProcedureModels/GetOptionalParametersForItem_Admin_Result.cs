@@ -1,4 +1,4 @@
-﻿namespace ButterflyShop.DAL.Models.StoredProcedureModels
+﻿namespace FurnitureShop.DAL.Models.StoredProcedureModels
 {
     public class GetOptionalParametersForItem_Admin_Result
     {

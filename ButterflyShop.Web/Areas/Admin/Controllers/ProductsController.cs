@@ -1,5 +1,5 @@
-﻿using ButterflyShop.DAL.Models;
-using ButterflyShop.Web.Areas.Admin.Models.ProductsModel;
+﻿using FurnitureShop.DAL.Models;
+using FurnitureShop.Web.Areas.Admin.Models.ProductsModel;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -8,7 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ButterflyShop.Web.Areas.Admin.Controllers
+namespace FurnitureShop.Web.Areas.Admin.Controllers
 {
     [Area("Admin")]
     public class ProductsController : AdminController

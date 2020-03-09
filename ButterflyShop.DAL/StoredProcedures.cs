@@ -1,11 +1,11 @@
-﻿using ButterflyShop.DAL.Dao;
-using ButterflyShop.DAL.Models;
-using ButterflyShop.DAL.Models.StoredProcedureModels;
+﻿using FurnitureShop.DAL.Dao;
+using FurnitureShop.DAL.Models;
+using FurnitureShop.DAL.Models.StoredProcedureModels;
 using Dapper;
 using System.Collections.Generic;
 using System.Data;
 
-namespace ButterflyShop.DAL
+namespace FurnitureShop.DAL
 {
     public class StoredProcedures : DataAccessObject
     {

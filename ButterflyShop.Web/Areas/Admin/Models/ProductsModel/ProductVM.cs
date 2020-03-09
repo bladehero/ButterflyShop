@@ -1,9 +1,9 @@
-﻿using ButterflyShop.DAL.Models;
-using ButterflyShop.DAL.Models.StoredProcedureModels;
+﻿using FurnitureShop.DAL.Models;
+using FurnitureShop.DAL.Models.StoredProcedureModels;
 using Microsoft.AspNetCore.Http;
 using System.Collections.Generic;
 
-namespace ButterflyShop.Web.Areas.Admin.Models.ProductsModel
+namespace FurnitureShop.Web.Areas.Admin.Models.ProductsModel
 {
     public class ProductVM
     {

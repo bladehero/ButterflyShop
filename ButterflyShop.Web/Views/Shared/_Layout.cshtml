@@ -1,7 +1,7 @@
-﻿@using ButterflyShop.DAL.Models.StoredProcedureModels
-@using static ButterflyShop.Web.Extensions.CustomExtensions
+﻿@using FurnitureShop.DAL.Models.StoredProcedureModels
+@using static FurnitureShop.Web.Extensions.CustomExtensions
 @{
-    IEnumerable<ButterflyShop.DAL.Models.ContactInfo> contacts = ViewBag.ContactInfo;
+    IEnumerable<FurnitureShop.DAL.Models.ContactInfo> contacts = ViewBag.ContactInfo;
     bool isAuthorized = !(ViewBag.Anonymous ?? true);
     IEnumerable<GetCategoryHierarchy_Result> categoryHierarchy = ViewBag.CategoryHierarchy ?? new List<GetCategoryHierarchy_Result>();
 }
@@ -11,7 +11,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Butterfly</title>
+    <title>Furniture</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="apple-touch-icon" sizes="57x57" href="~/assets/images/favicon/apple-icon-57x57.png">
@@ -329,7 +329,7 @@
                         <!--Footer Widget end-->
                         <!--Footer Widget start-->
                         <div class="footer-widget text-lg-right text-left col-xl-3 col-lg-3 col-md-6 col-sm-6 col-12 mb-40 mb-xs-35">
-                            <a href="mailto:abfly@ukr.net" class="contact-text">Почта: <b>abfly@ukr.net</b></a>
+                            <a href="mailto:mebli@ukr.net" class="contact-text">Почта: <b>mebli@ukr.net</b></a>
                             <br />
                             @foreach (var contact in contacts)
                             {
@@ -358,9 +358,9 @@
                                 <div class="col-12">
                                     <div class="copyright text-center">
                                         <p>
-                                            Copyright &copy;2019 <a href="@Url.Action("Index", "Home")">ButterflyShop</a>. Все права защищены.
+                                            Copyright &copy;2019 <a href="@Url.Action("Index", "Home")">FurnitureShop</a>. Все права защищены.
                                             <br />
-                                            <span class="font-weight-light">Сайт создан: <a class="text-dark font-weight-bold" href="mailto:nikita.dermenzhi@gmail.com">Dermenzhi N.</a></span>
+                                            <span class="font-weight-light">Сайт создан: <a class="text-dark font-weight-bold" href="mailto:valeria.osadcha@gmail.com">Valeria Osadcha</a></span>
                                         </p>
                                     </div>
                                 </div>

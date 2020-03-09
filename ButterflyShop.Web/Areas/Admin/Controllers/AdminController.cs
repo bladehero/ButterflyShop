@@ -1,6 +1,6 @@
-﻿using ButterflyShop.DAL;
-using ButterflyShop.DAL.Models;
-using ButterflyShop.Web.Extensions;
+﻿using FurnitureShop.DAL;
+using FurnitureShop.DAL.Models;
+using FurnitureShop.Web.Extensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -10,11 +10,11 @@ using System;
 using System.Data.SqlClient;
 using System.Linq;
 
-namespace ButterflyShop.Web.Areas.Admin.Controllers
+namespace FurnitureShop.Web.Areas.Admin.Controllers
 {
     public class AdminController : Controller
     {
-        public const string AuthKey = "__auth__admin__butterfly__";
+        public const string AuthKey = "__auth__admin__Furniture__";
 
         protected User SystemUser { get; set; }
         protected bool Anonymous => !(SystemUser is User user && user.Id != 0 && user.Token != Guid.Empty);

@@ -1,8 +1,8 @@
-﻿using ButterflyShop.DAL.Models.StoredProcedureModels;
+﻿using FurnitureShop.DAL.Models.StoredProcedureModels;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace ButterflyShop.Web.Models.ShopModels
+namespace FurnitureShop.Web.Models.ShopModels
 {
     public class CheckoutVM
     {

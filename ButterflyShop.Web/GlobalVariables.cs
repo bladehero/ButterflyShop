@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.IO;
 
-namespace ButterflyShop.Web
+namespace FurnitureShop.Web
 {
     public static class GlobalVariables
     {

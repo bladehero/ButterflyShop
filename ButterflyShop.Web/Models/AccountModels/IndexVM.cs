@@ -1,8 +1,8 @@
-﻿using ButterflyShop.DAL.Models;
-using ButterflyShop.DAL.Models.StoredProcedureModels;
+﻿using FurnitureShop.DAL.Models;
+using FurnitureShop.DAL.Models.StoredProcedureModels;
 using System.Collections.Generic;
 
-namespace ButterflyShop.Web.Models.AccountModels
+namespace FurnitureShop.Web.Models.AccountModels
 {
     public class IndexVM
     {

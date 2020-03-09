@@ -1,11 +1,11 @@
-﻿using ButterflyShop.Web.Areas.Admin.Models.HomeModels;
-using ButterflyShop.Web.Controllers;
-using ButterflyShop.Web.Extensions;
+﻿using FurnitureShop.Web.Areas.Admin.Models.HomeModels;
+using FurnitureShop.Web.Controllers;
+using FurnitureShop.Web.Extensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 
-namespace ButterflyShop.Web.Areas.Admin.Controllers
+namespace FurnitureShop.Web.Areas.Admin.Controllers
 {
     [Area("Admin")]
     public class HomeController : AdminController

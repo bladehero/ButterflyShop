@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace ButterflyShop.Web.Models.HomeModels
+namespace FurnitureShop.Web.Models.HomeModels
 {
     public class SendMessageVM
     {

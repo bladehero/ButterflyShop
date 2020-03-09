@@ -1,11 +1,11 @@
-﻿using ButterflyShop.DAL.Models.StoredProcedureModels;
-using ButterflyShop.Web.Extensions;
-using ButterflyShop.Web.Models.ShopModels;
+﻿using FurnitureShop.DAL.Models.StoredProcedureModels;
+using FurnitureShop.Web.Extensions;
+using FurnitureShop.Web.Models.ShopModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 
-namespace ButterflyShop.Web.Controllers
+namespace FurnitureShop.Web.Controllers
 {
     public class ShopController : BaseController
     {

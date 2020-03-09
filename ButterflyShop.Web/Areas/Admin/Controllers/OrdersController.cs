@@ -1,9 +1,9 @@
-﻿using ButterflyShop.DAL.Models;
-using ButterflyShop.Web.Areas.Admin.Models.OrderModels;
+﻿using FurnitureShop.DAL.Models;
+using FurnitureShop.Web.Areas.Admin.Models.OrderModels;
 using Microsoft.AspNetCore.Mvc;
 using System;
 
-namespace ButterflyShop.Web.Areas.Admin.Controllers
+namespace FurnitureShop.Web.Areas.Admin.Controllers
 {
     [Area("Admin")]
     public class OrdersController : AdminController

@@ -1,7 +1,7 @@
 ﻿using System.IO;
-using static ButterflyShop.Web.ImageFolderNames;
+using static FurnitureShop.Web.ImageFolderNames;
 
-namespace ButterflyShop.Web.Extensions
+namespace FurnitureShop.Web.Extensions
 {
     public static class ImagePathExtension
     {

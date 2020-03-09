@@ -1,8 +1,8 @@
-﻿using ButterflyShop.DAL.Models;
-using ButterflyShop.DAL.Models.StoredProcedureModels;
+﻿using FurnitureShop.DAL.Models;
+using FurnitureShop.DAL.Models.StoredProcedureModels;
 using System.Collections.Generic;
 
-namespace ButterflyShop.Web.Areas.Admin.Models.OrderModels
+namespace FurnitureShop.Web.Areas.Admin.Models.OrderModels
 {
     public class OrderVM
     {

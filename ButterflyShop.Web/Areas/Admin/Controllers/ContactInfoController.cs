@@ -1,8 +1,8 @@
-﻿using ButterflyShop.DAL.Models;
+﻿using FurnitureShop.DAL.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
 
-namespace ButterflyShop.Web.Areas.Admin.Controllers
+namespace FurnitureShop.Web.Areas.Admin.Controllers
 {
     [Area("Admin")]
     public class ContactInfoController : AdminController

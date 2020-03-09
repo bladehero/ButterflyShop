@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace ButterflyShop.Web
+namespace FurnitureShop.Web
 {
     public class Startup
     {

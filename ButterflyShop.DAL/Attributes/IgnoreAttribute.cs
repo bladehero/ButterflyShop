@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ButterflyShop.DAL.Attributes
+namespace FurnitureShop.DAL.Attributes
 {
     [AttributeUsage(AttributeTargets.Property, Inherited = false, AllowMultiple = false)]
     sealed class IgnoreAttribute : Attribute

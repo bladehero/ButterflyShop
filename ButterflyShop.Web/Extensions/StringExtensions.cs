@@ -1,4 +1,4 @@
-﻿namespace ButterflyShop.Web.Extensions
+﻿namespace FurnitureShop.Web.Extensions
 {
     public static class StringExtensions
     {

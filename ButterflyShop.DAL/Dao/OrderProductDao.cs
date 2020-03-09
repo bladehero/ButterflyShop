@@ -1,7 +1,7 @@
-﻿using ButterflyShop.DAL.Models;
+﻿using FurnitureShop.DAL.Models;
 using System.Data;
 
-namespace ButterflyShop.DAL.Dao
+namespace FurnitureShop.DAL.Dao
 {
     public class OrderProductDao : BaseDao<OrderProduct>
     {

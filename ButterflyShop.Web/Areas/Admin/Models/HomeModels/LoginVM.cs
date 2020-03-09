@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace ButterflyShop.Web.Areas.Admin.Models.HomeModels
+namespace FurnitureShop.Web.Areas.Admin.Models.HomeModels
 {
     public class LoginVM
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ButterflyShop.DAL.Models.StoredProcedureModels
+namespace FurnitureShop.DAL.Models.StoredProcedureModels
 {
     public class ProductItemInfo_Result
     {

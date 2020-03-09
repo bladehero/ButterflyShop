@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28010.2036
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29728.190
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ButterflyShop.Web", "ButterflyShop.Web\ButterflyShop.Web.csproj", "{84C75FB1-B81B-404D-8761-E7A04008FF28}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FurnitureShop.Web", "ButterflyShop.Web\FurnitureShop.Web.csproj", "{84C75FB1-B81B-404D-8761-E7A04008FF28}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ButterflyShop.DAL", "ButterflyShop.DAL\ButterflyShop.DAL.csproj", "{A6280E29-2813-4124-B7E3-F227F41801F7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FurnitureShop.DAL", "ButterflyShop.DAL\FurnitureShop.DAL.csproj", "{A6280E29-2813-4124-B7E3-F227F41801F7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

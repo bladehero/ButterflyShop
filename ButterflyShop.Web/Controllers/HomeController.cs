@@ -1,12 +1,12 @@
-﻿using ButterflyShop.DAL.Models;
-using ButterflyShop.Web.Extensions;
-using ButterflyShop.Web.Models.HomeModels;
+﻿using FurnitureShop.DAL.Models;
+using FurnitureShop.Web.Extensions;
+using FurnitureShop.Web.Models.HomeModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Linq;
 
-namespace ButterflyShop.Web.Controllers
+namespace FurnitureShop.Web.Controllers
 {
     public class HomeController : BaseController
     {

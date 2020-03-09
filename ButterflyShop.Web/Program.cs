@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
-namespace ButterflyShop.Web
+namespace FurnitureShop.Web
 {
     public class Program
     {

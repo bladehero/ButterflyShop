@@ -1,4 +1,4 @@
-﻿using ButterflyShop.DAL.Models;
+﻿using FurnitureShop.DAL.Models;
 using Dapper;
 using System;
 using System.Collections;
@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 
-namespace ButterflyShop.DAL.Dao
+namespace FurnitureShop.DAL.Dao
 {
     public class BaseDao<T> : DataAccessObject, IEnumerable<T>, IEnumerable where T : BaseEntity
     {

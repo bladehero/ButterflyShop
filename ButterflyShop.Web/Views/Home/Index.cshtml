@@ -1,5 +1,5 @@
-﻿@model ButterflyShop.Web.Models.HomeModels.IndexVM
-@using static ButterflyShop.Web.Extensions.ImagePathExtension
+﻿@model FurnitureShop.Web.Models.HomeModels.IndexVM
+@using static FurnitureShop.Web.Extensions.ImagePathExtension
 @{
     var brands = Model.Brands;
     var randomBrands = Model.RandomBrands;
@@ -75,7 +75,7 @@
                 </div>
             </div>
         </div>
-        <div class="row product-slider">
+        <div class="row @(newItems?.Count() > 4 ? "product-slider" : "justify-content-center")">
             @foreach (var product in newItems)
             {
                 <div class="col-lg-3 col-md-4 col-sm-6">
@@ -94,7 +94,7 @@
                 </div>
             </div>
         </div>
-        <div class="row product-slider">
+        <div class="row @(saleItems?.Count() > 4 ? "product-slider" : "justify-content-center")">
             @foreach (var product in saleItems)
             {
                 <div class="col-lg-3 col-md-4 col-sm-6">

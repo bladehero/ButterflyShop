@@ -1,8 +1,8 @@
-﻿using ButterflyShop.DAL.Models.StoredProcedureModels;
+﻿using FurnitureShop.DAL.Models.StoredProcedureModels;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace ButterflyShop.Web.Extensions
+namespace FurnitureShop.Web.Extensions
 {
     public static class CustomExtensions
     {

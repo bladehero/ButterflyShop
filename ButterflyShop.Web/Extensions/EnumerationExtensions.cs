@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Reflection;
 
-namespace ButterflyShop.Web.Extensions
+namespace FurnitureShop.Web.Extensions
 {
     public static class EnumerationExtensions
     {

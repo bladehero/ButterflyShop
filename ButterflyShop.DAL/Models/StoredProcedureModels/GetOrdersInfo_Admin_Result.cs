@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ButterflyShop.DAL.Models.StoredProcedureModels
+namespace FurnitureShop.DAL.Models.StoredProcedureModels
 {
     public class GetOrdersInfo_Admin_Result
     {

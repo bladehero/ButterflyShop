@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ButterflyShop.DAL.Models
+namespace FurnitureShop.DAL.Models
 {
     public class BaseEntity
     {

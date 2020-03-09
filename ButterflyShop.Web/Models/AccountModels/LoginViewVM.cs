@@ -1,4 +1,4 @@
-﻿namespace ButterflyShop.Web.Models.AccountModels
+﻿namespace FurnitureShop.Web.Models.AccountModels
 {
     public class LoginViewVM
     {

@@ -1,9 +1,9 @@
-﻿using ButterflyShop.DAL.Models;
+﻿using FurnitureShop.DAL.Models;
 using Dapper;
 using System;
 using System.Data;
 
-namespace ButterflyShop.DAL.Dao
+namespace FurnitureShop.DAL.Dao
 {
     public class UserDao : BaseDao<User>
     {

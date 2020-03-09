@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Data;
 
-namespace ButterflyShop.DAL.Dao
+namespace FurnitureShop.DAL.Dao
 {
     public class DataAccessObject
     {
