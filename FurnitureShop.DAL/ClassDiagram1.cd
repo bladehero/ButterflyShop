@@ -1,0 +1,405 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="FurnitureShop.DAL.Attributes.IgnoreAttribute">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Attributes\IgnoreAttribute.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FurnitureShop.DAL.Dao.BaseDao&lt;T&gt;" Collapsed="true">
+    <Position X="20.25" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAEAIAAAAABAAAAASAAQAABEJBQgAAAEAQRAAAQA=</HashCode>
+      <FileName>Dao\BaseDao.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.1" />
+  </Class>
+  <Class Name="FurnitureShop.DAL.Dao.BrandDao">
+    <Position X="9.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Dao\BrandDao.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FurnitureShop.DAL.Dao.CartDao">
+    <Position X="22" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Dao\CartDao.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FurnitureShop.DAL.Dao.CategoryDao">
+    <Position X="7.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Dao\CategoryDao.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FurnitureShop.DAL.Dao.CategoryProductDao">
+    <Position X="14" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Dao\CategoryProductDao.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FurnitureShop.DAL.Dao.CharacteristicDao">
+    <Position X="0.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Dao\CharacteristicDao.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FurnitureShop.DAL.Dao.CharacteristicProductDao">
+    <Position X="11.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Dao\CharacteristicProductDao.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FurnitureShop.DAL.Dao.ContactInfoDao">
+    <Position X="23.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Dao\ContactInfoDao.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FurnitureShop.DAL.Dao.DataAccessObject">
+    <Position X="23" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Dao\DataAccessObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FurnitureShop.DAL.Dao.FavouriteProductDao">
+    <Position X="16.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Dao\FavouriteProductDao.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FurnitureShop.DAL.Dao.ItemDao">
+    <Position X="2.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Dao\ItemDao.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FurnitureShop.DAL.Dao.OptionalParameterDao">
+    <Position X="14" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Dao\OptionalParameterDao.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FurnitureShop.DAL.Dao.OptionalParameterProductDao">
+    <Position X="0.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Dao\OptionalParameterProductDao.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FurnitureShop.DAL.Dao.OrderDao">
+    <Position X="9.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Dao\OrderDao.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FurnitureShop.DAL.Dao.OrderDeliveryTypeDao">
+    <Position X="18.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Dao\OrderDeliveryTypeDao.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FurnitureShop.DAL.Dao.OrderPaymentTypeDao">
+    <Position X="5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Dao\OrderPaymentTypeDao.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FurnitureShop.DAL.Dao.OrderProductDao">
+    <Position X="16.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Dao\OrderProductDao.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FurnitureShop.DAL.Dao.OrderStatusDao">
+    <Position X="2.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Dao\OrderStatusDao.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FurnitureShop.DAL.Dao.ProductDao">
+    <Position X="11.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Dao\ProductDao.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FurnitureShop.DAL.Dao.ProductImageDao">
+    <Position X="20.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Dao\ProductImageDao.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FurnitureShop.DAL.Dao.RoleDao">
+    <Position X="7.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Dao\RoleDao.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FurnitureShop.DAL.Dao.SupportMessageDao">
+    <Position X="18.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Dao\SupportMessageDao.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FurnitureShop.DAL.Dao.UserDao">
+    <Position X="5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAA=</HashCode>
+      <FileName>Dao\UserDao.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FurnitureShop.DAL.StoredProcedures">
+    <Position X="26.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAgAABASCQAEBmAACAACEYAAIAAAAAAAEAICAAA=</HashCode>
+      <FileName>StoredProcedures.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FurnitureShop.DAL.UnitOfWork" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="49.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAEIACABACAACAQESAAACAIAAwAAEAAkAAAIAAAFBAQ=</HashCode>
+      <FileName>UnitOfWork.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="FurnitureShop.DAL.Models.StoredProcedureModels.CartItemsInfo_Result" Collapsed="true">
+    <Position X="48" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAQAAAAAAgAAAAAQAAAAAQBAAAAAAgAAAAAQ=</HashCode>
+      <FileName>Models\StoredProcedureModels\CartItemsInfo_Result.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FurnitureShop.DAL.Models.StoredProcedureModels.GetCategoryHierarchy_Result" Collapsed="true">
+    <Position X="49.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAKAAAAAAAAAAAAAAAAAAQAAAAAAAABAgAEAQAAAAA=</HashCode>
+      <FileName>Models\StoredProcedureModels\GetCategoryHierarchy_Result.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FurnitureShop.DAL.Models.StoredProcedureModels.GetOptionalParametersForItem_Admin_Result" Collapsed="true">
+    <Position X="51.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAEAAAAAAAAAAAAgAAAAAEAAAAAAAAAAAAAAAAQQAA=</HashCode>
+      <FileName>Models\StoredProcedureModels\GetOptionalParametersForItem_Admin_Result.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FurnitureShop.DAL.Models.StoredProcedureModels.GetOrdersInfo_Admin_Result" Collapsed="true">
+    <Position X="53.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAEAAAAEAAAAgAgEAAAAAAQAABAAAAAAAAAEAQAAAAg=</HashCode>
+      <FileName>Models\StoredProcedureModels\GetOrdersInfo_Admin_Result.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FurnitureShop.DAL.Models.StoredProcedureModels.ItemWithParameters_Result" Collapsed="true">
+    <Position X="48" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQAAAAAAgAAAAAAAAAAAAAAAAIACAAAAAAA=</HashCode>
+      <FileName>Models\StoredProcedureModels\ItemWithParameters_Result.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FurnitureShop.DAL.Models.StoredProcedureModels.OrderDetails_Result" Collapsed="true">
+    <Position X="49.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAQEAAAAAAAAAAAQAAQAAAAAQAABAAAAAAAAAAA=</HashCode>
+      <FileName>Models\StoredProcedureModels\OrderDetails_Result.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FurnitureShop.DAL.Models.StoredProcedureModels.OrderProductsInfo_Result" Collapsed="true">
+    <Position X="51.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAQAAAAAAgAAAAAQAAAAAQBAAAAAAgAAAAAA=</HashCode>
+      <FileName>Models\StoredProcedureModels\OrderProductsInfo_Result.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FurnitureShop.DAL.Models.StoredProcedureModels.ProductItemInfo_Result" Collapsed="true">
+    <Position X="53.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAQAgAABAgAAAAAQAAAAAABAAAgACAAAAAAA=</HashCode>
+      <FileName>Models\StoredProcedureModels\ProductItemInfo_Result.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FurnitureShop.DAL.Models.StoredProcedureModels.ProductsInfo_Admin_Result" Collapsed="true">
+    <Position X="48" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAAAAAAAAAAAAAAAAAAAAEABAAAAAAQAIAAA=</HashCode>
+      <FileName>Models\StoredProcedureModels\ProductsInfo_Admin_Result.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FurnitureShop.DAL.Models.BaseEntity">
+    <Position X="23" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAEAQAAAAA=</HashCode>
+      <FileName>Models\BaseEntity.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FurnitureShop.DAL.Models.Brand">
+    <Position X="20.75" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAAAAAAABAAAAAAAQAAAIAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Brand.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FurnitureShop.DAL.Models.Cart">
+    <Position X="2.75" Y="12.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAgAAAAAgAAAAAAAAAAAAAgAAAAAA=</HashCode>
+      <FileName>Models\Cart.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FurnitureShop.DAL.Models.Category">
+    <Position X="9.5" Y="12.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAgAAAAAAAAA=</HashCode>
+      <FileName>Models\Category.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FurnitureShop.DAL.Models.CategoryProduct">
+    <Position X="16.25" Y="12.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\CategoryProduct.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FurnitureShop.DAL.Models.Characteristic">
+    <Position X="0.5" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Characteristic.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FurnitureShop.DAL.Models.CharacteristicProduct">
+    <Position X="7.25" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Models\CharacteristicProduct.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FurnitureShop.DAL.Models.ContactInfo">
+    <Position X="11.75" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAIAAAAAAAAAABAAAACAAAQIAAAAAA=</HashCode>
+      <FileName>Models\ContactInfo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FurnitureShop.DAL.Models.FavouriteProduct">
+    <Position X="16.25" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\FavouriteProduct.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FurnitureShop.DAL.Models.Item">
+    <Position X="23" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAA=</HashCode>
+      <FileName>Models\Item.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FurnitureShop.DAL.Models.OptionalParameter">
+    <Position X="5" Y="12.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\OptionalParameter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FurnitureShop.DAL.Models.OptionalParameterProduct">
+    <Position X="11.75" Y="12.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Models\OptionalParameterProduct.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FurnitureShop.DAL.Models.Order">
+    <Position X="18.5" Y="12.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAgCACgAAMAAAAAAgAAAAAAAACAAAAIAAAAAg=</HashCode>
+      <FileName>Models\Order.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FurnitureShop.DAL.Models.OrderDeliveryType">
+    <Position X="2.75" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>Models\OrderDeliveryType.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FurnitureShop.DAL.Models.OrderPaymentType">
+    <Position X="9.5" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>Models\OrderPaymentType.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FurnitureShop.DAL.Models.OrderProduct">
+    <Position X="14" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAQAAAAAAgAAAAAAAAAAAAAAAAAAAgAAAAAA=</HashCode>
+      <FileName>Models\OrderProduct.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FurnitureShop.DAL.Models.OrderStatus">
+    <Position X="18.5" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\OrderStatus.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FurnitureShop.DAL.Models.Product">
+    <Position X="0.5" Y="12.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgAAAAAAAAAAQAAAAAAAAAAAAAAAAQAAA=</HashCode>
+      <FileName>Models\Product.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FurnitureShop.DAL.Models.ProductImage">
+    <Position X="7.25" Y="12.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\ProductImage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FurnitureShop.DAL.Models.Role">
+    <Position X="14" Y="12.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Role.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FurnitureShop.DAL.Models.SupportMessage">
+    <Position X="20.75" Y="12.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAQAAAAAAAAAAAAAIAAAAAA=</HashCode>
+      <FileName>Models\SupportMessage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FurnitureShop.DAL.Models.User">
+    <Position X="5" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEIAACAAAAAAAAAAAAQAAAAAAAACAAAAIAABAAg=</HashCode>
+      <FileName>Models\User.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
