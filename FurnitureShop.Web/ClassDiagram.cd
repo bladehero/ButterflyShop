@@ -1,0 +1,298 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="FurnitureShop.Web.GlobalVariables">
+    <Position X="9.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAACAAAAAAAAA=</HashCode>
+      <FileName>GlobalVariables.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FurnitureShop.Web.ImageFolderNames">
+    <Position X="11.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAABIAAAiAAQAAAIAEAAAAAIAAAAAAEAAAAA=</HashCode>
+      <FileName>GlobalVariables.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FurnitureShop.Web.Program">
+    <Position X="15" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FurnitureShop.Web.Startup">
+    <Position X="11.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAgAAACAAAAAA=</HashCode>
+      <FileName>Startup.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FurnitureShop.Web.Areas.Admin.Controllers.AdminController" Collapsed="true">
+    <Position X="3.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQEAABAAAAAQAAAYAAAAIAAAAAgAABAACQAAAAAAA=</HashCode>
+      <FileName>Areas\Admin\Controllers\AdminController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FurnitureShop.Web.Areas.Admin.Controllers.ContactInfoController">
+    <Position X="0.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAIAAgAAgAAAAAEAAAAAAAA=</HashCode>
+      <FileName>Areas\Admin\Controllers\ContactInfoController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FurnitureShop.Web.Areas.Admin.Controllers.HomeController">
+    <Position X="2.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Areas\Admin\Controllers\HomeController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FurnitureShop.Web.Areas.Admin.Controllers.OrdersController">
+    <Position X="5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQAAAAAAAEACABCCAAAAAAAAAAEAAAAAAAA=</HashCode>
+      <FileName>Areas\Admin\Controllers\OrdersController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FurnitureShop.Web.Areas.Admin.Controllers.ProductsController">
+    <Position X="7.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BEAAAAAgCIAAAAAAAQCAAAAAAgAAAAAAAAEAAAQAEAA=</HashCode>
+      <FileName>Areas\Admin\Controllers\ProductsController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FurnitureShop.Web.Areas.Admin.Models.HomeModels.LoginVM">
+    <Position X="13.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAQAAAAAAA=</HashCode>
+      <FileName>Areas\Admin\Models\HomeModels\LoginVM.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FurnitureShop.Web.Areas.Admin.Models.OrderModels.OrderVM">
+    <Position X="18.5" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAEABgCAQAAQMAAAAAAgAARAIAAACAAAAIAQAAAg=</HashCode>
+      <FileName>Areas\Admin\Models\OrderModels\OrderVM.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FurnitureShop.Web.Areas.Admin.Models.ProductsModel.ProductVM">
+    <Position X="13.25" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAIAAAAgAAgCAAACAAABAQAAAAAEAAAAAQAAAAVAAA=</HashCode>
+      <FileName>Areas\Admin\Models\ProductsModel\ProductVM.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FurnitureShop.Web.Areas.Admin.Models.ProductsModel.ItemVM">
+    <Position X="9.75" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQAAAAAAgAAAAAAAAAAAAAAAAAADAAAAAAA=</HashCode>
+      <FileName>Areas\Admin\Models\ProductsModel\ProductVM.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FurnitureShop.Web.Controllers.AccountController">
+    <Position X="0.5" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAACQAAAAAAAAAAAAAAIAAAABAAAAAAEQAACAAAA=</HashCode>
+      <FileName>Controllers\AccountController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FurnitureShop.Web.Controllers.BaseController">
+    <Position X="0.5" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAYEAABAAAAAQAAAYAAAAIAAAAAgAABAACQAAAAAAA=</HashCode>
+      <FileName>Controllers\BaseController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FurnitureShop.Web.Controllers.HomeController">
+    <Position X="2.5" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAEACCAAAAAAAAAAAAAAAAEAAAAAAAA=</HashCode>
+      <FileName>Controllers\HomeController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FurnitureShop.Web.Controllers.ShopController">
+    <Position X="2.5" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAECAEQAAAAABAAAAAAAAAEAAAAAAAAAAAEAAAAAACA=</HashCode>
+      <FileName>Controllers\ShopController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FurnitureShop.Web.Extensions.CustomExtensions">
+    <Position X="15" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Extensions\CustomExtensions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FurnitureShop.Web.Extensions.EnumerableExtensions">
+    <Position X="16.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Extensions\EnumerableExtensions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FurnitureShop.Web.Extensions.EnumerationExtensions">
+    <Position X="18.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Extensions\EnumerationExtensions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FurnitureShop.Web.Extensions.ImagePathExtension">
+    <Position X="13.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAEAAABAAQAAABAAAAAAAAAAAAgAAAAAAAAAAAA=</HashCode>
+      <FileName>Extensions\ImagePathExtension.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FurnitureShop.Web.Extensions.ModelStateExtensions">
+    <Position X="16.75" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Extensions\ModelStateExtensions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FurnitureShop.Web.Extensions.StringExtensions">
+    <Position X="6.25" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Extensions\StringExtensions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FurnitureShop.Web.Models.AccountModels.IndexVM">
+    <Position X="15" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAgAQAAABAAAAAAAAAAAAAIAAAAAAQAAAQ=</HashCode>
+      <FileName>Models\AccountModels\IndexVM.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FurnitureShop.Web.Models.AccountModels.LoginViewVM">
+    <Position X="11.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQAAAAAACAAAAAACAAAIAAAAAAAAAAA=</HashCode>
+      <FileName>Models\AccountModels\LoginViewVM.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FurnitureShop.Web.Models.AccountModels.LoginVM">
+    <Position X="15" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAQAAAAAAAAAAAAACAAAAAAAAAAA=</HashCode>
+      <FileName>Models\AccountModels\LoginVM.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FurnitureShop.Web.Models.AccountModels.RegisterVM">
+    <Position X="16.75" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAAAAAAQAAAAAAAAAAAAACAAAAAAAAAEA=</HashCode>
+      <FileName>Models\AccountModels\RegisterVM.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FurnitureShop.Web.Models.AccountModels.UpdateUserInfoVM">
+    <Position X="15" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAACAAAAAAABAAAAQAAAAAAAAAAAABIAAAIAg=</HashCode>
+      <FileName>Models\AccountModels\UpdateUserInfoVM.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FurnitureShop.Web.Models.HomeModels.AboutVM">
+    <Position X="9.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAA=</HashCode>
+      <FileName>Models\HomeModels\AboutVM.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FurnitureShop.Web.Models.HomeModels.IndexVM">
+    <Position X="18.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAABAAAAAAAAAABAAAAAAAAAAAAAAAAAAABAAA=</HashCode>
+      <FileName>Models\HomeModels\IndexVM.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FurnitureShop.Web.Models.HomeModels.SendMessageVM">
+    <Position X="8" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACEAAAAAAAAAAAQAAAAAAAAAAAAAIAAAAAA=</HashCode>
+      <FileName>Models\HomeModels\SendMessageVM.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FurnitureShop.Web.Models.ShopModels.CartVM">
+    <Position X="11.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>Models\ShopModels\CartVM.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FurnitureShop.Web.Models.ShopModels.CheckoutVM">
+    <Position X="13.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAgAAAAAQEAAAAAAAAAAAAAAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>Models\ShopModels\CheckoutVM.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FurnitureShop.Web.Models.ShopModels.IndexVM">
+    <Position X="16.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAAAAAQAAAAAAAAAAAAAAGAAAAAAEBAAgAAQ=</HashCode>
+      <FileName>Models\ShopModels\IndexVM.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FurnitureShop.Web.Models.ShopModels.OrderVM">
+    <Position X="9.75" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAgCAAAAAIAAACAAAAAAAAAQACAAAAIAAAAAg=</HashCode>
+      <FileName>Models\ShopModels\OrderVM.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FurnitureShop.Web.Models.ShopModels.ProductVM">
+    <Position X="6.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAKAAAAAAAACABAAAAAAAAAAACAEAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>Models\ShopModels\ProductVM.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FurnitureShop.Web.Models.ShopModels.SearchVM">
+    <Position X="18.5" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAABAAAAAA=</HashCode>
+      <FileName>Models\ShopModels\SearchVM.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="FurnitureShop.Web.UserRole">
+    <Position X="16.75" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GlobalVariables.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="FurnitureShop.Web.AccountTab">
+    <Position X="8" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAAAEABAAAAAAAAAAAAAAAAAAAAAAEAAAAA=</HashCode>
+      <FileName>GlobalVariables.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="FurnitureShop.Web.ProductOption">
+    <Position X="16.75" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>GlobalVariables.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="FurnitureShop.Web.OrderDeliveryTypes">
+    <Position X="9.75" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAABAAAAAAAAAAAAAAQAAAAAAAAABAAAAAAAAAAA=</HashCode>
+      <FileName>GlobalVariables.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="FurnitureShop.Web.OrderPaymentTypes">
+    <Position X="8" Y="10" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAABAAAAAAAA=</HashCode>
+      <FileName>GlobalVariables.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
