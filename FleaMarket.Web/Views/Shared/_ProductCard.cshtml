@@ -4,7 +4,7 @@
     bool isAuthorized = !(ViewBag.Anonymous ?? true);
 }
 <!--  Single Grid product Start -->
-<div class="single-grid-product mb-40" data-name="@Model.Name" data-price="@Model.Price">
+<div class="single-grid-product mb-40 product-shadow-hover" data-name="@Model.Name" data-price="@Model.Price">
     <div class="product-image text-center">
         @if (Model.Discount.HasValue)
         {

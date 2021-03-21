@@ -168,15 +168,19 @@ img {
 }
 
 #main-wrapper {
-    background-color: #cfd8dc !important;
+    background-color: #efebe9 !important;
 }
 
 #main-wrapper header {
-    background-color: #eceff1 !important;
+    background-color: #e0e0e0 !important;
 }
 
 .border-bottom {
     border-bottom: 1px solid #eeeeee;
+}
+
+.product-shadow-hover:hover {
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
 }
 
 .bg-image {
