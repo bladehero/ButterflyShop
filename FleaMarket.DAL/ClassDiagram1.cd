@@ -1,0 +1,176 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="FleaMarket.DAL.Models.BaseEntity">
+    <Position X="5.5" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAEAQAAAAA=</HashCode>
+      <FileName>Models\BaseEntity.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FleaMarket.DAL.Models.Brand">
+    <Position X="7.5" Y="14" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAAAAAAABAAAAAAAQAAAIAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Brand.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FleaMarket.DAL.Models.Cart">
+    <Position X="2.25" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAgAAAAAgAAAAAAAAAAAAAgAAAAAA=</HashCode>
+      <FileName>Models\Cart.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FleaMarket.DAL.Models.Category">
+    <Position X="7.5" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAgAAAAAAAAA=</HashCode>
+      <FileName>Models\Category.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FleaMarket.DAL.Models.CategoryProduct">
+    <Position X="4" Y="16.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\CategoryProduct.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FleaMarket.DAL.Models.Characteristic">
+    <Position X="0.5" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Characteristic.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FleaMarket.DAL.Models.CharacteristicProduct">
+    <Position X="5.75" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Models\CharacteristicProduct.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FleaMarket.DAL.Models.ContactInfo">
+    <Position X="0.5" Y="14" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAIAAAAAAAAAABAAAACAAAQIAAAAAA=</HashCode>
+      <FileName>Models\ContactInfo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FleaMarket.DAL.Models.FavouriteProduct">
+    <Position X="4" Y="14" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\FavouriteProduct.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FleaMarket.DAL.Models.Item">
+    <Position X="9.25" Y="14" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAA=</HashCode>
+      <FileName>Models\Item.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FleaMarket.DAL.Models.OptionalParameter">
+    <Position X="4" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\OptionalParameter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FleaMarket.DAL.Models.OptionalParameterProduct">
+    <Position X="0.5" Y="16.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Models\OptionalParameterProduct.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FleaMarket.DAL.Models.Order">
+    <Position X="5.75" Y="16.75" Width="1.5" />
+    <InheritanceLine Type="FleaMarket.DAL.Models.BaseEntity" ManuallyRouted="true" FixedToPoint="true">
+      <Path>
+        <Point X="6.25" Y="8.43" />
+        <Point X="6.25" Y="8.674" />
+        <Point X="7.377" Y="8.674" />
+        <Point X="7.377" Y="18.312" />
+        <Point X="7.25" Y="18.312" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAgCACgAAMAAAAAAgAAAAAAAACAAAAIAAAAAg=</HashCode>
+      <FileName>Models\Order.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FleaMarket.DAL.Models.OrderDeliveryType">
+    <Position X="2.25" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>Models\OrderDeliveryType.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FleaMarket.DAL.Models.OrderPaymentType">
+    <Position X="7.5" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>Models\OrderPaymentType.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FleaMarket.DAL.Models.OrderProduct">
+    <Position X="2.25" Y="14" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAQAAAAAAgAAAAAAAAAAAAAAAAAAAgAAAAAA=</HashCode>
+      <FileName>Models\OrderProduct.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FleaMarket.DAL.Models.OrderStatus">
+    <Position X="5.75" Y="14" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\OrderStatus.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FleaMarket.DAL.Models.Product">
+    <Position X="0.5" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgAAAAAAAAAAQAAAAAAAAAAAAAAAAQAAA=</HashCode>
+      <FileName>Models\Product.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FleaMarket.DAL.Models.ProductImage">
+    <Position X="5.75" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\ProductImage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FleaMarket.DAL.Models.Role">
+    <Position X="2.25" Y="16.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Role.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FleaMarket.DAL.Models.SupportMessage">
+    <Position X="7.5" Y="16.75" Width="1.5" />
+    <InheritanceLine Type="FleaMarket.DAL.Models.BaseEntity" ManuallyRouted="true" FixedToPoint="true">
+      <Path>
+        <Point X="6.25" Y="8.43" />
+        <Point X="6.25" Y="8.66" />
+        <Point X="9.094" Y="8.66" />
+        <Point X="9.094" Y="17.437" />
+        <Point X="9" Y="17.437" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAQAAAAAAAAAAAAAIAAAAAA=</HashCode>
+      <FileName>Models\SupportMessage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FleaMarket.DAL.Models.User">
+    <Position X="4" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEIAACAAAAAAAAAAAAQAAAAAAAACAAAAIAABAAg=</HashCode>
+      <FileName>Models\User.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
