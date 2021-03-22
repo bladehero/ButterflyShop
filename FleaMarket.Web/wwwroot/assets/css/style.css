@@ -168,11 +168,11 @@ img {
 }
 
 #main-wrapper {
-    background-color: #efebe9 !important;
+    background-color: #000 !important;
 }
 
 #main-wrapper header {
-    background-color: #e0e0e0 !important;
+    background-color: #000 !important;
 }
 
 .border-bottom {
@@ -1084,6 +1084,11 @@ header.header {
 
             .header-search-cart-area > ul > li > a i {
                 font-size: 24px;
+            }
+
+
+            .header-search-cart-area > ul > li > a {
+                color: #fff;
             }
 
             .header-search-cart-area > ul > li > a:hover {

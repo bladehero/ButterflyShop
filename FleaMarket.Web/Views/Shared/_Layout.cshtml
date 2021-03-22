@@ -43,7 +43,7 @@
 <body>
     <div id="main-wrapper">
         <!--Header section start-->
-        <header class="header header-transparent header-sticky  d-lg-block d-none">
+        <header class="header header-transparent header-sticky d-lg-block d-none">
             <div class="header-deafult-area">
                 <div class="container">
                     <div class="row align-items-center">
@@ -60,6 +60,7 @@
                                 <nav class="main-menu">
                                     <ul>
                                         <li><a href="@Url.Action("Index", "Home")">Главная</a></li>
+                                        <li><a href="@Url.Action("About", "Home")">О нас</a></li>
                                         <li>
                                             <a href="@Url.Action("Index", "Shop")">Купить</a>
                                             <!-- Categories -->
@@ -78,7 +79,6 @@
                                             <!-- Categories End -->
                                         </li>
                                         <li><a href="@Url.Action("Contact", "Home")">Контакты</a></li>
-                                        <li><a href="@Url.Action("About", "Home")">О нас</a></li>
                                     </ul>
                                 </nav>
                             </div>
@@ -327,7 +327,7 @@
                         <!--Footer Widget end-->
                         <!--Footer Widget start-->
                         <div class="footer-widget text-lg-right text-left col-xl-3 col-lg-3 col-md-6 col-sm-6 col-12 mb-40 mb-xs-35">
-                            <a href="mailto:mebli@ukr.net" class="contact-text">Почта: <b>mebli@ukr.net</b></a>
+                            <a href="mailto:flea-market@i.ua" class="contact-text">Почта: <b>flea-market@i.ua</b></a>
                             <br />
                             @foreach (var contact in contacts)
                             {
@@ -356,9 +356,7 @@
                                 <div class="col-12">
                                     <div class="copyright text-center">
                                         <p>
-                                            Copyright &copy;2019 <a href="@Url.Action("Index", "Home")">FleaMarket</a>. Все права защищены.
-                                            <br />
-                                            <span class="font-weight-light">Сайт создан: <a class="text-dark font-weight-bold" href="mailto:valeria.osadcha@gmail.com">Valeria Osadcha</a></span>
+                                             <a href="@Url.Action("Index", "Home")">FleaMarket</a> &copy; @DateTime.Now.Year. Все права защищены.
                                         </p>
                                     </div>
                                 </div>
