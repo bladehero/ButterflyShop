@@ -7813,9 +7813,9 @@ button.swal2-confirm {
 
 ::-webkit-scrollbar {
     width: 10px;
-    background-color: transparent;
+    background-color: #000;
 }
 
 ::-webkit-scrollbar-thumb {
-    background-color: #455a64;
+    background-color: #d32f2f;
 }
