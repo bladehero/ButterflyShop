@@ -225,7 +225,7 @@ if (object_ID('dbo.GetUserRoleId') is not null)
 go
 
 -- ============================================================================
--- Example    : select dbo.GetUserRoleId(N'Пользователь')
+-- Example    : select dbo.GetUserRoleId(N'User')
 -- ============================================================================
 
 create function dbo.GetUserRoleId(@role nvarchar(100) null)
@@ -392,7 +392,7 @@ if object_id(N'dbo.SearchItemInfo') is null
 go
  
  -- ============================================================================
- -- Example    : exec dbo.SearchItemInfo 1, 4, 2, N'Тоник', 140, 200; exec dbo.SearchItemInfo null, null, null, N'Молочко'
+ -- Example    : exec dbo.SearchItemInfo 1, 4, 2, N'Balm', 140, 200; exec dbo.SearchItemInfo null, null, null, N'Milk'
  -- ============================================================================
  
 alter procedure dbo.SearchItemInfo
@@ -667,7 +667,7 @@ begin
     values
     (
         @userId
-      , (select top 1 os.Id from dbo.OrderStatuses os where Status = N'В обработке')
+      , (select top 1 os.Id from dbo.OrderStatuses os where Status = N'In progress')
       , @deliveryTypeId
       , @paymentTypeId
       , @email
@@ -803,7 +803,7 @@ if object_id(N'dbo.GetProductsInfo_Admin') is null
 go
 
 -- ============================================================================
--- Example    : exec dbo.GetProductsInfo_Admin N'Крем'
+-- Example    : exec dbo.GetProductsInfo_Admin N'Cream'
 -- ============================================================================
 
 alter procedure dbo.GetProductsInfo_Admin 
@@ -928,7 +928,7 @@ if object_id(N'dbo.GetOrdersInfo_Admin') is null
 go
 
 -- ============================================================================
--- Example    : exec dbo.GetOrdersInfo_Admin N'Александр'
+-- Example    : exec dbo.GetOrdersInfo_Admin N'Alex'
 -- ============================================================================
 
 alter procedure dbo.GetOrdersInfo_Admin 
