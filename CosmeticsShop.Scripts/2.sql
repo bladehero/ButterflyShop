@@ -1,29 +1,4 @@
-﻿-- Example:
--- if object_id(N'dbo.StoreProcedureName') is null
---   exec('create procedure dbo.StoreProcedureName as set nocount on;');
--- go
--- 
--- -- ============================================================================
--- -- Example    : exec dbo.StoreProcedureName
--- -- Author     : Nikita Dermenzhi
--- -- Date       : 25/07/2019
--- -- Description: —
--- -- ============================================================================
--- 
--- alter procedure dbo.StoreProcedureName
--- (  
---     @Param1 as int = null  
---   , @Param2 as varchar(100) = null  
--- )  
--- as  
--- begin  
---   
--- 
--- 
--- end;
--- go
-
-use ButterflyShopDatabase
+﻿use CosmeticsShopDatabase;
 go
 
 if object_id(N'dbo.GetItemsInfo') is null
@@ -32,9 +7,6 @@ go
 
 -- ============================================================================
 -- Example    : exec dbo.GetItemsInfo null, null, null, 5
--- Author     : Nikita Dermenzhi
--- Date       : 25/07/2019
--- Description: —
 -- ============================================================================
 
 alter procedure dbo.GetItemsInfo
@@ -134,9 +106,6 @@ go
  
  -- ============================================================================
  -- Example    : exec dbo.CategoriesForProduct 8
- -- Author     : Nikita Dermenzhi
- -- Date       : 25/07/2019
- -- Description: —
  -- ============================================================================
  
 alter procedure dbo.CategoriesForProduct
@@ -178,9 +147,6 @@ go
 
 -- ============================================================================
 -- Example    : exec dbo.GetProductImages 3
--- Author     : Nikita Dermenzhi
--- Date       : 25/07/2019
--- Description: —
 -- ============================================================================
 
 alter procedure dbo.GetProductImages
@@ -206,9 +172,6 @@ go
 
 -- ============================================================================
 -- Example    : exec dbo.GetItemWithParameters 7
--- Author     : Nikita Dermenzhi
--- Date       : 25/07/2019
--- Description: —
 -- ============================================================================
 
 alter procedure dbo.GetItemWithParameters 
@@ -247,9 +210,6 @@ go
 
 -- ============================================================================
 -- Example    : select dbo.MD5HashPassword('qwe')
--- Author     : Nikita Dermenzhi
--- Date       : 25/07/2019
--- Description: —
 -- ============================================================================
 
 create function dbo.MD5HashPassword(@password nvarchar(100))
@@ -266,9 +226,6 @@ go
 
 -- ============================================================================
 -- Example    : select dbo.GetUserRoleId(N'Пользователь')
--- Author     : Nikita Dermenzhi
--- Date       : 25/07/2019
--- Description: —
 -- ============================================================================
 
 create function dbo.GetUserRoleId(@role nvarchar(100) null)
@@ -287,9 +244,6 @@ go
 
 -- ============================================================================
 -- Example    : exec dbo.GetCategoryHierarchy 2
--- Author     : Nikita Dermenzhi
--- Date       : 25/07/2019
--- Description: —
 -- ============================================================================
 
 alter procedure dbo.GetCategoryHierarchy 
@@ -344,9 +298,6 @@ go
  
  -- ============================================================================
  -- Example    : exec dbo.GetFavouriteProductInfo 5
- -- Author     : Nikita Dermenzhi
- -- Date       : 25/07/2019
- -- Description: —
  -- ============================================================================
  
 alter procedure dbo.GetFavouriteProductInfo
@@ -394,9 +345,6 @@ go
 
 -- ============================================================================
 -- Example    : select * from dbo.GetCategoryForProducts(1)
--- Author     : Nikita Dermenzhi
--- Date       : 25/07/2019
--- Description: —
 -- ============================================================================
 create function dbo.GetCategoryForProducts(@productId as int) 
     returns @categories table
@@ -445,9 +393,6 @@ go
  
  -- ============================================================================
  -- Example    : exec dbo.SearchItemInfo 1, 4, 2, N'Тоник', 140, 200; exec dbo.SearchItemInfo null, null, null, N'Молочко'
- -- Author     : Nikita Dermenzhi
- -- Date       : 25/07/2019
- -- Description: —
  -- ============================================================================
  
 alter procedure dbo.SearchItemInfo
@@ -532,9 +477,6 @@ go
 
 -- ============================================================================
 -- Example    : select dbo.GetProductNumericValueByOption('MinPrice')
--- Author     : Nikita Dermenzhi
--- Date       : 25/07/2019
--- Description: —
 -- ============================================================================
 
 create function dbo.GetProductNumericValueByOption(@option char(10))
@@ -556,9 +498,6 @@ go
 
 -- ============================================================================
 -- Example    : exec dbo.GetCartItemsInfo 1
--- Author     : Nikita Dermenzhi
--- Date       : 25/07/2019
--- Description: —
 -- ============================================================================
 
 alter procedure dbo.GetCartItemsInfo 
@@ -609,9 +548,6 @@ go
 
 -- ============================================================================
 -- Example    : exec dbo.MergeItemToCart 1, 7, 2
--- Author     : Nikita Dermenzhi
--- Date       : 25/07/2019
--- Description: —
 -- ============================================================================
 
 alter procedure dbo.MergeItemToCart 
@@ -693,9 +629,6 @@ go
 
 -- ============================================================================
 -- Example    : exec dbo.CreateOrder 1
--- Author     : Nikita Dermenzhi
--- Date       : 25/07/2019
--- Description: —
 -- ============================================================================
 
 alter procedure dbo.CreateOrder 
@@ -784,9 +717,6 @@ go
 
 -- ============================================================================
 -- Example    : exec dbo.GetOrderDetails 1
--- Author     : Nikita Dermenzhi
--- Date       : 25/07/2019
--- Description: —
 -- ============================================================================
 
 alter procedure dbo.GetOrderDetails 
@@ -819,9 +749,6 @@ go
 
 -- ============================================================================
 -- Example    : exec dbo.GetOrderProductsInfo 1, 1
--- Author     : Nikita Dermenzhi
--- Date       : 25/07/2019
--- Description: —
 -- ============================================================================
 
 alter procedure dbo.GetOrderProductsInfo 
@@ -877,9 +804,6 @@ go
 
 -- ============================================================================
 -- Example    : exec dbo.GetProductsInfo_Admin N'Крем'
--- Author     : Nikita Dermenzhi
--- Date       : 25/07/2019
--- Description: —
 -- ============================================================================
 
 alter procedure dbo.GetProductsInfo_Admin 
@@ -943,9 +867,6 @@ go
   
 -- ============================================================================  
 -- Example    : exec dbo.GetOptionalParametersForProduct_Admin 3  
--- Author     : Nikita Dermenzhi  
--- Date       : 25/07/2019  
--- Description: —  
 -- ============================================================================  
   
 alter procedure dbo.GetOptionalParametersForProduct_Admin   
@@ -973,9 +894,6 @@ go
   
 -- ============================================================================  
 -- Example    : exec dbo.GetOptionalParametersForItem_Admin 2  
--- Author     : Nikita Dermenzhi  
--- Date       : 25/07/2019  
--- Description: —  
 -- ============================================================================  
   
 alter procedure dbo.GetOptionalParametersForItem_Admin
@@ -1011,9 +929,6 @@ go
 
 -- ============================================================================
 -- Example    : exec dbo.GetOrdersInfo_Admin N'Александр'
--- Author     : Nikita Dermenzhi
--- Date       : 25/07/2019
--- Description: —
 -- ============================================================================
 
 alter procedure dbo.GetOrdersInfo_Admin 
@@ -1083,9 +998,6 @@ if (object_ID('dbo.GetCartSum') is not null)
 go
 -- ============================================================================
 -- Example    : select dbo.GetCartSum(1)
--- Author     : Nikita Dermenzhi
--- Date       : 25/07/2019
--- Description: —
 -- ============================================================================
 
 create function dbo.GetCartSum(@userId int null)
@@ -1108,9 +1020,6 @@ if (object_ID('dbo.GetOrderSum') is not null)
 go
 -- ============================================================================
 -- Example    : select dbo.GetOrderSum(1)
--- Author     : Nikita Dermenzhi
--- Date       : 25/07/2019
--- Description: —
 -- ============================================================================
 
 create function dbo.GetOrderSum(@orderId int null)

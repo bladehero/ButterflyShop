@@ -1,6 +1,6 @@
-﻿use ButterflyShopDatabase;
+﻿use CosmeticsShopDatabase;
 go
 
 insert Users (Email, Password, FirstName, RoleId)
-values ('abfly@ukr.net', dbo.MD5HashPassword('QwErty123'), N'Администратор', dbo.GetUserRoleId(N'Администратор'))
+values ('admin@mail.com', dbo.MD5HashPassword('QwErty123'), N'Administrator', dbo.GetUserRoleId(N'Administrator'))
 
