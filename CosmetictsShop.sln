@@ -7,6 +7,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CosmeticsShop.Web", "Cosmet
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CosmeticsShop.DAL", "CosmeticsShop.DAL\CosmeticsShop.DAL.csproj", "{A6280E29-2813-4124-B7E3-F227F41801F7}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CosmeticsShop.Scripts", "CosmeticsShop.Scripts", "{3B32ECE8-CC37-4A30-AEFE-76A729ADA6A5}"
+ProjectSection(SolutionItems) = preProject
+	CosmeticsShop.Scripts\0.sql = CosmeticsShop.Scripts\0.sql
+	CosmeticsShop.Scripts\1.sql = CosmeticsShop.Scripts\1.sql
+	CosmeticsShop.Scripts\2.sql = CosmeticsShop.Scripts\2.sql
+	CosmeticsShop.Scripts\3.sql = CosmeticsShop.Scripts\3.sql
+EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

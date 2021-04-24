@@ -1,8 +1,8 @@
-﻿if not exists (select name from master.dbo.sysdatabases where name = 'ButterflyShopDatabase')
-  create database ButterflyShopDatabase;
+﻿if not exists (select name from master.dbo.sysdatabases where name = 'CosmeticsShopDatabase')
+  create database CosmeticsShopDatabase;
 go
 
-use ButterflyShopDatabase;
+use CosmeticsShopDatabase;
 go
 
 if not exists (select 1 
