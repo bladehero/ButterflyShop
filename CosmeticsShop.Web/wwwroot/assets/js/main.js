@@ -405,10 +405,10 @@
                 if (data.success) {
                     var msg;
                     if (data.isDeleted) {
-                        msg = 'Product removed from Favorites!';
+                        msg = 'Product removed from Favourites!';
                         _this.removeClass('active');
                     } else {
-                        msg = 'Product added to Favorites!';
+                        msg = 'Product added to Favourites!';
                         _this.addClass('active');
                     }
                     Swal.fire({
@@ -420,7 +420,7 @@
                     Swal.fire({
                         title: 'Error',
                         type: 'error',
-                        html: 'When saving to favorites an error occured!'
+                        html: 'When saving to favourites an error occured!'
                     });
                 }
             }
