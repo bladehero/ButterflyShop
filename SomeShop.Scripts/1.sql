@@ -59,70 +59,21 @@ insert into Items(ProductId, Price, OldPrice) values
 , (14, 5.5, null)
 
 insert Categories(Name, ParentId) values
-  (N'For face ', null) -- 1
-, (N'Problem skin ', 1) -- 2
-, (N'For young skin ', 1) -- 3
-, (N'For mature skin ', 1) -- 4
-, (N'For body ', null) -- 5
-, (N'Anticellulite funds', 5) -- 6
-, (N'Body Care ', 5) -- 7
-, (N'Ortal ', null) -- 8
-, (N'For hair ', null) -- 9
-, (N'For children ', null) -- 10
-, (N'Health ', null) -- 11
-, (N'Women''s health ', 11) -- 12
-, (N'Men''s health ', 13) -- 13
-, (N'Power', null) -- 14
-, (N'Oil ', 14) -- 15
-, (N'Shroty ', 14) -- 16
-, (N'Cocktails', 14) -- 17
-, (N'Sesame and Bars', 14) -- 18
-, (N'Decorative cosmetics', null) -- 19
-, (N'Perfumery ', null) -- 20
-, (N'Fitochai ', null) -- 21
-, (N'Fitoproducts', null) -- 22
-, (N'Detox organism ', null) -- 23
-, (N'Antiarasitic phytopreparations', 23) -- 24
-, (N'Vitamins and minerals', 23) -- 25
-, (N'Support Immunity ', 23) -- 26
-, (N'Healthy skin ', 23) -- 27
-, (N'Respiratory system ', 23) -- 28
-, (N'Cardiovascular system ', 23) -- 29
-, (N'Musculoskeletal system', 23) -- 30
-, (N'Nervous system ', 23) -- 31
-, (N'Digestive system ', 23) -- 32
-, (N'Kidneys and genitourinary system', 23) -- 33
-, (N'Endocrine system ', 23) -- 34
-, (N'Eye Health ', 23) -- 35
-, (N'For home ', null) -- 36
-, (N'Procedures', null) -- 37
-, (N'Certificates', null) -- 38
-
-insert CategoryProducts(ProductId, CategoryId) values
-  (1,14)
-, (1,22)
-, (1,26)
-, (2,2)
-, (2,3)
-, (3,1)
-, (4,3)
-, (4,4)
-, (4,15)
-, (5,21)
-, (5,22)
-, (6,2)
-, (6,3)
-, (6,4)
-, (7,1)
-, (8,25)
-, (8,26)
-, (9,1)
-, (10,5)
-, (11,1)
-, (12,2)
-, (12,27)
-, (13,9)
-, (14,5)
+  (N'Health', null) -- 1
+, (N'Immunity', 1) -- 2
+, (N'Vitamins and minerals', 1) -- 3
+, (N'Nervous system', 1) -- 4
+, (N'For face', null) -- 5
+, (N'Care cosmetics', 5) -- 6
+, (N'Decorative cosmetics', 5) -- 7
+, (N'For Body', null) -- 8
+, (N'Scrubs', 8) -- 9
+, (N'Creams', 8) -- 10
+, (N'Shower gels', 8) -- 11
+, (N'For Hair', null) -- 12
+, (N'Oils', 12) -- 13
+, (N'Balsams', 12) -- 14
+, (N'Shampoo', 12) -- 15
 
 insert Characteristics(Name) values
   (N'Volume')            -- 1
